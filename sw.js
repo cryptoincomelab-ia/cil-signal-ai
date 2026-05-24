@@ -1,5 +1,5 @@
 // CIL Signal AI — minimal service worker
-const CACHE = 'cil-v1';
+const CACHE = 'cil-v2';
 const ASSETS = ['/', '/index.html', '/logo.png', '/manifest.json'];
 
 self.addEventListener('install', (e) => {
@@ -17,8 +17,10 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
-  // Never cache Binance API calls — always fetch live
-  if (e.request.url.includes('api.binance.com') || e.request.url.includes('formspree.io')) {
+  // Never cache live data APIs — always fetch live
+  if (e.request.url.includes('api.binance.com') ||
+      e.request.url.includes('api.coingecko.com') ||
+      e.request.url.includes('formspree.io')) {
     return; // let it go to network
   }
   e.respondWith(

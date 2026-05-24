@@ -600,7 +600,7 @@
 
     <!-- Waitlist via Formspree. Replace YOUR_FORM_ID below with your real ID. -->
     <form class="waitlist-form" id="waitlist-form"
-          action="https://formspree.io/f/xojblgej" method="POST">
+          action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
       <input type="email" name="email" class="waitlist-input"
              placeholder="your@email.com" required>
       <input type="hidden" name="_subject" value="New CIL token waitlist signup">
@@ -654,12 +654,15 @@
     navigator.serviceWorker.register('/sw.js').catch(() => {});
   }
 
-  // ── LIVE PRICES from Binance (public API, no key) ──
-  const TICKER_SYMBOLS = [
-    ['BTCUSDT','BTC'],['ETHUSDT','ETH'],['SOLUSDT','SOL'],['XRPUSDT','XRP'],
-    ['ADAUSDT','ADA'],['AVAXUSDT','AVAX'],['LINKUSDT','LINK'],['DOTUSDT','DOT'],
-    ['DOGEUSDT','DOGE'],['ATOMUSDT','ATOM']
+  // ── LIVE PRICES from CoinGecko (public API, no key, works worldwide) ──
+  // CoinGecko id -> display name
+  const TICKER_COINS = [
+    ['bitcoin','BTC'],['ethereum','ETH'],['solana','SOL'],['ripple','XRP'],
+    ['cardano','ADA'],['avalanche-2','AVAX'],['chainlink','LINK'],['polkadot','DOT'],
+    ['dogecoin','DOGE'],['cosmos','ATOM']
   ];
+  const CG_IDS = TICKER_COINS.map(c => c[0]).join(',');
+  const CG_NAME = Object.fromEntries(TICKER_COINS);
 
   function fmtPrice(p) {
     p = parseFloat(p);
@@ -668,37 +671,64 @@
     return '$' + p.toFixed(4);
   }
 
+  async function tryCoinGecko() {
+    const url = 'https://api.coingecko.com/api/v3/coins/markets'
+              + '?vs_currency=usd&ids=' + CG_IDS
+              + '&order=market_cap_desc&sparkline=false&price_change_percentage=24h';
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('cg ' + res.status);
+    const data = await res.json();
+    const map = {}; data.forEach(c => map[c.id] = c);
+    return TICKER_COINS.map(([id, name]) => {
+      const c = map[id]; if (!c) return null;
+      const chg = (c.price_change_percentage_24h != null) ? c.price_change_percentage_24h : 0;
+      return { name, price: c.current_price, chg, unit: 'USD' };
+    }).filter(Boolean);
+  }
+
+  async function tryBinance() {
+    const res = await fetch('https://api.binance.com/api/v3/ticker/24hr');
+    if (!res.ok) throw new Error('bn ' + res.status);
+    const all = await res.json();
+    const map = {}; all.forEach(t => map[t.symbol] = t);
+    const SYM = {BTC:'BTCUSDT',ETH:'ETHUSDT',SOL:'SOLUSDT',XRP:'XRPUSDT',ADA:'ADAUSDT',
+                 AVAX:'AVAXUSDT',LINK:'LINKUSDT',DOT:'DOTUSDT',DOGE:'DOGEUSDT',ATOM:'ATOMUSDT'};
+    return TICKER_COINS.map(([id, name]) => {
+      const t = map[SYM[name]]; if (!t) return null;
+      return { name, price: parseFloat(t.lastPrice), chg: parseFloat(t.priceChangePercent), unit: 'USDT' };
+    }).filter(Boolean);
+  }
+
+  function renderTicker(items) {
+    const build = () => items.map(it => {
+      const cls = it.chg >= 0 ? 'up' : 'down';
+      const arrow = it.chg >= 0 ? '▲' : '▼';
+      return `<span class="ticker-item"><span class="sym">${it.name}/${it.unit}</span> ${fmtPrice(it.price)} <span class="${cls}">${arrow} ${it.chg>=0?'+':''}${it.chg.toFixed(1)}%</span></span>`;
+    }).join('');
+    let html = '<span class="ticker-item"><span class="live-dot"></span> LIVE</span>' + build();
+    html = html + html;
+    const ticker = document.getElementById('ticker');
+    ticker.innerHTML = html;
+    ticker.classList.add('animate');
+  }
+
   async function loadPrices() {
-    try {
-      const res = await fetch('https://api.binance.com/api/v3/ticker/24hr');
-      const all = await res.json();
-      const map = {};
-      all.forEach(t => map[t.symbol] = t);
-
-      let html = '';
-      const build = () => TICKER_SYMBOLS.map(([sym, name]) => {
-        const t = map[sym];
-        if (!t) return '';
-        const chg = parseFloat(t.priceChangePercent);
-        const cls = chg >= 0 ? 'up' : 'down';
-        const arrow = chg >= 0 ? '▲' : '▼';
-        return `<span class="ticker-item"><span class="sym">${name}/USDT</span> ${fmtPrice(t.lastPrice)} <span class="${cls}">${arrow} ${chg>=0?'+':''}${chg.toFixed(1)}%</span></span>`;
-      }).join('');
-
-      // duplicate content for seamless infinite scroll
-      html = '<span class="ticker-item"><span class="live-dot"></span> LIVE</span>' + build();
-      html = html + html;
-
-      const ticker = document.getElementById('ticker');
-      ticker.innerHTML = html;
-      ticker.classList.add('animate');
-    } catch (e) {
+    // Try CoinGecko first (works in EU), fall back to Binance, then to brand text
+    let items = null;
+    try { items = await tryCoinGecko(); } catch (e) {}
+    if (!items || !items.length) {
+      try { items = await tryBinance(); } catch (e) {}
+    }
+    if (items && items.length) {
+      renderTicker(items);
+    } else {
       const ticker = document.getElementById('ticker');
       ticker.innerHTML = '<span class="ticker-item"><span class="live-dot"></span> CIL SIGNAL AI · LIVE 24/7 MARKET MONITORING</span>';
+      ticker.classList.add('animate');
     }
   }
   loadPrices();
-  setInterval(loadPrices, 30000); // refresh every 30s
+  setInterval(loadPrices, 60000);
 
   // ── FLOATING CANDLESTICKS BG ──
   (function makeCandles() {
