@@ -598,7 +598,7 @@
       <div class="token-benefit"><span class="amount">TBA</span><span class="desc">supply &amp; launch<br>details to be<br>announced</span></div>
     </div>
 
-    <!-- Waitlist via Formspree. Replace YOUR_FORM_ID below with your real ID. -->
+    <!-- Waitlist via Formspree — connected. -->
     <form class="waitlist-form" id="waitlist-form"
           action="https://formspree.io/f/xojbnvae" method="POST">
       <input type="email" name="email" class="waitlist-input"
@@ -771,12 +771,6 @@
   const form = document.getElementById('waitlist-form');
   if (form) {
     form.addEventListener('submit', async (ev) => {
-      // If form ID not set yet, prevent broken submit and inform.
-      if (form.action.includes('YOUR_FORM_ID')) {
-        ev.preventDefault();
-        alert('Waitlist not connected yet. (Set your Formspree form ID in index.html.)');
-        return;
-      }
       ev.preventDefault();
       const btn = document.getElementById('waitlist-btn');
       const data = new FormData(form);
