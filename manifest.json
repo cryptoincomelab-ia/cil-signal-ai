@@ -1,24 +1,23 @@
 {
   "name": "CIL Signal AI",
   "short_name": "CIL Signal",
-  "description": "AI-powered crypto trading signals with 70%+ accuracy",
+  "description": "AI-powered crypto trading signals with target, stop loss and risk/reward.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a0a0f",
-  "theme_color": "#00ff88",
-  "orientation": "portrait-primary",
+  "background_color": "#080810",
+  "theme_color": "#080810",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "logo.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "icon-512.png",
+      "src": "logo.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
-  ],
-  "categories": ["finance", "utilities"],
-  "lang": "en"
+  ]
 }
