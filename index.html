@@ -74,10 +74,10 @@
 
     /* TICKER */
     .ticker-wrap {
-      position: relative; z-index: 1;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 101;
       overflow: hidden; background: var(--bg2);
-      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0; height: 45px;
     }
     .ticker { display: flex; gap: 48px; white-space: nowrap; will-change: transform; }
     .ticker.animate { animation: ticker 40s linear infinite; }
@@ -97,7 +97,7 @@
 
     /* NAV */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 45px; left: 0; right: 0; z-index: 100;
       padding: 16px 40px; display: flex; align-items: center; justify-content: space-between;
       background: rgba(8,8,16,0.8); backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
@@ -334,9 +334,9 @@
     .divider { position: relative; z-index: 1; height: 1px; background: var(--border); }
 
     @media (max-width: 768px) {
-      nav { padding: 14px 18px; }
+      nav { padding: 14px 18px; top: 45px; }
       .nav-links { display: none; }
-      .hero { padding: 120px 20px 60px; }
+      .hero { padding: 150px 20px 60px; }
       section { padding: 60px 20px; }
       .stats-bar { gap: 28px; padding: 24px 20px; }
       .token-section { padding: 40px 24px; }
