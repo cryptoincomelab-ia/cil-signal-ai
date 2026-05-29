@@ -1,795 +1,1724 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080810">
-  <meta name="description" content="CIL Signal AI — AI-powered crypto trading signals. Multi-source analysis with target price, stop loss and risk/reward ratio on every premium signal. Currently in beta.">
-  <meta name="keywords" content="crypto signals, AI trading, bitcoin signals, crypto AI, solana, telegram signals">
-  <meta property="og:title" content="CIL Signal AI — AI Crypto Signals">
-  <meta property="og:description" content="AI-powered crypto signals with target, stop loss & risk/reward. Multi-source analysis. In beta.">
-  <meta property="og:type" content="website">
-  <title>CIL Signal AI — AI-Powered Crypto Signals</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050508">
+<meta name="description" content="CIL Signal AI — AI-powered crypto trading signals. Multi-source analysis with target, stop loss and risk/reward on every premium signal.">
+<meta name="keywords" content="crypto signals, AI trading, bitcoin signals, crypto AI, telegram signals">
+<meta property="og:title" content="CIL Signal AI — AI Crypto Signals">
+<meta property="og:description" content="AI-powered crypto signals with target, stop loss & risk/reward. Multi-source analysis.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="logo.png">
+<title>CIL Signal AI — AI-Powered Crypto Signals</title>
 
-  <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="logo.png">
-  <link rel="icon" href="logo.png">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="icon" href="logo.png">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --bg:        #080810;
-      --bg2:       #0d0d16;
-      --bg3:       #13131f;
-      --border:    rgba(255,255,255,0.06);
-      --border2:   rgba(255,255,255,0.12);
-      --text:      #e8e8f0;
-      --text2:     #8888aa;
-      --text3:     #555570;
-      --green:     #00ff88;
-      --green2:    #00cc6a;
-      --gold:      #ffd700;
-      --gold2:     #ffaa00;
-      --red:       #ff4466;
-      --purple:    #8866ff;
-      --glow:      rgba(0,255,136,0.15);
-      --glow2:     rgba(0,255,136,0.05);
-      --font-head: 'Syne', sans-serif;
-      --font-mono: 'Space Mono', monospace;
-    }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-head);
-      overflow-x: hidden;
-    }
+<style>
+:root {
+  --bg-darkest: #050508;
+  --bg-dark: #0a0a14;
+  --bg-elev: #11111c;
+  --bg-card: rgba(20, 20, 32, 0.5);
+  --green: #00ff88;
+  --green-dim: #00cc6a;
+  --green-glow: rgba(0, 255, 136, 0.4);
+  --green-faint: rgba(0, 255, 136, 0.08);
+  --cyan: #22e5ff;
+  --gold: #ffd700;
+  --gold-dim: #cc9900;
+  --red: #ff3b5c;
+  --purple: #8866ff;
+  --text: #ffffff;
+  --text-dim: #8a8aa0;
+  --text-faint: #4a4a5e;
+  --border: rgba(255, 255, 255, 0.06);
+  --border-bright: rgba(0, 255, 136, 0.2);
+  --font-head: 'Syne', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --font-data: 'JetBrains Mono', monospace;
+}
 
-    /* NOISE + GRID */
-    body::before {
-      content: ''; position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 9999; opacity: 0.4;
-    }
-    .grid-bg {
-      position: fixed; inset: 0;
-      background-image:
-        linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
-      background-size: 60px 60px; pointer-events: none; z-index: 0;
-    }
-    /* floating candlesticks bg */
-    .candles-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.5; overflow: hidden; }
-    .candle {
-      position: absolute; bottom: -40px; width: 6px; border-radius: 2px;
-      animation: floatUp linear infinite;
-    }
-    @keyframes floatUp {
-      to { transform: translateY(-110vh); opacity: 0; }
-    }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-mono);
+  background: var(--bg-darkest);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.5;
+}
 
-    /* TICKER */
-    .ticker-wrap {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 101;
-      overflow: hidden; background: var(--bg2);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 0; height: 45px;
-    }
-    .ticker { display: flex; gap: 48px; white-space: nowrap; will-change: transform; }
-    .ticker.animate { animation: ticker 40s linear infinite; }
-    .ticker-item {
-      font-family: var(--font-mono); font-size: 0.78rem; color: var(--text2);
-      display: flex; align-items: center; gap: 8px; flex-shrink: 0;
-    }
-    .ticker-item .sym { color: var(--text); font-weight: 700; }
-    .ticker-item .up { color: var(--green); }
-    .ticker-item .down { color: var(--red); }
-    @keyframes ticker { 0% { transform: translateX(0);} 100% { transform: translateX(-50%);} }
-    .live-dot {
-      width: 7px; height: 7px; background: var(--green); border-radius: 50%;
-      box-shadow: 0 0 8px var(--green); animation: pulse 2s infinite; flex-shrink: 0;
-    }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.4;transform:scale(.7);} }
+/* === 3D CANVAS BACKGROUND === */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
 
-    /* NAV */
-    nav {
-      position: fixed; top: 45px; left: 0; right: 0; z-index: 100;
-      padding: 16px 40px; display: flex; align-items: center; justify-content: space-between;
-      background: rgba(8,8,16,0.8); backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-    .nav-brand img { width: 38px; height: 38px; border-radius: 50%; }
-    .nav-brand .txt { font-family: var(--font-mono); font-size: 1rem; font-weight: 700; color: var(--green); letter-spacing: 0.05em; }
-    .nav-brand .txt span { color: var(--text2); }
-    .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
-    .nav-links a {
-      color: var(--text2); text-decoration: none; font-size: 0.85rem; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase; transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--green); }
-    .nav-cta {
-      background: var(--green); color: var(--bg) !important; padding: 10px 24px;
-      border-radius: 4px; font-weight: 700 !important; transition: all .2s !important;
-    }
-    .nav-cta:hover { background: var(--green2) !important; transform: translateY(-1px); box-shadow: 0 4px 20px var(--glow); }
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0, 255, 136, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 136, 0.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+}
 
-    /* HERO */
-    .hero {
-      position: relative; min-height: 100vh; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; padding: 140px 40px 80px;
-      text-align: center; z-index: 1; overflow: hidden;
-    }
-    .hero-glow {
-      position: absolute; width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(0,255,136,0.07) 0%, transparent 70%);
-      top: 45%; left: 50%; transform: translate(-50%,-50%); pointer-events: none;
-    }
-    /* RADAR LOGO */
-    .radar {
-      position: relative; width: 160px; height: 160px; margin-bottom: 32px;
-      animation: fadeDown 0.6s ease both;
-    }
-    .radar img { width: 100%; height: 100%; border-radius: 50%; position: relative; z-index: 2; }
-    .radar::before {
-      content: ''; position: absolute; inset: -8px; border-radius: 50%;
-      border: 2px solid transparent;
-      border-top-color: var(--green); border-right-color: rgba(0,255,136,0.3);
-      animation: spin 4s linear infinite; z-index: 1;
-    }
-    .radar::after {
-      content: ''; position: absolute; inset: -8px; border-radius: 50%;
-      box-shadow: 0 0 40px var(--glow); z-index: 0;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
+/* === TOP TICKER BAR === */
+.top-ticker {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 99;
+  background: rgba(5, 5, 8, 0.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  font-family: var(--font-data);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  flex-wrap: wrap;
+}
+.ticker-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ticker-item .symbol { color: var(--text); font-weight: 700; }
+.ticker-item .price { color: var(--green); font-weight: 700; }
+.ticker-item .change.up { color: var(--green); }
+.ticker-item .change.down { color: var(--red); }
+.ticker-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
 
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.2);
-      padding: 8px 20px; border-radius: 100px; font-family: var(--font-mono);
-      font-size: 0.72rem; color: var(--green); letter-spacing: 0.1em;
-      margin-bottom: 28px; animation: fadeDown 0.6s ease both;
-    }
-    .hero h1 {
-      font-size: clamp(2.6rem, 7vw, 6rem); font-weight: 800; line-height: 0.95;
-      letter-spacing: -0.03em; margin-bottom: 24px; animation: fadeDown 0.6s 0.1s ease both;
-    }
-    .hero h1 .l1 { color: var(--text); display: block; }
-    .hero h1 .l2 { color: var(--green); display: block; text-shadow: 0 0 60px rgba(0,255,136,0.3); }
-    .hero-sub {
-      font-family: var(--font-mono); font-size: 0.98rem; color: var(--text2);
-      max-width: 580px; margin: 0 auto 44px; line-height: 1.7;
-      animation: fadeDown 0.6s 0.2s ease both;
-    }
-    .hero-sub strong { color: var(--green); }
-    .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; animation: fadeDown 0.6s 0.3s ease both; }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 10px; background: var(--green);
-      color: var(--bg); padding: 16px 36px; border-radius: 4px; font-family: var(--font-head);
-      font-size: 1rem; font-weight: 700; text-decoration: none; transition: all .2s;
-    }
-    .btn-primary:hover { background: var(--green2); transform: translateY(-2px); box-shadow: 0 8px 32px var(--glow); }
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 10px; background: transparent;
-      color: var(--text); padding: 16px 36px; border-radius: 4px; border: 1px solid var(--border2);
-      font-family: var(--font-head); font-size: 1rem; font-weight: 600; text-decoration: none; transition: all .2s;
-    }
-    .btn-secondary:hover { border-color: var(--green); color: var(--green); transform: translateY(-2px); }
+/* === NAV === */
+.nav-wrap {
+  position: fixed;
+  top: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: calc(100% - 48px);
+  max-width: 1280px;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background: rgba(10, 10, 20, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 64px;
+}
 
-    /* STATS BAR */
-    .stats-bar {
-      position: relative; z-index: 1; background: var(--bg2);
-      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-      padding: 28px 40px; display: flex; justify-content: center; gap: 56px; flex-wrap: wrap;
-    }
-    .stat-item { text-align: center; }
-    .stat-number { font-family: var(--font-mono); font-size: 1.9rem; font-weight: 700; color: var(--green); display: block; line-height: 1; margin-bottom: 6px; }
-    .stat-number.gold { color: var(--gold); }
-    .stat-label { font-size: 0.72rem; color: var(--text2); letter-spacing: 0.1em; text-transform: uppercase; }
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text);
+}
+.logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 12px var(--green-glow));
+}
+.logo-text {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+}
+.logo-text span { color: var(--green); }
 
-    /* SECTIONS */
-    section { position: relative; z-index: 1; padding: 100px 40px; max-width: 1200px; margin: 0 auto; }
-    .section-tag { font-family: var(--font-mono); font-size: 0.7rem; color: var(--green); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; display: block; }
-    .section-title { font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 20px; }
-    .section-sub { font-family: var(--font-mono); color: var(--text2); font-size: 0.92rem; line-height: 1.8; max-width: 600px; }
+.nav-links {
+  display: flex;
+  gap: 32px;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.3s;
+  font-family: var(--font-data);
+}
+.nav-links a:hover { color: var(--green); }
 
-    /* reveal on scroll */
-    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+.nav-cta {
+  padding: 10px 20px;
+  background: var(--green);
+  color: var(--bg-darkest);
+  border-radius: 32px;
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--green-glow);
+}
 
-    /* SIGNAL CARDS */
-    .demo-note {
-      display: inline-flex; align-items: center; gap: 8px; margin-top: 16px;
-      font-family: var(--font-mono); font-size: 0.72rem; color: var(--gold);
-      background: rgba(255,215,0,0.06); border: 1px solid rgba(255,215,0,0.15);
-      padding: 6px 14px; border-radius: 100px;
-    }
-    .signals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr)); gap: 16px; margin-top: 40px; }
-    .signal-card {
-      background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
-      padding: 24px; transition: all .3s; position: relative; overflow: hidden;
-    }
-    .signal-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
-    .signal-card.bull::before { background: var(--green); }
-    .signal-card.bear::before { background: var(--red); }
-    .signal-card:hover { border-color: var(--border2); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-    .signal-tag {
-      position: absolute; top: 14px; right: 14px; font-family: var(--font-mono);
-      font-size: 0.6rem; color: var(--gold); letter-spacing: 0.15em;
-      background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.2);
-      padding: 3px 8px; border-radius: 4px;
-    }
-    .signal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-right: 70px; }
-    .signal-coin { font-family: var(--font-mono); font-size: 1.2rem; font-weight: 700; }
-    .signal-dir { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; padding: 4px 12px; border-radius: 100px; letter-spacing: 0.1em; }
-    .signal-dir.bull { background: rgba(0,255,136,0.1); color: var(--green); border: 1px solid rgba(0,255,136,0.2); }
-    .signal-dir.bear { background: rgba(255,68,102,0.1); color: var(--red); border: 1px solid rgba(255,68,102,0.2); }
-    .signal-grade { font-family: var(--font-mono); font-size: 0.7rem; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 12px; }
-    .signal-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.82rem; }
-    .signal-row:last-child { border-bottom: none; }
-    .signal-row .label { color: var(--text2); }
-    .signal-row .value { color: var(--text); font-weight: 700; }
-    .signal-row .value.green { color: var(--green); }
-    .signal-row .value.red { color: var(--red); }
-    .signal-row .value.gold { color: var(--gold); }
-    .premium-blur { position: relative; }
-    .premium-blur::after {
-      content: '🔒 PREMIUM'; position: absolute; inset: 0; background: rgba(8,8,16,0.88);
-      backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-mono); font-size: 0.72rem; color: var(--gold); letter-spacing: 0.15em;
-      border-radius: 4px;
-    }
+@media (max-width: 968px) {
+  .nav-links { display: none; }
+}
 
-    /* FEATURES */
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 16px; margin-top: 40px; }
-    .feature-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 32px; transition: all .3s; }
-    .feature-card:hover { border-color: rgba(0,255,136,0.2); transform: translateY(-2px); }
-    .feature-icon { font-size: 2rem; margin-bottom: 16px; display: block; }
-    .feature-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
-    .feature-desc { font-family: var(--font-mono); font-size: 0.82rem; color: var(--text2); line-height: 1.7; }
+/* === HERO === */
+.hero {
+  position: relative;
+  z-index: 5;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 160px 48px 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
 
-    /* HOW */
-    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 0; margin-top: 40px; }
-    .step { padding: 32px; text-align: center; }
-    .step-num { font-family: var(--font-mono); font-size: 3rem; font-weight: 700; color: rgba(0,255,136,0.12); display: block; line-height: 1; margin-bottom: 16px; }
-    .step-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
-    .step-desc { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text2); line-height: 1.7; }
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  width: 100%;
+}
 
-    /* BETA STATS */
-    .beta-box {
-      background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
-      padding: 56px 48px; margin-top: 40px; text-align: center;
-    }
-    .beta-icon { font-size: 2.4rem; margin-bottom: 16px; }
-    .beta-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 14px; }
-    .beta-text { font-family: var(--font-mono); font-size: 0.88rem; color: var(--text2); line-height: 1.8; max-width: 560px; margin: 0 auto 8px; }
-    .beta-text strong { color: var(--green); }
+.hero-eyebrow {
+  font-family: var(--font-data);
+  font-size: 11px;
+  letter-spacing: 6px;
+  color: var(--green);
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
 
-    /* PRICING */
-    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 16px; margin-top: 40px; align-items: start; }
-    .pricing-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 36px; transition: all .3s; position: relative; }
-    .pricing-card.featured { border-color: var(--green); box-shadow: 0 0 40px var(--glow2); }
-    .pricing-card.featured::before {
-      content: 'MOST POPULAR'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-      background: var(--green); color: var(--bg); font-family: var(--font-mono); font-size: 0.62rem;
-      font-weight: 700; padding: 4px 16px; border-radius: 100px; letter-spacing: 0.1em; white-space: nowrap;
-    }
-    .pricing-tier { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text2); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; }
-    .pricing-price { font-size: 3rem; font-weight: 800; line-height: 1; margin-bottom: 4px; }
-    .pricing-price span { font-size: 1rem; font-weight: 400; color: var(--text2); }
-    .pricing-cil { font-family: var(--font-mono); font-size: 0.72rem; color: var(--gold); margin-bottom: 24px; padding: 6px 12px; background: rgba(255,215,0,0.05); border: 1px solid rgba(255,215,0,0.1); border-radius: 4px; display: inline-block; }
-    .pricing-features { list-style: none; margin-bottom: 32px; }
-    .pricing-features li { font-family: var(--font-mono); font-size: 0.82rem; color: var(--text2); padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
-    .pricing-features li:last-child { border-bottom: none; }
-    .pricing-features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
-    .pricing-features li.na { color: var(--text3); }
-    .pricing-features li.na::before { content: '—'; color: var(--text3); }
-    .btn-plan { display: block; width: 100%; padding: 14px; border-radius: 4px; font-family: var(--font-head); font-size: 0.95rem; font-weight: 700; text-align: center; text-decoration: none; transition: all .2s; }
-    .btn-plan.primary { background: var(--green); color: var(--bg); }
-    .btn-plan.primary:hover { background: var(--green2); box-shadow: 0 4px 20px var(--glow); transform: translateY(-1px); }
-    .btn-plan.secondary { background: transparent; color: var(--text); border: 1px solid var(--border2); }
-    .btn-plan.secondary:hover { border-color: var(--green); color: var(--green); }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    /* TOKEN */
-    .token-section {
-      background: linear-gradient(135deg, rgba(136,102,255,0.05) 0%, rgba(0,255,136,0.05) 100%);
-      border: 1px solid var(--border); border-radius: 12px; padding: 60px; text-align: center;
-      margin-top: 40px; position: relative; overflow: hidden;
-    }
-    .token-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(136,102,255,0.1); border: 1px solid rgba(136,102,255,0.3); padding: 8px 20px; border-radius: 100px; font-family: var(--font-mono); font-size: 0.7rem; color: var(--purple); letter-spacing: 0.15em; margin-bottom: 24px; }
-    .token-title { font-size: clamp(2rem,4vw,3rem); font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em; }
-    .token-desc { font-family: var(--font-mono); color: var(--text2); font-size: 0.88rem; line-height: 1.8; max-width: 560px; margin: 0 auto 36px; }
-    .token-benefits { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
-    .token-benefit { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 20px 28px; min-width: 160px; }
-    .token-benefit .amount { font-family: var(--font-mono); font-size: 1.05rem; font-weight: 700; color: var(--purple); display: block; margin-bottom: 6px; }
-    .token-benefit .desc { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text2); line-height: 1.5; }
-    .waitlist-form { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; max-width: 480px; margin: 0 auto; }
-    .waitlist-input { flex: 1; min-width: 220px; padding: 14px 20px; background: var(--bg3); border: 1px solid var(--border2); border-radius: 4px; color: var(--text); font-family: var(--font-mono); font-size: 0.85rem; outline: none; transition: border-color .2s; }
-    .waitlist-input:focus { border-color: var(--purple); }
-    .waitlist-input::placeholder { color: var(--text3); }
-    .btn-waitlist { padding: 14px 28px; background: var(--purple); color: white; border: none; border-radius: 4px; font-family: var(--font-head); font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: all .2s; }
-    .btn-waitlist:hover { background: #7755ee; transform: translateY(-1px); }
+.hero h1 {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(48px, 7vw, 104px);
+  line-height: 0.95;
+  letter-spacing: -3px;
+  margin-bottom: 32px;
+}
+.hero h1 .line {
+  display: block;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 0.8s forwards;
+}
+.hero h1 .line:nth-child(1) { animation-delay: 0.3s; }
+.hero h1 .line:nth-child(2) { animation-delay: 0.45s; }
+.hero h1 .line:nth-child(3) {
+  animation-delay: 0.6s;
+  color: var(--green);
+  text-shadow: 0 0 60px var(--green-glow);
+}
 
-    /* FOOTER */
-    footer { position: relative; z-index: 1; background: var(--bg2); border-top: 1px solid var(--border); padding: 48px 40px; text-align: center; }
-    .footer-brand { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 16px; }
-    .footer-brand img { width: 32px; height: 32px; border-radius: 50%; }
-    .footer-brand .txt { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; color: var(--green); }
-    .footer-links { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-bottom: 24px; }
-    .footer-links a { color: var(--text2); text-decoration: none; font-family: var(--font-mono); font-size: 0.8rem; transition: color .2s; }
-    .footer-links a:hover { color: var(--green); }
-    .footer-disclaimer {
-      font-family: var(--font-mono); font-size: 0.74rem; color: var(--text3);
-      max-width: 640px; margin: 0 auto; line-height: 1.7;
-      border: 1px solid var(--border); border-radius: 8px; padding: 20px; background: var(--bg3);
-    }
-    .footer-disclaimer strong { color: var(--text2); }
+.hero-sub {
+  font-size: 17px;
+  color: var(--text-dim);
+  max-width: 500px;
+  margin-bottom: 40px;
+  line-height: 1.7;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.75s forwards;
+}
 
-    @keyframes fadeDown { from{opacity:0;transform:translateY(-20px);} to{opacity:1;transform:translateY(0);} }
+.hero-features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 40px;
+  max-width: 500px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.85s forwards;
+}
+.feature-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 12px;
+  font-family: var(--font-data);
+  color: var(--text-dim);
+}
+.feature-icon {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--green-faint);
+  border: 1px solid var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.feature-icon::after {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green);
+}
 
-    .divider { position: relative; z-index: 1; height: 1px; background: var(--border); }
+.cta-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  opacity: 0;
+  animation: fadeUp 0.8s 1s forwards;
+  flex-wrap: wrap;
+}
 
-    @media (max-width: 768px) {
-      nav { padding: 14px 18px; top: 45px; }
-      .nav-links { display: none; }
-      .hero { padding: 150px 20px 60px; }
-      section { padding: 60px 20px; }
-      .stats-bar { gap: 28px; padding: 24px 20px; }
-      .token-section { padding: 40px 24px; }
-      .beta-box { padding: 36px 22px; }
-      footer { padding: 40px 20px; }
-    }
-  </style>
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 36px;
+  background: var(--green);
+  color: var(--bg-darkest);
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  border-radius: 32px;
+  transition: all 0.3s;
+}
+.cta::after { content: '→'; transition: transform 0.3s; }
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px var(--green-glow);
+}
+.cta:hover::after { transform: translateX(4px); }
+
+.cta-ghost {
+  padding: 18px 32px;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  font-family: var(--font-data);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  border-radius: 32px;
+  transition: all 0.3s;
+}
+.cta-ghost:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+/* HERO RIGHT — 3D area */
+.hero-visual {
+  position: relative;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-visual-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.float-card {
+  position: absolute;
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-bright);
+  border-radius: 20px;
+  padding: 20px 24px;
+  z-index: 3;
+  animation: float 6s ease-in-out infinite;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+.float-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 20px;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--green), transparent 60%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.float-card-1 { top: 8%; left: -5%; width: 200px; animation-delay: 0s; }
+.float-card-2 { top: 40%; right: -5%; width: 220px; animation-delay: 2s; }
+.float-card-3 { bottom: 10%; left: 10%; width: 240px; animation-delay: 4s; }
+
+.fc-label {
+  font-family: var(--font-data);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-faint);
+  margin-bottom: 8px;
+}
+.fc-big {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 28px;
+  color: var(--green);
+  line-height: 1;
+}
+.fc-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 11px;
+  font-family: var(--font-data);
+  color: var(--text-dim);
+}
+.fc-meta .bear { color: var(--red); }
+.fc-meta .bull { color: var(--green); }
+
+/* === SECTIONS === */
+section.s {
+  position: relative;
+  z-index: 5;
+  padding: 100px 48px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-tag {
+  font-family: var(--font-data);
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--green);
+  display: block;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1;
+  letter-spacing: -2px;
+  margin-bottom: 24px;
+}
+.section-title .accent { color: var(--green); }
+
+.section-sub {
+  color: var(--text-dim);
+  font-size: 15px;
+  max-width: 640px;
+  line-height: 1.7;
+}
+
+/* === LAST SIGNAL === */
+.last-signal-wrap {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.last-signal-box {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-bright);
+  border-radius: 24px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.last-signal-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+}
+
+.ls-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+.ls-channel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-data);
+  font-size: 12px;
+  color: var(--text);
+  font-weight: 700;
+}
+.ls-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: var(--green-faint);
+  border: 1px solid var(--border-bright);
+  border-radius: 16px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--green);
+}
+.ls-live-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s infinite;
+}
+
+.ls-divider {
+  font-family: var(--font-data);
+  color: var(--green-dim);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-align: center;
+  margin: 8px 0;
+}
+
+.ls-title {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 22px;
+  margin: 8px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ls-title .icon { font-size: 24px; }
+.ls-title .bearish { color: var(--red); }
+.ls-title .bullish { color: var(--green); }
+
+.ls-grade-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-family: var(--font-data);
+  font-size: 12px;
+  flex-wrap: wrap;
+}
+.ls-badge {
+  padding: 4px 10px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text-dim);
+}
+.ls-badge .v { color: var(--text); font-weight: 700; }
+
+.ls-row {
+  font-family: var(--font-data);
+  font-size: 13px;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+.ls-row:last-of-type { border-bottom: none; }
+.ls-row .label { color: var(--text-dim); }
+.ls-row .val { color: var(--text); font-weight: 700; }
+.ls-row .val.green { color: var(--green); }
+.ls-row .val.red { color: var(--red); }
+.ls-row .val.lock { color: var(--text-faint); font-style: italic; }
+.ls-row .val.lock::before { content: '🔒 '; }
+
+.ls-footer {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-data);
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+.ls-info-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.ls-info-card h3 {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 28px;
+  margin-bottom: 16px;
+  letter-spacing: -1px;
+}
+.ls-info-card h3 span { color: var(--green); }
+.ls-info-card p {
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.ls-info-card .live-stat {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-data);
+  font-size: 13px;
+}
+.ls-info-card .live-stat:last-child { border-bottom: 1px solid var(--border); }
+.ls-info-card .live-stat .l { color: var(--text-dim); }
+.ls-info-card .live-stat .v { color: var(--green); font-weight: 700; }
+
+/* === STATS BAR === */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 80px 0;
+}
+.stat-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 32px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.stat-card:hover {
+  border-color: var(--border-bright);
+  transform: translateY(-4px);
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+}
+.stat-icon-circle {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border-bright);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  background: var(--green-faint);
+}
+.stat-icon-circle::after {
+  content: '';
+  width: 14px; height: 14px;
+  border: 2px solid var(--green);
+  border-radius: 50%;
+  border-top-color: transparent;
+}
+.stat-card:nth-child(2) .stat-icon-circle::after { border-radius: 0; border: none; background: var(--green); }
+.stat-card:nth-child(3) .stat-icon-circle::after { border-radius: 4px; }
+.stat-card:nth-child(4) .stat-icon-circle::after { transform: rotate(45deg); }
+
+.stat-value {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 56px;
+  color: var(--text);
+  line-height: 1;
+  letter-spacing: -2px;
+}
+.stat-label {
+  font-family: var(--font-data);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--green);
+  margin-top: 12px;
+  text-transform: uppercase;
+}
+.stat-desc {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+/* === STEPS === */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.step-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 32px;
+  position: relative;
+  transition: all 0.3s;
+}
+.step-card:hover {
+  border-color: var(--border-bright);
+  transform: translateY(-4px);
+}
+.step-number {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 64px;
+  color: var(--green);
+  opacity: 0.3;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.step-title {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+.step-desc {
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* === FEATURES === */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 48px;
+}
+.feat-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+  transition: all 0.3s;
+}
+.feat-card:hover {
+  border-color: var(--border-bright);
+  transform: translateY(-4px);
+}
+.feat-icon-box {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: var(--green-faint);
+  border: 1px solid var(--border-bright);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--green);
+}
+.feat-title {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+.feat-desc {
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* === PRICING === */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.price-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 40px 32px;
+  position: relative;
+  transition: all 0.3s;
+}
+.price-card.featured {
+  border-color: var(--green);
+  box-shadow: 0 12px 60px rgba(0, 255, 136, 0.15);
+}
+.price-card.featured::before {
+  content: 'COMING SOON';
+  position: absolute;
+  top: -12px; left: 32px;
+  background: var(--gold);
+  color: var(--bg-darkest);
+  font-family: var(--font-data);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 4px 12px;
+  border-radius: 16px;
+}
+.price-card.locked::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(5, 5, 8, 0.6));
+  border-radius: 24px;
+  pointer-events: none;
+}
+.price-tier {
+  font-family: var(--font-data);
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--green);
+  margin-bottom: 16px;
+}
+.price-card.locked .price-tier { color: var(--gold); }
+.price-amount {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 48px;
+  line-height: 1;
+  margin-bottom: 4px;
+  letter-spacing: -2px;
+}
+.price-amount .currency {
+  font-size: 24px;
+  vertical-align: top;
+  margin-right: 4px;
+  color: var(--text-dim);
+}
+.price-amount .period {
+  font-size: 14px;
+  color: var(--text-dim);
+  font-weight: 400;
+  font-family: var(--font-mono);
+}
+.price-features {
+  list-style: none;
+  margin: 32px 0;
+  padding: 0;
+}
+.price-features li {
+  font-size: 13px;
+  font-family: var(--font-data);
+  color: var(--text-dim);
+  padding: 10px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.price-features li:last-child { border-bottom: none; }
+.price-features li::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+  margin-top: 7px;
+  box-shadow: 0 0 6px var(--green);
+}
+.price-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border-bright);
+  border-radius: 32px;
+  text-decoration: none;
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 2px;
+  transition: all 0.3s;
+  position: relative;
+  z-index: 2;
+}
+.price-cta:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+.price-card.featured .price-cta {
+  background: var(--bg-elev);
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+.price-cta.active {
+  background: var(--green);
+  color: var(--bg-darkest);
+  border-color: var(--green);
+}
+.price-cta.active:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px var(--green-glow);
+  color: var(--bg-darkest);
+}
+.lock-icon {
+  font-size: 14px;
+}
+.coming-soon-note {
+  text-align: center;
+  font-family: var(--font-data);
+  font-size: 11px;
+  color: var(--gold);
+  margin-top: 12px;
+  letter-spacing: 1px;
+}
+
+/* === TOKEN SECTION === */
+.token-section {
+  margin: 100px auto 0;
+  padding: 60px 48px;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(0, 255, 136, 0.05));
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  border-radius: 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  max-width: 1400px;
+}
+.token-section::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.1), transparent 60%);
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.token-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid var(--gold);
+  border-radius: 32px;
+  font-family: var(--font-data);
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.token-title {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 1;
+  letter-spacing: -2px;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 2;
+}
+.token-title .accent { color: var(--gold); }
+
+.token-sub {
+  color: var(--text-dim);
+  font-size: 16px;
+  max-width: 640px;
+  margin: 0 auto 40px;
+  line-height: 1.8;
+  position: relative;
+  z-index: 2;
+}
+
+.token-perks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto 48px;
+  position: relative;
+  z-index: 2;
+}
+.token-perk {
+  padding: 24px;
+  background: rgba(20, 20, 32, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+.token-perk-icon {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 32px;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.token-perk-title {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.token-perk-desc {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.token-form {
+  display: flex;
+  gap: 12px;
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+.token-form input {
+  flex: 1;
+  padding: 16px 20px;
+  background: rgba(20, 20, 32, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 32px;
+  color: var(--text);
+  font-family: var(--font-data);
+  font-size: 14px;
+}
+.token-form input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.token-form button {
+  padding: 16px 32px;
+  background: var(--gold);
+  color: var(--bg-darkest);
+  border: none;
+  border-radius: 32px;
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.token-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4);
+}
+
+/* === FOOTER === */
+footer {
+  position: relative;
+  z-index: 5;
+  margin-top: 100px;
+  padding: 64px 48px 32px;
+  background: var(--bg-dark);
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.footer-logo img {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 8px var(--green-glow));
+}
+.footer-logo .logo-text { font-size: 18px; }
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.footer-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-family: var(--font-data);
+  font-size: 12px;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--green); }
+.footer-disclaimer {
+  max-width: 700px;
+  margin: 0 auto;
+  font-family: var(--font-data);
+  font-size: 11px;
+  color: var(--text-faint);
+  line-height: 1.6;
+}
+.footer-disclaimer strong { color: var(--text-dim); }
+
+/* === REVEAL === */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s, transform 0.8s;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 968px) {
+  .hero { padding: 140px 24px 60px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .hero-visual { height: 400px; }
+  section.s { padding: 60px 24px; }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  .last-signal-wrap { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .token-perks { grid-template-columns: 1fr; }
+  .float-card-1 { left: 0; }
+  .float-card-2 { right: 0; }
+  .token-form { flex-direction: column; }
+  .top-ticker { gap: 16px; padding: 6px 12px; font-size: 10px; }
+  .top-ticker .ticker-label { display: none; }
+}
+</style>
 </head>
 <body>
 
-<div class="grid-bg"></div>
-<div class="candles-bg" id="candles"></div>
+<!-- 3D Background -->
+<canvas id="bg-canvas"></canvas>
+<div class="grid-overlay"></div>
 
-<!-- TICKER (live prices from Binance) -->
-<div class="ticker-wrap">
-  <div class="ticker" id="ticker">
-    <span class="ticker-item"><span class="live-dot"></span> LOADING LIVE PRICES…</span>
+<!-- TOP TICKER -->
+<div class="top-ticker">
+  <div class="ticker-item">
+    <span class="ticker-dot"></span>
+    <span class="ticker-label">LIVE</span>
+  </div>
+  <div class="ticker-item">
+    <span class="symbol">BTC</span>
+    <span class="price" id="btc-price">—</span>
+    <span class="change" id="btc-change">—</span>
+  </div>
+  <div class="ticker-item">
+    <span class="symbol">ETH</span>
+    <span class="price" id="eth-price">—</span>
+    <span class="change" id="eth-change">—</span>
+  </div>
+  <div class="ticker-item">
+    <span class="symbol">SOL</span>
+    <span class="price" id="sol-price">—</span>
+    <span class="change" id="sol-change">—</span>
+  </div>
+  <div class="ticker-item">
+    <span class="ticker-label">F&G</span>
+    <span class="price" id="fng">—</span>
   </div>
 </div>
 
 <!-- NAV -->
-<nav>
-  <a href="#" class="nav-brand">
-    <img src="logo.png" alt="CIL Signal AI" onerror="this.style.display='none'">
-    <span class="txt">CIL<span>/</span>SIGNAL</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#signals">Signals</a></li>
-    <li><a href="#how">How it works</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#token">Token</a></li>
-    <li><a href="https://t.me/CILSignalAI" target="_blank" rel="noopener" class="nav-cta">Join Free →</a></li>
-  </ul>
-</nav>
+<div class="nav-wrap">
+  <nav>
+    <a href="#" class="logo">
+      <img src="logo.png" alt="CIL Signal AI">
+      <div class="logo-text">CIL<span>/SIGNAL</span></div>
+    </a>
+    <div class="nav-links">
+      <a href="#last-signal">Live Signal</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#token">$CIL Token</a>
+    </div>
+    <a href="https://t.me/CILSignalAI" class="nav-cta">JOIN FREE</a>
+  </nav>
+</div>
 
 <!-- HERO -->
-<div class="hero">
-  <div class="hero-glow"></div>
-  <div class="radar">
-    <img src="logo.png" alt="CIL Signal AI" onerror="this.parentElement.style.display='none'">
-  </div>
-  <div class="hero-badge"><span class="live-dot"></span> 24/7 AI MARKET MONITORING · BETA</div>
-  <h1>
-    <span class="l1">CRYPTO SIGNALS</span>
-    <span class="l2">POWERED BY AI</span>
-  </h1>
-  <p class="hero-sub">
-    An AI engine analyzing <strong>10+ data sources</strong> in real time —
-    technical, on-chain, futures &amp; sentiment. Every premium signal comes with
-    <strong>entry, target, stop loss</strong> and a clear risk/reward ratio.
-  </p>
-  <div class="hero-actions">
-    <a href="https://t.me/CILSignalAI" target="_blank" rel="noopener" class="btn-primary">📢 Join Free Channel</a>
-    <a href="https://t.me/CILSignalAIbot" target="_blank" rel="noopener" class="btn-secondary">💎 Get Premium Access</a>
-  </div>
-</div>
-
-<!-- STATS BAR (honest, no performance claims) -->
-<div class="stats-bar">
-  <div class="stat-item"><span class="stat-number">40+</span><span class="stat-label">Coins Monitored</span></div>
-  <div class="stat-item"><span class="stat-number">10+</span><span class="stat-label">Data Sources</span></div>
-  <div class="stat-item"><span class="stat-number">60s</span><span class="stat-label">Scan Interval</span></div>
-  <div class="stat-item"><span class="stat-number gold">24/7</span><span class="stat-label">Always On</span></div>
-</div>
-
-<div class="divider"></div>
-
-<!-- SIGNAL PREVIEW (clearly marked demo) -->
-<section id="signals" class="reveal">
-  <span class="section-tag">// what a signal looks like</span>
-  <h2 class="section-title">What You Get</h2>
-  <p class="section-sub">
-    Every signal shows direction, probability, grade and market regime.
-    Premium signals include the full trade setup — target, stop loss and risk/reward.
-  </p>
-  <div class="demo-note">⚠️ Examples below — illustrative format, not live trades</div>
-
-  <div class="signals-grid">
-    <div class="signal-card bull">
-      <div class="signal-tag">EXAMPLE</div>
-      <div class="signal-header">
-        <span class="signal-coin">$SOL</span>
-        <span class="signal-dir bull">● BULLISH</span>
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">// CRYPTO TRADING INTELLIGENCE</div>
+      <h1>
+        <span class="line">REAL AI.</span>
+        <span class="line">NO BULLSHIT.</span>
+        <span class="line">RADICAL TRANSPARENCY.</span>
+      </h1>
+      <p class="hero-sub">
+        Every signal tracked publicly — wins, losses, all of them.
+        15+ data sources feeding a model that learns from itself.
+        Built different from the ground up.
+      </p>
+      <div class="hero-features">
+        <div class="feature-pill"><div class="feature-icon"></div>Entry · Target · Stop</div>
+        <div class="feature-pill"><div class="feature-icon"></div>Multi-timeframe AI</div>
+        <div class="feature-pill"><div class="feature-icon"></div>15+ data sources</div>
+        <div class="feature-pill"><div class="feature-icon"></div>Public results</div>
       </div>
-      <div class="signal-grade">⭐ GRADE B — FREE CHANNEL</div>
-      <div class="signal-row"><span class="label">Probability</span><span class="value green">71%</span></div>
-      <div class="signal-row"><span class="label">Entry</span><span class="value">$148.42</span></div>
-      <div class="signal-row"><span class="label">RSI</span><span class="value">31.4</span></div>
-      <div class="signal-row"><span class="label">Volume</span><span class="value">2.1x avg</span></div>
-      <div class="signal-row premium-blur"><span class="label">Target</span><span class="value green">$155.10</span></div>
-      <div class="signal-row premium-blur"><span class="label">Stop Loss</span><span class="value red">$144.00</span></div>
+      <div class="cta-row">
+        <a href="https://t.me/CILSignalAI" class="cta">JOIN FREE CHANNEL</a>
+        <a href="#how" class="cta-ghost">HOW IT WORKS</a>
+      </div>
     </div>
 
-    <div class="signal-card bear">
-      <div class="signal-tag">EXAMPLE</div>
-      <div class="signal-header">
-        <span class="signal-coin">$BTC</span>
-        <span class="signal-dir bear">● BEARISH</span>
-      </div>
-      <div class="signal-grade">🏆 GRADE A — PREMIUM ONLY</div>
-      <div class="signal-row"><span class="label">Probability</span><span class="value green">76%</span></div>
-      <div class="signal-row"><span class="label">Entry</span><span class="value">$103,420</span></div>
-      <div class="signal-row"><span class="label">Target</span><span class="value green">$98,850 (-4.4%)</span></div>
-      <div class="signal-row"><span class="label">Stop Loss</span><span class="value red">$106,520 (+3.0%)</span></div>
-      <div class="signal-row"><span class="label">Risk/Reward</span><span class="value gold">1.5:1</span></div>
-      <div class="signal-row"><span class="label">Regime</span><span class="value">📉 Bear</span></div>
-    </div>
+    <div class="hero-visual">
+      <canvas class="hero-visual-canvas" id="orb-canvas"></canvas>
 
-    <div class="signal-card bull">
-      <div class="signal-tag">EXAMPLE</div>
-      <div class="signal-header">
-        <span class="signal-coin">$ETH</span>
-        <span class="signal-dir bull">● BULLISH</span>
+      <div class="float-card float-card-1">
+        <div class="fc-label">// REGIME</div>
+        <div class="fc-big">BEAR</div>
+        <div class="fc-meta">
+          <span>F&G 22</span>
+          <span>VIX 16</span>
+        </div>
       </div>
-      <div class="signal-grade">🏆 GRADE A — PREMIUM ONLY</div>
-      <div class="signal-row"><span class="label">Probability</span><span class="value green">73%</span></div>
-      <div class="signal-row"><span class="label">Entry</span><span class="value">$2,486.30</span></div>
-      <div class="signal-row"><span class="label">Target</span><span class="value green">$2,598.20 (+4.5%)</span></div>
-      <div class="signal-row"><span class="label">Stop Loss</span><span class="value red">$2,411.70 (-3.0%)</span></div>
-      <div class="signal-row"><span class="label">Risk/Reward</span><span class="value gold">1.5:1</span></div>
-      <div class="signal-row"><span class="label">Reason</span><span class="value" style="font-size:0.72rem">RSI oversold + MACD cross + volume</span></div>
+
+      <div class="float-card float-card-2">
+        <div class="fc-label">// DATA SOURCES</div>
+        <div class="fc-big">15+</div>
+        <div class="fc-meta">
+          <span>technical</span>
+          <span>on-chain</span>
+        </div>
+      </div>
+
+      <div class="float-card float-card-3">
+        <div class="fc-label">// LAST SIGNAL</div>
+        <div class="fc-big">ETH/USD</div>
+        <div class="fc-meta">
+          <span class="bear">▼ BEARISH</span>
+          <span>Grade B</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
+<!-- LAST SIGNAL -->
+<section id="last-signal" class="s reveal">
+  <span class="section-tag">// LATEST FREE SIGNAL</span>
+  <h2 class="section-title">Straight from <span class="accent">Telegram.</span></h2>
+  <p class="section-sub">This is what a real signal looks like. Posted live on our free channel.
+  Premium subscribers also see target, stop loss, R/R and Grade A signals.</p>
 
-<!-- BETA / PERFORMANCE (honest) -->
-<section class="reveal">
-  <span class="section-tag">// performance</span>
-  <h2 class="section-title">Transparent By Design</h2>
-  <p class="section-sub">
-    We track every single signal and verify it automatically against real market data.
-    No cherry-picking, no inflated numbers.
-  </p>
+  <div class="last-signal-wrap">
+    <!-- Signal box -->
+    <div class="last-signal-box">
+      <div class="ls-header">
+        <div class="ls-channel">
+          <span style="color: var(--green); font-size: 16px;">📢</span>
+          @CILSignalAI
+        </div>
+        <div class="ls-live">
+          <div class="ls-live-dot"></div>
+          <span>LIVE</span>
+        </div>
+      </div>
 
-  <div class="beta-box">
-    <div class="beta-icon">🧪</div>
-    <div class="beta-title">Currently in Beta</div>
-    <p class="beta-text">
-      The engine was recently rebuilt with a stricter, more honest result-verification
-      method. We are now collecting <strong>verified performance data</strong> on the
-      new system before publishing any accuracy numbers.
-    </p>
-    <p class="beta-text">
-      Real, verified statistics will appear here once we have a meaningful sample —
-      and they'll be the <strong>actual</strong> numbers, whatever they are.
-    </p>
+      <div class="ls-divider">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
+      <div class="ls-title">
+        <span class="icon">🔴</span>
+        <span class="bearish">▼ BEARISH — ETH/USDT</span>
+      </div>
+
+      <div class="ls-grade-row">
+        <div class="ls-badge">✅ <span class="v">STRONG</span></div>
+        <div class="ls-badge">⭐ Grade: <span class="v">B</span></div>
+        <div class="ls-badge">📉 <span class="v">BEAR regime</span></div>
+        <div class="ls-badge">🤖 <span class="v">XGBoost</span></div>
+      </div>
+
+      <div class="ls-row">
+        <span class="label">💰 Entry:</span>
+        <span class="val green">$2,022.09</span>
+      </div>
+      <div class="ls-row">
+        <span class="label">🎯 Target:</span>
+        <span class="val lock">Premium</span>
+      </div>
+      <div class="ls-row">
+        <span class="label">🛑 Stop Loss:</span>
+        <span class="val lock">Premium</span>
+      </div>
+      <div class="ls-row">
+        <span class="label">⚖️ R/R:</span>
+        <span class="val lock">Premium</span>
+      </div>
+      <div class="ls-row">
+        <span class="label">📊 RSI · Vol:</span>
+        <span class="val">53.3 · 0.45x</span>
+      </div>
+
+      <div class="ls-footer">
+        <span id="signal-time">Updated just now</span>
+        <span>⚠️ DYOR</span>
+      </div>
+    </div>
+
+    <!-- Info card -->
+    <div class="ls-info-card">
+      <h3>Want the <span>full</span> signal?</h3>
+      <p>
+        Free signals show entry only. Premium subscribers unlock the target price,
+        stop loss, risk/reward ratio, plus exclusive Grade A signals with the highest
+        confidence scoring from the AI engine.
+      </p>
+      <div class="live-stat">
+        <span class="l">Signals processed</span>
+        <span class="v" id="signals-count">3,023+</span>
+      </div>
+      <div class="live-stat">
+        <span class="l">Data sources</span>
+        <span class="v">15+</span>
+      </div>
+      <div class="live-stat">
+        <span class="l">Monitored pairs</span>
+        <span class="v">67</span>
+      </div>
+      <div class="live-stat">
+        <span class="l">Active 24/7</span>
+        <span class="v">YES</span>
+      </div>
+      <a href="#pricing" class="cta" style="margin-top: 24px; align-self: flex-start;">SEE PRICING</a>
+    </div>
   </div>
 </section>
 
-<div class="divider"></div>
+<!-- STATS -->
+<section class="s reveal">
+  <span class="section-tag">// THE PLATFORM</span>
+  <h2 class="section-title">Real engine, <span class="accent">real capabilities.</span></h2>
+  <p class="section-sub">No marketing fiction. These are what the system does today.</p>
 
-<!-- HOW IT WORKS -->
-<section id="how" class="reveal">
-  <span class="section-tag">// how it works</span>
-  <h2 class="section-title">Simple Process</h2>
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="stat-icon-circle"></div>
+      <div class="stat-value">15+</div>
+      <div class="stat-label">DATA SOURCES</div>
+      <div class="stat-desc">Real-time AI analysis</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon-circle"></div>
+      <div class="stat-value">24/7</div>
+      <div class="stat-label">MONITORING</div>
+      <div class="stat-desc">Non-stop market scan</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon-circle"></div>
+      <div class="stat-value">3</div>
+      <div class="stat-label">TIMEFRAMES</div>
+      <div class="stat-desc">15m · 1h · 4h confirmation</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon-circle"></div>
+      <div class="stat-value">1.5:1</div>
+      <div class="stat-label">MIN R/R</div>
+      <div class="stat-desc">Every premium signal</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section id="how" class="s reveal">
+  <span class="section-tag">// HOW IT WORKS</span>
+  <h2 class="section-title">Simple <span class="accent">process.</span></h2>
   <p class="section-sub">The AI runs 24/7 analyzing markets. You get signals with clear entry, target and stop loss.</p>
-  <div class="steps">
-    <div class="step"><span class="step-num">01</span><div class="step-title">AI Scans Markets</div><p class="step-desc">An ML engine analyzes 40+ coins across 10+ sources every 60 seconds — funding rates, on-chain data, futures, sentiment and more.</p></div>
-    <div class="step"><span class="step-num">02</span><div class="step-title">Signal Graded</div><p class="step-desc">Each signal gets a grade A/B/C based on source quality and confirmation count. Only the strongest reach Grade A.</p></div>
-    <div class="step"><span class="step-num">03</span><div class="step-title">You Get Alerted</div><p class="step-desc">Grade A signals go to Premium with the full trade setup. Grade B/C reach the free channel. Delivered instantly via Telegram.</p></div>
-    <div class="step"><span class="step-num">04</span><div class="step-title">Results Verified</div><p class="step-desc">Every signal is checked automatically against real price action — target hit or stop loss hit. Honest tracking, always.</p></div>
+
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-number">01</div>
+      <div class="step-title">AI Scans Markets</div>
+      <div class="step-desc">15+ data sources analyzed continuously: technical indicators, on-chain data, futures positioning, sentiment, macro.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-number">02</div>
+      <div class="step-title">Signal Generated</div>
+      <div class="step-desc">When multiple sources align with high confidence, a signal is created with entry, target, stop loss and grade.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-number">03</div>
+      <div class="step-title">You Get Notified</div>
+      <div class="step-desc">Instant Telegram notification. Free tier gets entry. Premium unlocks full signal with targets and stops.</div>
+    </div>
   </div>
 </section>
-
-<div class="divider"></div>
 
 <!-- FEATURES -->
-<section class="reveal">
-  <span class="section-tag">// features</span>
-  <h2 class="section-title">Built Different</h2>
+<section class="s reveal">
+  <span class="section-tag">// WHAT MAKES US DIFFERENT</span>
+  <h2 class="section-title">Built <span class="accent">different.</span></h2>
+  <p class="section-sub">No "92% accuracy" lies. No cherry-picked screenshots. No pump groups.</p>
+
   <div class="features-grid">
-    <div class="feature-card"><span class="feature-icon">🤖</span><div class="feature-title">Machine Learning Engine</div><p class="feature-desc">XGBoost + Random Forest models that re-train on live, verified results — the system keeps learning from its own track record.</p></div>
-    <div class="feature-card"><span class="feature-icon">⚖️</span><div class="feature-title">Defined Risk on Every Trade</div><p class="feature-desc">Each premium signal includes a target and a stop loss derived from volatility (ATR), with a clear risk/reward ratio.</p></div>
-    <div class="feature-card"><span class="feature-icon">📊</span><div class="feature-title">Market Regime Detection</div><p class="feature-desc">Bull, bear, sideways or volatile — the engine adapts its thresholds to current market conditions automatically.</p></div>
-    <div class="feature-card"><span class="feature-icon">🐋</span><div class="feature-title">Whale &amp; Futures Data</div><p class="feature-desc">Monitors large trades, funding rates, liquidations and open interest across major exchanges in real time.</p></div>
-    <div class="feature-card"><span class="feature-icon">🔗</span><div class="feature-title">10+ Data Sources</div><p class="feature-desc">Binance, Bybit, OKX, Fear &amp; Greed index, on-chain metrics, macro data and more — combined into one weighted score.</p></div>
-    <div class="feature-card"><span class="feature-icon">✅</span><div class="feature-title">Honest Tracking</div><p class="feature-desc">Every signal is verified against real price action. When we publish stats, they'll be the real ones — no cherry-picking.</p></div>
+    <div class="feat-card">
+      <div class="feat-icon-box">⚡</div>
+      <div class="feat-title">AI Powered</div>
+      <div class="feat-desc">Advanced machine learning models, retrained continuously on fresh data.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon-box">⊞</div>
+      <div class="feat-title">15+ Data Sources</div>
+      <div class="feat-desc">On-chain, technical, futures, sentiment & macro indicators combined.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon-box">◎</div>
+      <div class="feat-title">Clear Signals</div>
+      <div class="feat-desc">Entry, target, stop loss and clear risk/reward on every premium signal.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon-box">⚐</div>
+      <div class="feat-title">Real-time Alerts</div>
+      <div class="feat-desc">Instant Telegram notifications 24/7 — never miss an opportunity.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon-box">◈</div>
+      <div class="feat-title">Trusted by Traders</div>
+      <div class="feat-desc">100% transparent results. We publish wins AND losses. No bullshit.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon-box">⟁</div>
+      <div class="feat-title">Self-Learning AI</div>
+      <div class="feat-desc">Model continuously learns from its own performance. Adapts to market regime changes.</div>
+    </div>
   </div>
 </section>
-
-<div class="divider"></div>
 
 <!-- PRICING -->
-<section id="pricing" class="reveal">
-  <span class="section-tag">// pricing</span>
-  <h2 class="section-title">Choose Your Plan</h2>
-  <p class="section-sub">Start free. Upgrade when ready. Pay with crypto — 50% off by burning CIL token (after launch).</p>
+<section id="pricing" class="s reveal">
+  <span class="section-tag">// PRICING</span>
+  <h2 class="section-title">Start free. <span class="accent">Upgrade when ready.</span></h2>
+  <p class="section-sub">Honest tiers. Premium & Lifetime launching soon — join the waitlist below.</p>
+
   <div class="pricing-grid">
-    <div class="pricing-card">
-      <div class="pricing-tier">FREE</div>
-      <div class="pricing-price">$0 <span>/ forever</span></div><br>
-      <ul class="pricing-features">
-        <li>Grade B/C signals</li>
-        <li>Community group access</li>
-        <li>Entry + direction</li>
-        <li class="na">Target price</li>
-        <li class="na">Stop loss</li>
-        <li class="na">Risk/Reward ratio</li>
-        <li class="na">Grade A signals</li>
+    <div class="price-card">
+      <div class="price-tier">FREE</div>
+      <div class="price-amount"><span class="currency">$</span>0<span class="period">/forever</span></div>
+      <ul class="price-features">
+        <li>Free Telegram channel</li>
+        <li>Entry price on signals</li>
+        <li>Grade B & C signals</li>
+        <li>Community access</li>
       </ul>
-      <a href="https://t.me/CILSignalAI" target="_blank" rel="noopener" class="btn-plan secondary">Join Free Channel →</a>
+      <a href="https://t.me/CILSignalAI" class="price-cta active">JOIN FREE →</a>
     </div>
 
-    <div class="pricing-card featured">
-      <div class="pricing-tier">PREMIUM</div>
-      <div class="pricing-price">$15 <span>/ month</span></div>
-      <div class="pricing-cil">🔥 or burn CIL for 50% off (after launch)</div>
-      <ul class="pricing-features">
-        <li>Grade A signals only</li>
-        <li>🎯 Target price on every signal</li>
-        <li>🛑 Stop loss on every signal</li>
-        <li>⚖️ Risk/Reward ratio</li>
-        <li>Market regime detection</li>
-        <li class="na">Permanent access</li>
-      </ul>
-      <a href="https://t.me/CILSignalAIbot" target="_blank" rel="noopener" class="btn-plan primary">Get Premium →</a>
-    </div>
-
-    <div class="pricing-card">
-      <div class="pricing-tier">VIP</div>
-      <div class="pricing-price">$99 <span>/ one-time</span></div>
-      <div class="pricing-cil">🔥 or burn CIL for 50% off (after launch)</div>
-      <ul class="pricing-features">
-        <li>Everything in Premium</li>
-        <li>🎯 Target + Stop Loss</li>
-        <li>⚖️ Risk/Reward ratio</li>
-        <li>Market regime detection</li>
-        <li>Permanent access ♾️</li>
+    <div class="price-card featured locked">
+      <div class="price-tier">PREMIUM</div>
+      <div class="price-amount"><span class="currency">$</span>29<span class="period">/month</span></div>
+      <ul class="price-features">
+        <li>Everything in Free</li>
+        <li>Target price on every signal</li>
+        <li>Stop loss on every signal</li>
+        <li>Risk/Reward ratio</li>
+        <li>Grade A, B & C signals</li>
         <li>Priority support</li>
       </ul>
-      <a href="https://t.me/CILSignalAIbot" target="_blank" rel="noopener" class="btn-plan secondary">Get VIP →</a>
+      <div class="price-cta"><span class="lock-icon">🔒</span> LAUNCHING SOON</div>
+      <div class="coming-soon-note">⏳ Join waitlist below</div>
+    </div>
+
+    <div class="price-card locked">
+      <div class="price-tier">LIFETIME</div>
+      <div class="price-amount"><span class="currency">$</span>249<span class="period">/once</span></div>
+      <ul class="price-features">
+        <li>Everything in Premium</li>
+        <li>Pay once, use forever</li>
+        <li>All future features</li>
+        <li>VIP community access</li>
+        <li>Direct contact</li>
+      </ul>
+      <div class="price-cta"><span class="lock-icon">🔒</span> LAUNCHING SOON</div>
+      <div class="coming-soon-note">⏳ Founder pricing for early adopters</div>
     </div>
   </div>
 </section>
-
-<div class="divider"></div>
 
 <!-- TOKEN -->
-<section id="token" class="reveal">
-  <span class="section-tag">// cil token</span>
-  <h2 class="section-title">The CIL Token</h2>
-  <p class="section-sub">A planned Solana-based utility token. Burn CIL to unlock 50% off any plan. Not yet launched.</p>
-
+<section id="token" class="s reveal">
   <div class="token-section">
-    <div class="token-badge">◆ PLANNED — NOT YET LAUNCHED</div>
-    <h3 class="token-title">Planned Token Utility</h3>
-    <p class="token-desc">
-      The CIL token is intended as a payment-and-discount utility: burn CIL instead of paying
-      in stablecoins to receive 50% off premium access. Details, supply and launch date will be
-      announced. Join the waitlist to be notified first.
+    <div class="token-badge">$CIL TOKEN · COMING SOON</div>
+    <h2 class="token-title">Hold $CIL.<br><span class="accent">Pay 50% less.</span></h2>
+    <p class="token-sub">
+      The CIL token gives holders direct discounts on all packages.
+      Tokens used for purchases are <strong style="color: var(--gold);">automatically burned</strong>,
+      reducing supply with every transaction.
     </p>
 
-    <div class="token-benefits">
-      <div class="token-benefit"><span class="amount">50% off</span><span class="desc">premium plans<br>when paying<br>by burning CIL</span></div>
-      <div class="token-benefit"><span class="amount">Solana</span><span class="desc">fast &amp; low-fee<br>settlement<br>network</span></div>
-      <div class="token-benefit"><span class="amount">🔥 Burn</span><span class="desc">tokens used for<br>payment are<br>burned on-chain</span></div>
-      <div class="token-benefit"><span class="amount">TBA</span><span class="desc">supply &amp; launch<br>details to be<br>announced</span></div>
+    <div class="token-perks">
+      <div class="token-perk">
+        <div class="token-perk-icon">50%</div>
+        <div class="token-perk-title">Discount on Packages</div>
+        <div class="token-perk-desc">Premium becomes $14.50, Lifetime $124. Pay with $CIL tokens.</div>
+      </div>
+      <div class="token-perk">
+        <div class="token-perk-icon">🔥</div>
+        <div class="token-perk-title">Auto Burn Mechanism</div>
+        <div class="token-perk-desc">Every token spent on packages is burned. Supply only decreases.</div>
+      </div>
+      <div class="token-perk">
+        <div class="token-perk-icon">🚀</div>
+        <div class="token-perk-title">Early Holders Get More</div>
+        <div class="token-perk-desc">Waitlist gets allocation at launch. First-come priority.</div>
+      </div>
     </div>
 
-    <!-- Waitlist via Formspree — connected. -->
-    <form class="waitlist-form" id="waitlist-form"
-          action="https://formspree.io/f/xojbnvae" method="POST">
-      <input type="email" name="email" class="waitlist-input"
-             placeholder="your@email.com" required>
-      <input type="hidden" name="_subject" value="New CIL token waitlist signup">
-      <button type="submit" class="btn-waitlist" id="waitlist-btn">Join Waitlist</button>
+    <form class="token-form" action="https://formspree.io/f/xojbnvae" method="POST">
+      <input type="email" name="email" placeholder="your@email.com — join $CIL waitlist" required>
+      <input type="hidden" name="_subject" value="CIL Token Waitlist">
+      <input type="hidden" name="source" value="token-waitlist">
+      <button type="submit">JOIN WAITLIST</button>
     </form>
-    <p style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text3);margin-top:12px">
-      Get notified at launch. No spam ever.
-    </p>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- CTA -->
-<section class="reveal" style="text-align:center">
-  <span class="section-tag">// get started</span>
-  <h2 class="section-title">Start Today.<br>It's Free.</h2>
-  <p class="section-sub" style="margin:0 auto 40px">Join the free channel and see the signals for yourself. Upgrade to Premium when you're ready.</p>
-  <div class="hero-actions">
-    <a href="https://t.me/CILSignalAI" target="_blank" rel="noopener" class="btn-primary">📢 Join Free Channel</a>
-    <a href="https://t.me/CILSignalAIbot" target="_blank" rel="noopener" class="btn-secondary">💎 Subscribe to Premium</a>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-brand">
-    <img src="logo.png" alt="CIL Signal AI" onerror="this.style.display='none'">
-    <span class="txt">CIL / SIGNAL AI</span>
+  <div class="footer-logo">
+    <img src="logo.png" alt="CIL Signal AI">
+    <div class="logo-text">CIL<span>/SIGNAL</span></div>
   </div>
   <div class="footer-links">
-    <a href="https://t.me/CILSignalAI" target="_blank" rel="noopener">Telegram Channel</a>
-    <a href="https://t.me/CILSignalAICommunity" target="_blank" rel="noopener">Community</a>
-    <a href="https://t.me/CILSignalAIbot" target="_blank" rel="noopener">Subscribe Bot</a>
-    <a href="#token">CIL Token</a>
+    <a href="#last-signal">Live Signal</a>
+    <a href="#how">How it works</a>
     <a href="#pricing">Pricing</a>
+    <a href="#token">$CIL Token</a>
+    <a href="https://t.me/CILSignalAI">Telegram</a>
+    <a href="mailto:contact@cilsignal.com">Contact</a>
   </div>
   <p class="footer-disclaimer">
-    <strong>⚠️ Risk disclaimer.</strong> CIL Signal AI provides AI-generated cryptocurrency information
-    for educational purposes only. Nothing on this website is financial, investment or trading advice.
-    Cryptocurrency trading carries a high level of risk and may not be suitable for everyone — you can
-    lose some or all of your capital. The CIL token is not yet launched and nothing here is an offer to
-    sell or solicitation to buy any token or security. Always do your own research (DYOR) and never
-    invest more than you can afford to lose.
+    <strong>Disclaimer:</strong> Crypto trading involves substantial risk of loss.
+    Past performance does not guarantee future results. Signals are not financial advice.
+    Always do your own research (DYOR). Never invest more than you can afford to lose.
+    <br><br>
+    © 2026 CIL Signal AI. All rights reserved.
   </p>
 </footer>
 
 <script>
-  // ── PWA — unregister any stale worker first, then register fresh ──
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistrations().then(regs => {
-      regs.forEach(r => r.unregister());
-    }).finally(() => {
-      navigator.serviceWorker.register('/sw.js').catch(() => {});
-    });
+// ═══════════════════════════════════════════════════════════
+// 3D BACKGROUND
+// ═══════════════════════════════════════════════════════════
+(function() {
+  const canvas = document.getElementById('bg-canvas');
+  if (!canvas || typeof THREE === 'undefined') return;
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 50;
+
+  const particleCount = 200;
+  const positions = new Float32Array(particleCount * 3);
+  for (let i = 0; i < particleCount * 3; i++) {
+    positions[i] = (Math.random() - 0.5) * 100;
   }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  const material = new THREE.PointsMaterial({
+    color: 0x00ff88, size: 0.3, transparent: true, opacity: 0.6,
+    blending: THREE.AdditiveBlending
+  });
+  const particles = new THREE.Points(geometry, material);
+  scene.add(particles);
 
-  // ── LIVE PRICES — robust, with visible startup content + logging ──
-  const TICKER_COINS = [
-    ['bitcoin','BTC'],['ethereum','ETH'],['solana','SOL'],['ripple','XRP'],
-    ['cardano','ADA'],['avalanche-2','AVAX'],['chainlink','LINK'],['polkadot','DOT'],
-    ['dogecoin','DOGE'],['cosmos','ATOM']
-  ];
-  const CG_IDS = TICKER_COINS.map(c => c[0]).join(',');
+  let mouseX = 0, mouseY = 0;
+  document.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+  });
 
-  function fmtPrice(p) {
-    p = parseFloat(p);
-    if (p >= 1000) return '$' + p.toLocaleString('en-US', {maximumFractionDigits:0});
-    if (p >= 1)    return '$' + p.toFixed(2);
-    return '$' + p.toFixed(4);
+  function animate() {
+    requestAnimationFrame(animate);
+    particles.rotation.y += 0.0008;
+    particles.rotation.x += 0.0004;
+    camera.position.x += (mouseX * 3 - camera.position.x) * 0.03;
+    camera.position.y += (-mouseY * 3 - camera.position.y) * 0.03;
+    camera.lookAt(scene.position);
+    renderer.render(scene, camera);
   }
+  animate();
 
-  function renderTicker(items) {
-    const build = () => items.map(it => {
-      const cls = it.chg >= 0 ? 'up' : 'down';
-      const arrow = it.chg >= 0 ? '▲' : '▼';
-      return '<span class="ticker-item"><span class="sym">' + it.name + '/' + it.unit + '</span> '
-           + fmtPrice(it.price) + ' <span class="' + cls + '">' + arrow + ' '
-           + (it.chg>=0?'+':'') + it.chg.toFixed(1) + '%</span></span>';
-    }).join('');
-    let html = '<span class="ticker-item"><span class="live-dot"></span> LIVE</span>' + build();
-    const ticker = document.getElementById('ticker');
-    if (ticker) { ticker.innerHTML = html + html; ticker.classList.add('animate'); }
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+})();
+
+// ═══════════════════════════════════════════════════════════
+// 3D HERO ORB
+// ═══════════════════════════════════════════════════════════
+(function() {
+  const canvas = document.getElementById('orb-canvas');
+  if (!canvas || typeof THREE === 'undefined') return;
+
+  const container = canvas.parentElement;
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  const updateSize = () => {
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  };
+  updateSize();
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
+  camera.position.z = 4;
+
+  const sphereGeo = new THREE.IcosahedronGeometry(1.3, 4);
+  const wireMat = new THREE.MeshBasicMaterial({
+    color: 0x00ff88, wireframe: true, transparent: true, opacity: 0.4
+  });
+  const sphere = new THREE.Mesh(sphereGeo, wireMat);
+  scene.add(sphere);
+
+  const innerGeo = new THREE.SphereGeometry(1.1, 32, 32);
+  const innerMat = new THREE.MeshBasicMaterial({
+    color: 0x00ff88, transparent: true, opacity: 0.08
+  });
+  const innerSphere = new THREE.Mesh(innerGeo, innerMat);
+  scene.add(innerSphere);
+
+  const orbCount = 80;
+  const orbPositions = new Float32Array(orbCount * 3);
+  for (let i = 0; i < orbCount; i++) {
+    const r = 1.6 + Math.random() * 0.5;
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    orbPositions[i*3]   = r * Math.sin(phi) * Math.cos(theta);
+    orbPositions[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
+    orbPositions[i*3+2] = r * Math.cos(phi);
   }
+  const orbGeo = new THREE.BufferGeometry();
+  orbGeo.setAttribute('position', new THREE.BufferAttribute(orbPositions, 3));
+  const orbMat = new THREE.PointsMaterial({
+    color: 0x22e5ff, size: 0.06, transparent: true, opacity: 0.8,
+    blending: THREE.AdditiveBlending
+  });
+  const orbits = new THREE.Points(orbGeo, orbMat);
+  scene.add(orbits);
 
-  function setTickerText(txt) {
-    const ticker = document.getElementById('ticker');
-    if (ticker) {
-      ticker.innerHTML = '<span class="ticker-item"><span class="live-dot"></span> ' + txt + '</span>';
-      ticker.classList.add('animate');
-    }
+  function animate() {
+    requestAnimationFrame(animate);
+    sphere.rotation.y += 0.003;
+    sphere.rotation.x += 0.001;
+    innerSphere.rotation.y -= 0.002;
+    orbits.rotation.y += 0.005;
+    orbits.rotation.x += 0.002;
+    renderer.render(scene, camera);
   }
+  animate();
 
-  async function tryCoinGecko() {
-    const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids='
-              + CG_IDS + '&order=market_cap_desc&sparkline=false&price_change_percentage=24h';
-    const res = await fetch(url, { cache: 'no-store' });
-    if (!res.ok) throw new Error('cg ' + res.status);
-    const data = await res.json();
-    const map = {}; data.forEach(c => map[c.id] = c);
-    return TICKER_COINS.map(([id, name]) => {
-      const c = map[id]; if (!c) return null;
-      const chg = (c.price_change_percentage_24h != null) ? c.price_change_percentage_24h : 0;
-      return { name: name, price: c.current_price, chg: chg, unit: 'USD' };
-    }).filter(Boolean);
-  }
+  window.addEventListener('resize', updateSize);
+})();
 
-  async function tryBinance() {
-    const res = await fetch('https://api.binance.com/api/v3/ticker/24hr', { cache: 'no-store' });
-    if (!res.ok) throw new Error('bn ' + res.status);
-    const all = await res.json();
-    const map = {}; all.forEach(t => map[t.symbol] = t);
-    const SYM = {BTC:'BTCUSDT',ETH:'ETHUSDT',SOL:'SOLUSDT',XRP:'XRPUSDT',ADA:'ADAUSDT',
-                 AVAX:'AVAXUSDT',LINK:'LINKUSDT',DOT:'DOTUSDT',DOGE:'DOGEUSDT',ATOM:'ATOMUSDT'};
-    return TICKER_COINS.map(([id, name]) => {
-      const t = map[SYM[name]]; if (!t) return null;
-      return { name: name, price: parseFloat(t.lastPrice), chg: parseFloat(t.priceChangePercent), unit: 'USDT' };
-    }).filter(Boolean);
-  }
-
-  async function loadPrices() {
-    try {
-      const items = await tryCoinGecko();
-      if (items && items.length) { renderTicker(items); console.log('[ticker] CoinGecko OK', items.length); return; }
-      throw new Error('cg empty');
-    } catch (e1) {
-      console.log('[ticker] CoinGecko failed:', e1.message);
-      try {
-        const items = await tryBinance();
-        if (items && items.length) { renderTicker(items); console.log('[ticker] Binance OK', items.length); return; }
-        throw new Error('bn empty');
-      } catch (e2) {
-        console.log('[ticker] Binance failed:', e2.message);
-        setTickerText('CIL SIGNAL AI · LIVE 24/7 MARKET MONITORING');
-      }
-    }
-  }
-
-  // show something immediately so the bar is never empty
-  setTickerText('LOADING LIVE PRICES…');
-  loadPrices();
-  setInterval(loadPrices, 60000);
-
-  // ── FLOATING CANDLESTICKS BG ──
-  (function makeCandles() {
-    const box = document.getElementById('candles');
-    const colors = ['rgba(0,255,136,0.25)', 'rgba(255,68,102,0.22)', 'rgba(255,215,0,0.18)'];
-    for (let i = 0; i < 18; i++) {
-      const c = document.createElement('div');
-      c.className = 'candle';
-      const h = 20 + Math.random() * 90;
-      c.style.height = h + 'px';
-      c.style.left = Math.random() * 100 + '%';
-      c.style.background = colors[Math.floor(Math.random()*colors.length)];
-      c.style.animationDuration = (12 + Math.random() * 18) + 's';
-      c.style.animationDelay = (-Math.random() * 20) + 's';
-      box.appendChild(c);
-    }
-  })();
-
-  // ── REVEAL ON SCROLL ──
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-  // ── WAITLIST (Formspree) ──
-  const form = document.getElementById('waitlist-form');
-  if (form) {
-    form.addEventListener('submit', async (ev) => {
-      ev.preventDefault();
-      const btn = document.getElementById('waitlist-btn');
-      const data = new FormData(form);
-      try {
-        const r = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
-        if (r.ok) {
-          btn.textContent = '✅ You\'re on the list!';
-          form.reset();
-          setTimeout(() => btn.textContent = 'Join Waitlist', 3500);
-        } else {
-          btn.textContent = 'Try again';
-          setTimeout(() => btn.textContent = 'Join Waitlist', 3000);
-        }
-      } catch (e) {
-        btn.textContent = 'Try again';
-        setTimeout(() => btn.textContent = 'Join Waitlist', 3000);
+// ═══════════════════════════════════════════════════════════
+// LIVE TICKER (Binance, real-time)
+// ═══════════════════════════════════════════════════════════
+async function updateTicker() {
+  try {
+    const r = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbols=["BTCUSDT","ETHUSDT","SOLUSDT"]');
+    const data = await r.json();
+    data.forEach(coin => {
+      const sym = coin.symbol.replace('USDT', '').toLowerCase();
+      const price = parseFloat(coin.lastPrice);
+      const change = parseFloat(coin.priceChangePercent);
+      const pEl = document.getElementById(`${sym}-price`);
+      const cEl = document.getElementById(`${sym}-change`);
+      if (pEl) pEl.textContent = '$' + (price >= 1000 ? price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',') : price.toFixed(2));
+      if (cEl) {
+        cEl.textContent = (change >= 0 ? '▲' : '▼') + ' ' + Math.abs(change).toFixed(1) + '%';
+        cEl.className = 'change ' + (change >= 0 ? 'up' : 'down');
       }
     });
-  }
+  } catch (e) {}
+}
+async function updateFng() {
+  try {
+    const r = await fetch('https://api.alternative.me/fng/?limit=1');
+    const d = await r.json();
+    const val = d.data[0].value;
+    document.getElementById('fng').textContent = val;
+  } catch (e) {}
+}
+updateTicker();
+updateFng();
+setInterval(updateTicker, 30000);
+
+// ═══════════════════════════════════════════════════════════
+// SCROLL REVEAL
+// ═══════════════════════════════════════════════════════════
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('active');
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ═══════════════════════════════════════════════════════════
+// PWA Service Worker
+// ═══════════════════════════════════════════════════════════
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
 </script>
 
 </body>
