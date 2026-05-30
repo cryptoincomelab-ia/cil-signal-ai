@@ -95,13 +95,13 @@ body {
 }
 .ticker-track {
   display: inline-flex;
-  gap: 60px;
-  padding-left: 100%;
+  gap: 50px;
   animation: marquee 90s linear infinite;
+  white-space: nowrap;
 }
 @keyframes marquee {
   from { transform: translateX(0); }
-  to { transform: translateX(-100%); }
+  to { transform: translateX(-50%); }
 }
 .top-ticker:hover .ticker-track {
   animation-play-state: paused;
@@ -373,42 +373,37 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 24px;
 }
 .hero-visual-inner {
   position: relative;
   width: 100%;
-  min-height: 600px;
-  display: grid;
-  grid-template-columns: 1fr 280px;
-  gap: 24px;
-  align-items: stretch;
+  height: 600px;
 }
 .orb-container {
-  position: relative;
-  width: 100%;
-  height: 600px;
-  min-height: 500px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 .cards-column {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 35%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;
   justify-content: center;
-  height: 100%;
 }
 
 .hero-visual-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100% !important;
   height: 100% !important;
-  z-index: 1;
   display: block;
 }
 
@@ -1171,10 +1166,10 @@ footer {
 @media (max-width: 968px) {
   .hero { padding: 140px 24px 60px; }
   .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-  .hero-visual { height: auto; min-height: 400px; }
-  .hero-visual-inner { grid-template-columns: 1fr; gap: 24px; }
-  .orb-container { height: 280px; }
-  .cards-column { gap: 12px; }
+  .hero-visual { height: auto; min-height: 700px; }
+  .hero-visual-inner { height: auto; }
+  .orb-container { position: relative; width: 100%; height: 300px; }
+  .cards-column { position: relative; width: 100%; gap: 12px; margin-top: 24px; }
   section.s { padding: 60px 24px; }
   .stats-bar { grid-template-columns: repeat(2, 1fr); }
   .last-signal-wrap { grid-template-columns: 1fr; }
@@ -1198,29 +1193,36 @@ footer {
 <!-- TOP TICKER -->
 <div class="top-ticker">
   <div class="ticker-track">
+    <!-- SET 1 -->
     <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-label">LIVE</span></div>
-    <div class="ticker-item"><span class="symbol">BTC</span> <span class="price" id="btc-price">—</span> <span class="change" id="btc-change">—</span></div>
-    <div class="ticker-item"><span class="symbol">ETH</span> <span class="price" id="eth-price">—</span> <span class="change" id="eth-change">—</span></div>
-    <div class="ticker-item"><span class="symbol">SOL</span> <span class="price" id="sol-price">—</span> <span class="change" id="sol-change">—</span></div>
-    <div class="ticker-item"><span class="symbol">BNB</span> <span class="price" id="bnb-price">—</span> <span class="change" id="bnb-change">—</span></div>
-    <div class="ticker-item"><span class="symbol">XRP</span> <span class="price" id="xrp-price">—</span> <span class="change" id="xrp-change">—</span></div>
-    <div class="ticker-item"><span class="symbol">ADA</span> <span class="price" id="ada-price">—</span> <span class="change" id="ada-change">—</span></div>
-    <div class="ticker-item"><span class="symbol">DOGE</span> <span class="price" id="doge-price">—</span> <span class="change" id="doge-change">—</span></div>
-    <div class="ticker-item"><span class="symbol">AVAX</span> <span class="price" id="avax-price">—</span> <span class="change" id="avax-change">—</span></div>
-    <div class="ticker-item"><span class="symbol">LINK</span> <span class="price" id="link-price">—</span> <span class="change" id="link-change">—</span></div>
-    <div class="ticker-item"><span class="symbol">DOT</span> <span class="price" id="dot-price">—</span> <span class="change" id="dot-change">—</span></div>
-    <div class="ticker-item"><span class="symbol">MATIC</span> <span class="price" id="matic-price">—</span> <span class="change" id="matic-change">—</span></div>
+    <div class="ticker-item"><span class="symbol">BTC</span> <span class="price" data-sym="BTCUSDT">—</span> <span class="change" data-sym="BTCUSDT">—</span></div>
+    <div class="ticker-item"><span class="symbol">ETH</span> <span class="price" data-sym="ETHUSDT">—</span> <span class="change" data-sym="ETHUSDT">—</span></div>
+    <div class="ticker-item"><span class="symbol">SOL</span> <span class="price" data-sym="SOLUSDT">—</span> <span class="change" data-sym="SOLUSDT">—</span></div>
+    <div class="ticker-item"><span class="symbol">BNB</span> <span class="price" data-sym="BNBUSDT">—</span> <span class="change" data-sym="BNBUSDT">—</span></div>
+    <div class="ticker-item"><span class="symbol">XRP</span> <span class="price" data-sym="XRPUSDT">—</span> <span class="change" data-sym="XRPUSDT">—</span></div>
+    <div class="ticker-item"><span class="symbol">ADA</span> <span class="price" data-sym="ADAUSDT">—</span> <span class="change" data-sym="ADAUSDT">—</span></div>
+    <div class="ticker-item"><span class="symbol">DOGE</span> <span class="price" data-sym="DOGEUSDT">—</span> <span class="change" data-sym="DOGEUSDT">—</span></div>
+    <div class="ticker-item"><span class="symbol">AVAX</span> <span class="price" data-sym="AVAXUSDT">—</span> <span class="change" data-sym="AVAXUSDT">—</span></div>
+    <div class="ticker-item"><span class="symbol">LINK</span> <span class="price" data-sym="LINKUSDT">—</span> <span class="change" data-sym="LINKUSDT">—</span></div>
+    <div class="ticker-item"><span class="symbol">DOT</span> <span class="price" data-sym="DOTUSDT">—</span> <span class="change" data-sym="DOTUSDT">—</span></div>
+    <div class="ticker-item"><span class="symbol">MATIC</span> <span class="price" data-sym="MATICUSDT">—</span> <span class="change" data-sym="MATICUSDT">—</span></div>
     <div class="ticker-item"><span class="ticker-label">FEAR &amp; GREED</span> <span class="price" id="fng">—</span></div>
     <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-label">CIL SIGNAL AI · 15+ DATA SOURCES · 24/7 MONITORING · AI POWERED</span></div>
-    <div class="ticker-item"><span class="symbol">BTC</span> <span class="price" id="btc-price2">—</span> <span class="change" id="btc-change2">—</span></div>
-    <div class="ticker-item"><span class="symbol">ETH</span> <span class="price" id="eth-price2">—</span> <span class="change" id="eth-change2">—</span></div>
-    <div class="ticker-item"><span class="symbol">SOL</span> <span class="price" id="sol-price2">—</span> <span class="change" id="sol-change2">—</span></div>
-    <div class="ticker-item"><span class="symbol">BNB</span> <span class="price" id="bnb-price2">—</span></div>
-    <div class="ticker-item"><span class="symbol">XRP</span> <span class="price" id="xrp-price2">—</span></div>
-    <div class="ticker-item"><span class="symbol">ADA</span> <span class="price" id="ada-price2">—</span></div>
-    <div class="ticker-item"><span class="symbol">DOGE</span> <span class="price" id="doge-price2">—</span></div>
-    <div class="ticker-item"><span class="symbol">AVAX</span> <span class="price" id="avax-price2">—</span></div>
-    <div class="ticker-item"><span class="symbol">LINK</span> <span class="price" id="link-price2">—</span></div>
+    <!-- SET 2 (duplicat identic pentru continuitate) -->
+    <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-label">LIVE</span></div>
+    <div class="ticker-item"><span class="symbol">BTC</span> <span class="price" data-sym="BTCUSDT">—</span> <span class="change" data-sym="BTCUSDT">—</span></div>
+    <div class="ticker-item"><span class="symbol">ETH</span> <span class="price" data-sym="ETHUSDT">—</span> <span class="change" data-sym="ETHUSDT">—</span></div>
+    <div class="ticker-item"><span class="symbol">SOL</span> <span class="price" data-sym="SOLUSDT">—</span> <span class="change" data-sym="SOLUSDT">—</span></div>
+    <div class="ticker-item"><span class="symbol">BNB</span> <span class="price" data-sym="BNBUSDT">—</span> <span class="change" data-sym="BNBUSDT">—</span></div>
+    <div class="ticker-item"><span class="symbol">XRP</span> <span class="price" data-sym="XRPUSDT">—</span> <span class="change" data-sym="XRPUSDT">—</span></div>
+    <div class="ticker-item"><span class="symbol">ADA</span> <span class="price" data-sym="ADAUSDT">—</span> <span class="change" data-sym="ADAUSDT">—</span></div>
+    <div class="ticker-item"><span class="symbol">DOGE</span> <span class="price" data-sym="DOGEUSDT">—</span> <span class="change" data-sym="DOGEUSDT">—</span></div>
+    <div class="ticker-item"><span class="symbol">AVAX</span> <span class="price" data-sym="AVAXUSDT">—</span> <span class="change" data-sym="AVAXUSDT">—</span></div>
+    <div class="ticker-item"><span class="symbol">LINK</span> <span class="price" data-sym="LINKUSDT">—</span> <span class="change" data-sym="LINKUSDT">—</span></div>
+    <div class="ticker-item"><span class="symbol">DOT</span> <span class="price" data-sym="DOTUSDT">—</span> <span class="change" data-sym="DOTUSDT">—</span></div>
+    <div class="ticker-item"><span class="symbol">MATIC</span> <span class="price" data-sym="MATICUSDT">—</span> <span class="change" data-sym="MATICUSDT">—</span></div>
+    <div class="ticker-item"><span class="ticker-label">FEAR &amp; GREED</span> <span class="price" id="fng2">—</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-label">CIL SIGNAL AI · 15+ DATA SOURCES · 24/7 MONITORING · AI POWERED</span></div>
   </div>
 </div>
 
@@ -1747,19 +1749,17 @@ async function updateTicker() {
     const r = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbols=["BTCUSDT","ETHUSDT","SOLUSDT","BNBUSDT","XRPUSDT","ADAUSDT","DOGEUSDT","AVAXUSDT","LINKUSDT","DOTUSDT","MATICUSDT"]');
     const data = await r.json();
     data.forEach(coin => {
-      const sym = coin.symbol.replace('USDT', '').toLowerCase();
       const price = parseFloat(coin.lastPrice);
       const change = parseFloat(coin.priceChangePercent);
-      const pEl = document.getElementById(`${sym}-price`);
-      const cEl = document.getElementById(`${sym}-change`);
-      const formatted = '$' + (price >= 1000 ? price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',') : price.toFixed(2));
-      if (pEl) pEl.textContent = formatted;
-      const pEl2 = document.getElementById(`${sym}-price2`);
-      if (pEl2) pEl2.textContent = formatted;
-      if (cEl) {
-        cEl.textContent = (change >= 0 ? '▲' : '▼') + ' ' + Math.abs(change).toFixed(1) + '%';
-        cEl.className = 'change ' + (change >= 0 ? 'up' : 'down');
-      }
+      const formatted = '$' + (price >= 1 ? (price >= 1000 ? price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',') : price.toFixed(2)) : price.toFixed(4));
+      const changeText = (change >= 0 ? '▲' : '▼') + ' ' + Math.abs(change).toFixed(1) + '%';
+      const changeClass = 'change ' + (change >= 0 ? 'up' : 'down');
+      // Actualizez TOATE elementele cu acest data-sym (ambele seturi din marquee)
+      document.querySelectorAll(`.price[data-sym="${coin.symbol}"]`).forEach(el => el.textContent = formatted);
+      document.querySelectorAll(`.change[data-sym="${coin.symbol}"]`).forEach(el => {
+        el.textContent = changeText;
+        el.className = changeClass;
+      });
     });
   } catch (e) {}
 }
@@ -1768,7 +1768,10 @@ async function updateFng() {
     const r = await fetch('https://api.alternative.me/fng/?limit=1');
     const d = await r.json();
     const val = d.data[0].value;
-    document.getElementById('fng').textContent = val;
+    const f1 = document.getElementById('fng');
+    const f2 = document.getElementById('fng2');
+    if (f1) f1.textContent = val;
+    if (f2) f2.textContent = val;
   } catch (e) {}
 }
 updateTicker();
