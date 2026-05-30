@@ -97,7 +97,7 @@ body {
   display: inline-flex;
   gap: 60px;
   padding-left: 100%;
-  animation: marquee 30s linear infinite;
+  animation: marquee 60s linear infinite;
 }
 @keyframes marquee {
   from { transform: translateX(0); }
@@ -157,15 +157,20 @@ nav {
   color: var(--text);
 }
 .logo img {
-  width: 40px;
-  height: 40px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  filter: drop-shadow(0 0 12px var(--green-glow));
+  filter: drop-shadow(0 0 20px var(--green-glow)) drop-shadow(0 0 40px var(--green-faint));
+  animation: logo-pulse 4s ease-in-out infinite;
+}
+@keyframes logo-pulse {
+  0%, 100% { filter: drop-shadow(0 0 20px var(--green-glow)) drop-shadow(0 0 40px var(--green-faint)); }
+  50% { filter: drop-shadow(0 0 30px var(--green)) drop-shadow(0 0 60px var(--green-glow)); }
 }
 .logo-text {
   font-family: var(--font-head);
   font-weight: 800;
-  font-size: 16px;
+  font-size: 20px;
   letter-spacing: 1.5px;
 }
 .logo-text span { color: var(--green); }
@@ -374,7 +379,10 @@ nav {
 
 .hero-visual-canvas {
   position: absolute;
-  inset: 0;
+  top: 0;
+  right: -10%;
+  width: 90%;
+  height: 100%;
   z-index: 1;
 }
 
@@ -406,9 +414,9 @@ nav {
   50% { transform: translateY(-12px); }
 }
 
-.float-card-1 { top: 8%; left: 0; width: 200px; animation-delay: 0s; }
-.float-card-2 { top: 40%; right: 0; width: 220px; animation-delay: 2s; }
-.float-card-3 { bottom: 10%; left: 8%; width: 220px; animation-delay: 4s; }
+.float-card-1 { top: 5%; left: 0; width: 200px; animation-delay: 0s; }
+.float-card-2 { top: 38%; right: 5%; width: 200px; animation-delay: 2s; }
+.float-card-3 { bottom: 5%; left: 5%; width: 220px; animation-delay: 4s; }
 
 .fc-label {
   font-family: var(--font-data);
@@ -1090,9 +1098,9 @@ footer {
   margin-bottom: 24px;
 }
 .footer-logo img {
-  width: 32px; height: 32px;
+  width: 48px; height: 48px;
   border-radius: 50%;
-  filter: drop-shadow(0 0 8px var(--green-glow));
+  filter: drop-shadow(0 0 16px var(--green-glow));
 }
 .footer-logo .logo-text { font-size: 18px; }
 .footer-links {
@@ -1164,11 +1172,25 @@ footer {
     <div class="ticker-item"><span class="symbol">BTC</span> <span class="price" id="btc-price">—</span> <span class="change" id="btc-change">—</span></div>
     <div class="ticker-item"><span class="symbol">ETH</span> <span class="price" id="eth-price">—</span> <span class="change" id="eth-change">—</span></div>
     <div class="ticker-item"><span class="symbol">SOL</span> <span class="price" id="sol-price">—</span> <span class="change" id="sol-change">—</span></div>
+    <div class="ticker-item"><span class="symbol">BNB</span> <span class="price" id="bnb-price">—</span> <span class="change" id="bnb-change">—</span></div>
+    <div class="ticker-item"><span class="symbol">XRP</span> <span class="price" id="xrp-price">—</span> <span class="change" id="xrp-change">—</span></div>
+    <div class="ticker-item"><span class="symbol">ADA</span> <span class="price" id="ada-price">—</span> <span class="change" id="ada-change">—</span></div>
+    <div class="ticker-item"><span class="symbol">DOGE</span> <span class="price" id="doge-price">—</span> <span class="change" id="doge-change">—</span></div>
+    <div class="ticker-item"><span class="symbol">AVAX</span> <span class="price" id="avax-price">—</span> <span class="change" id="avax-change">—</span></div>
+    <div class="ticker-item"><span class="symbol">LINK</span> <span class="price" id="link-price">—</span> <span class="change" id="link-change">—</span></div>
+    <div class="ticker-item"><span class="symbol">DOT</span> <span class="price" id="dot-price">—</span> <span class="change" id="dot-change">—</span></div>
+    <div class="ticker-item"><span class="symbol">MATIC</span> <span class="price" id="matic-price">—</span> <span class="change" id="matic-change">—</span></div>
     <div class="ticker-item"><span class="ticker-label">FEAR &amp; GREED</span> <span class="price" id="fng">—</span></div>
-    <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-label">CIL SIGNAL AI · 15+ DATA SOURCES · 24/7 MONITORING</span></div>
-    <div class="ticker-item"><span class="symbol">BTC</span> <span class="price" id="btc-price2">—</span></div>
-    <div class="ticker-item"><span class="symbol">ETH</span> <span class="price" id="eth-price2">—</span></div>
-    <div class="ticker-item"><span class="symbol">SOL</span> <span class="price" id="sol-price2">—</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-label">CIL SIGNAL AI · 15+ DATA SOURCES · 24/7 MONITORING · AI POWERED</span></div>
+    <div class="ticker-item"><span class="symbol">BTC</span> <span class="price" id="btc-price2">—</span> <span class="change" id="btc-change2">—</span></div>
+    <div class="ticker-item"><span class="symbol">ETH</span> <span class="price" id="eth-price2">—</span> <span class="change" id="eth-change2">—</span></div>
+    <div class="ticker-item"><span class="symbol">SOL</span> <span class="price" id="sol-price2">—</span> <span class="change" id="sol-change2">—</span></div>
+    <div class="ticker-item"><span class="symbol">BNB</span> <span class="price" id="bnb-price2">—</span></div>
+    <div class="ticker-item"><span class="symbol">XRP</span> <span class="price" id="xrp-price2">—</span></div>
+    <div class="ticker-item"><span class="symbol">ADA</span> <span class="price" id="ada-price2">—</span></div>
+    <div class="ticker-item"><span class="symbol">DOGE</span> <span class="price" id="doge-price2">—</span></div>
+    <div class="ticker-item"><span class="symbol">AVAX</span> <span class="price" id="avax-price2">—</span></div>
+    <div class="ticker-item"><span class="symbol">LINK</span> <span class="price" id="link-price2">—</span></div>
   </div>
 </div>
 
@@ -1618,16 +1640,16 @@ footer {
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
-  camera.position.z = 3.5;
+  camera.position.z = 4;
 
-  const sphereGeo = new THREE.IcosahedronGeometry(1.0, 4);
+  const sphereGeo = new THREE.IcosahedronGeometry(0.85, 4);
   const wireMat = new THREE.MeshBasicMaterial({
     color: 0x00ff88, wireframe: true, transparent: true, opacity: 0.4
   });
   const sphere = new THREE.Mesh(sphereGeo, wireMat);
   scene.add(sphere);
 
-  const innerGeo = new THREE.SphereGeometry(0.85, 32, 32);
+  const innerGeo = new THREE.SphereGeometry(0.72, 32, 32);
   const innerMat = new THREE.MeshBasicMaterial({
     color: 0x00ff88, transparent: true, opacity: 0.08
   });
@@ -1637,7 +1659,7 @@ footer {
   const orbCount = 80;
   const orbPositions = new Float32Array(orbCount * 3);
   for (let i = 0; i < orbCount; i++) {
-    const r = 1.3 + Math.random() * 0.4;
+    const r = 1.1 + Math.random() * 0.3;
     const theta = Math.random() * Math.PI * 2;
     const phi = Math.acos(2 * Math.random() - 1);
     orbPositions[i*3]   = r * Math.sin(phi) * Math.cos(theta);
@@ -1672,7 +1694,7 @@ footer {
 // ═══════════════════════════════════════════════════════════
 async function updateTicker() {
   try {
-    const r = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbols=["BTCUSDT","ETHUSDT","SOLUSDT"]');
+    const r = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbols=["BTCUSDT","ETHUSDT","SOLUSDT","BNBUSDT","XRPUSDT","ADAUSDT","DOGEUSDT","AVAXUSDT","LINKUSDT","DOTUSDT","MATICUSDT"]');
     const data = await r.json();
     data.forEach(coin => {
       const sym = coin.symbol.replace('USDT', '').toLowerCase();
