@@ -97,7 +97,7 @@ body {
   display: inline-flex;
   gap: 60px;
   padding-left: 100%;
-  animation: marquee 60s linear infinite;
+  animation: marquee 90s linear infinite;
 }
 @keyframes marquee {
   from { transform: translateX(0); }
@@ -373,21 +373,41 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
   border-radius: 24px;
+}
+.hero-visual-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 16px;
+  align-items: center;
+}
+.orb-container {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.cards-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  height: 100%;
 }
 
 .hero-visual-canvas {
   position: absolute;
-  top: 0;
-  right: -10%;
-  width: 90%;
-  height: 100%;
+  inset: 0;
   z-index: 1;
 }
 
 .float-card {
-  position: absolute;
+  position: relative;
   background: var(--bg-card);
   backdrop-filter: blur(20px);
   border: 1px solid var(--border-bright);
@@ -396,6 +416,7 @@ nav {
   z-index: 3;
   animation: float 6s ease-in-out infinite;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  width: 100%;
 }
 .float-card::before {
   content: '';
@@ -414,9 +435,9 @@ nav {
   50% { transform: translateY(-12px); }
 }
 
-.float-card-1 { top: 5%; left: 0; width: 200px; animation-delay: 0s; }
-.float-card-2 { top: 38%; right: 5%; width: 200px; animation-delay: 2s; }
-.float-card-3 { bottom: 5%; left: 5%; width: 220px; animation-delay: 4s; }
+.float-card-1 { animation-delay: 0s; }
+.float-card-2 { animation-delay: 2s; }
+.float-card-3 { animation-delay: 4s; }
 
 .fc-label {
   font-family: var(--font-data);
@@ -1144,7 +1165,10 @@ footer {
 @media (max-width: 968px) {
   .hero { padding: 140px 24px 60px; }
   .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-  .hero-visual { height: 400px; }
+  .hero-visual { height: auto; min-height: 400px; }
+  .hero-visual-inner { grid-template-columns: 1fr; gap: 24px; }
+  .orb-container { height: 280px; }
+  .cards-column { gap: 12px; }
   section.s { padding: 60px 24px; }
   .stats-bar { grid-template-columns: repeat(2, 1fr); }
   .last-signal-wrap { grid-template-columns: 1fr; }
@@ -1239,32 +1263,37 @@ footer {
     </div>
 
     <div class="hero-visual">
-      <canvas class="hero-visual-canvas" id="orb-canvas"></canvas>
-
-      <div class="float-card float-card-1">
-        <div class="fc-label">// REGIME</div>
-        <div class="fc-big">BEAR</div>
-        <div class="fc-meta">
-          <span>F&G 22</span>
-          <span>VIX 16</span>
+      <div class="hero-visual-inner">
+        <div class="orb-container">
+          <canvas class="hero-visual-canvas" id="orb-canvas"></canvas>
         </div>
-      </div>
+        <div class="cards-column">
+          <div class="float-card float-card-1">
+            <div class="fc-label">// REGIME</div>
+            <div class="fc-big">BEAR</div>
+            <div class="fc-meta">
+              <span>F&G 22</span>
+              <span>VIX 16</span>
+            </div>
+          </div>
 
-      <div class="float-card float-card-2">
-        <div class="fc-label">// DATA SOURCES</div>
-        <div class="fc-big">15+</div>
-        <div class="fc-meta">
-          <span>technical</span>
-          <span>on-chain</span>
-        </div>
-      </div>
+          <div class="float-card float-card-2">
+            <div class="fc-label">// DATA SOURCES</div>
+            <div class="fc-big">15+</div>
+            <div class="fc-meta">
+              <span>technical</span>
+              <span>on-chain</span>
+            </div>
+          </div>
 
-      <div class="float-card float-card-3">
-        <div class="fc-label">// LAST SIGNAL</div>
-        <div class="fc-big">ETH/USD</div>
-        <div class="fc-meta">
-          <span class="bear">▼ BEARISH</span>
-          <span>Grade B</span>
+          <div class="float-card float-card-3">
+            <div class="fc-label">// LAST SIGNAL</div>
+            <div class="fc-big">ETH/USD</div>
+            <div class="fc-meta">
+              <span class="bear">▼ BEARISH</span>
+              <span>Grade B</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1642,14 +1671,14 @@ footer {
   const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
   camera.position.z = 4;
 
-  const sphereGeo = new THREE.IcosahedronGeometry(0.85, 4);
+  const sphereGeo = new THREE.IcosahedronGeometry(1.1, 4);
   const wireMat = new THREE.MeshBasicMaterial({
     color: 0x00ff88, wireframe: true, transparent: true, opacity: 0.4
   });
   const sphere = new THREE.Mesh(sphereGeo, wireMat);
   scene.add(sphere);
 
-  const innerGeo = new THREE.SphereGeometry(0.72, 32, 32);
+  const innerGeo = new THREE.SphereGeometry(0.95, 32, 32);
   const innerMat = new THREE.MeshBasicMaterial({
     color: 0x00ff88, transparent: true, opacity: 0.08
   });
@@ -1659,7 +1688,7 @@ footer {
   const orbCount = 80;
   const orbPositions = new Float32Array(orbCount * 3);
   for (let i = 0; i < orbCount; i++) {
-    const r = 1.1 + Math.random() * 0.3;
+    const r = 1.4 + Math.random() * 0.4;
     const theta = Math.random() * Math.PI * 2;
     const phi = Math.acos(2 * Math.random() - 1);
     orbPositions[i*3]   = r * Math.sin(phi) * Math.cos(theta);
