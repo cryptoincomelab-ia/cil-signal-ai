@@ -378,15 +378,17 @@ nav {
 .hero-visual-inner {
   position: relative;
   width: 100%;
-  height: 100%;
+  min-height: 600px;
   display: grid;
   grid-template-columns: 1fr 280px;
-  gap: 16px;
-  align-items: center;
+  gap: 24px;
+  align-items: stretch;
 }
 .orb-container {
   position: relative;
-  height: 100%;
+  width: 100%;
+  height: 600px;
+  min-height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -402,8 +404,12 @@ nav {
 
 .hero-visual-canvas {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
   z-index: 1;
+  display: block;
 }
 
 .float-card {
@@ -1661,14 +1667,29 @@ footer {
 
   const container = canvas.parentElement;
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-  const updateSize = () => {
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  };
-  updateSize();
 
+  // Fallback la dimensiuni rezonabile dacă container-ul nu e încă măsurat
+  const getSize = () => {
+    const w = container.clientWidth || 400;
+    const h = container.clientHeight || 600;
+    return { w, h };
+  };
+
+  const updateSize = () => {
+    const { w, h } = getSize();
+    renderer.setSize(w, h, false);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    if (window._orbCamera) {
+      window._orbCamera.aspect = w / h;
+      window._orbCamera.updateProjectionMatrix();
+    }
+  };
+
+  const { w: iw, h: ih } = getSize();
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
+  const camera = new THREE.PerspectiveCamera(50, iw / ih, 0.1, 1000);
+  window._orbCamera = camera;
+  updateSize();
   camera.position.z = 4;
 
   const sphereGeo = new THREE.IcosahedronGeometry(1.1, 4);
