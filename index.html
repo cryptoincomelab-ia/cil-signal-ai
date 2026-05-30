@@ -378,30 +378,35 @@ nav {
   position: relative;
   width: 100%;
   height: 600px;
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: 20px;
+  align-items: center;
 }
 .orb-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 60%;
+  position: relative;
+  width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+.orb-square {
+  position: relative;
+  width: min(100%, 480px);
+  aspect-ratio: 1 / 1;
+}
 .cards-column {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 35%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;
   justify-content: center;
+  height: 100%;
 }
 
 .hero-visual-canvas {
+  position: absolute;
+  inset: 0;
   width: 100% !important;
   height: 100% !important;
   display: block;
@@ -1167,9 +1172,10 @@ footer {
   .hero { padding: 140px 24px 60px; }
   .hero-inner { grid-template-columns: 1fr; gap: 48px; }
   .hero-visual { height: auto; min-height: 700px; }
-  .hero-visual-inner { height: auto; }
-  .orb-container { position: relative; width: 100%; height: 300px; }
-  .cards-column { position: relative; width: 100%; gap: 12px; margin-top: 24px; }
+  .hero-visual-inner { grid-template-columns: 1fr; height: auto; gap: 32px; }
+  .orb-container { height: 300px; }
+  .orb-square { width: 280px; }
+  .cards-column { gap: 12px; }
   section.s { padding: 60px 24px; }
   .stats-bar { grid-template-columns: repeat(2, 1fr); }
   .last-signal-wrap { grid-template-columns: 1fr; }
@@ -1273,7 +1279,9 @@ footer {
     <div class="hero-visual">
       <div class="hero-visual-inner">
         <div class="orb-container">
-          <canvas class="hero-visual-canvas" id="orb-canvas"></canvas>
+          <div class="orb-square">
+            <canvas class="hero-visual-canvas" id="orb-canvas"></canvas>
+          </div>
         </div>
         <div class="cards-column">
           <div class="float-card float-card-1">
