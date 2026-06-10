@@ -1,5 +1,5 @@
 // CIL Signal AI — minimal service worker
-const CACHE = 'cil-v2';
+const CACHE = 'cil-v3';
 const ASSETS = ['/', '/index.html', '/logo.png', '/manifest.json'];
 
 self.addEventListener('install', (e) => {
