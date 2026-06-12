@@ -1,0 +1,3079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIL Signal AI — Public Track Record</title>
+<style>
+  :root { --bg:#080810; --card:#0f0f1a; --line:#1e1e2e; --green:#00ff88;
+          --text:#e8e8f0; --muted:#8a8a9a; --red:#ff4d6d; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text);
+          font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; padding:32px 16px; }
+  .wrap { max-width:1000px; margin:0 auto; }
+  h1 { font-size:28px; margin:0 0 6px; }
+  h1 .accent { color:var(--green); }
+  .sub { color:var(--muted); margin:0 0 24px; font-size:14px; line-height:1.5; }
+  .stats { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:24px; }
+  .stat { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 20px; min-width:120px; }
+  .stat .v { font-size:24px; font-weight:700; color:var(--green); }
+  .stat .l { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+  .verify { background:var(--card); border:1px solid var(--line); border-left:3px solid var(--green);
+             border-radius:10px; padding:14px 18px; margin-bottom:24px; font-size:13px; color:var(--muted); line-height:1.6; }
+  .verify strong { color:var(--text); }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  thead th { text-align:left; color:var(--muted); font-weight:600; text-transform:uppercase;
+              letter-spacing:.04em; font-size:11px; padding:10px 8px; border-bottom:1px solid var(--line); }
+  tbody td { padding:10px 8px; border-bottom:1px solid var(--line); white-space:nowrap; }
+  tbody tr:hover { background:rgba(255,255,255,.02); }
+  .id { color:var(--muted); font-variant-numeric:tabular-nums; }
+  .time { color:var(--muted); }
+  .coin { font-weight:600; }
+  .num { font-variant-numeric:tabular-nums; text-align:right; }
+  .tgt { color:var(--green); }
+  .stp { color:var(--red); }
+  .side { font-weight:700; font-size:11px; padding:2px 8px; border-radius:6px; }
+  .side.long { color:var(--green); background:rgba(0,255,136,.1); }
+  .side.short { color:var(--red); background:rgba(255,77,109,.1); }
+  .out { font-size:12px; }
+  .out.hit { color:var(--green); }
+  .out.miss { color:var(--muted); }
+  .empty { text-align:center; color:var(--muted); padding:40px; }
+  .foot { color:var(--muted); font-size:12px; margin-top:24px; line-height:1.6; }
+  .scroll { overflow-x:auto; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Public <span class="accent">Track Record</span></h1>
+  <p class="sub">Every signal below was posted publicly on Telegram — with entry, target and stop —
+  <strong>before</strong> the outcome was known. Nothing is added after the fact.</p>
+  <div class="stats">
+    <div class="stat"><div class="v">300</div><div class="l">Verified signals</div></div>
+    <div class="stat"><div class="v">242</div><div class="l">Target hits</div></div>
+    <div class="stat"><div class="v">81%</div><div class="l">Target-hit rate</div></div>
+  </div>
+  <div class="verify">
+    <strong>How to verify any row yourself:</strong> take the coin, the entry/target prices and the time
+    it was posted, then open that pair on Binance or TradingView for the 24h after. Did price reach the
+    target before the stop? That's the whole check — the prediction was public and timestamped first, so
+    it can't be faked backwards. "Target hit" = target reached before stop within 24h.
+  </div>
+  <div class="scroll">
+  <table>
+    <thead><tr>
+      <th>ID</th><th>Posted (UTC)</th><th>Pair</th><th>Side</th>
+      <th style="text-align:right">Entry</th><th style="text-align:right">Target</th>
+      <th style="text-align:right">Stop</th><th>Result</th>
+    </tr></thead>
+    <tbody>
+<tr>
+  <td class="id">#4020</td>
+  <td class="time">2026-06-11 23:00 UTC</td>
+  <td class="coin">AAVE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001014</td>
+  <td class="num tgt">0.001060</td>
+  <td class="num stp">0.00098358</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#4019</td>
+  <td class="time">2026-06-11 22:07 UTC</td>
+  <td class="coin">DOT/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001513</td>
+  <td class="num tgt">0.00001581</td>
+  <td class="num stp">0.00001468</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#4018</td>
+  <td class="time">2026-06-11 21:50 UTC</td>
+  <td class="coin">ADA/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000268</td>
+  <td class="num tgt">0.00000281</td>
+  <td class="num stp">0.00000259</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#4017</td>
+  <td class="time">2026-06-11 21:48 UTC</td>
+  <td class="coin">SOL/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001054</td>
+  <td class="num tgt">0.001102</td>
+  <td class="num stp">0.001023</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#4016</td>
+  <td class="time">2026-06-11 21:38 UTC</td>
+  <td class="coin">ALGO/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000141</td>
+  <td class="num tgt">0.00000147</td>
+  <td class="num stp">0.00000137</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#4015</td>
+  <td class="time">2026-06-11 21:08 UTC</td>
+  <td class="coin">XLM/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000190</td>
+  <td class="num tgt">0.00000199</td>
+  <td class="num stp">0.00000184</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#4014</td>
+  <td class="time">2026-06-11 20:33 UTC</td>
+  <td class="coin">NEAR/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00003189</td>
+  <td class="num tgt">0.00003496</td>
+  <td class="num stp">0.00002984</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#4013</td>
+  <td class="time">2026-06-11 20:16 UTC</td>
+  <td class="coin">XTZ/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000365</td>
+  <td class="num tgt">0.00000381</td>
+  <td class="num stp">0.00000354</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#4012</td>
+  <td class="time">2026-06-11 20:08 UTC</td>
+  <td class="coin">XTZ/ETH</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00044000</td>
+  <td class="num tgt">0.00045980</td>
+  <td class="num stp">0.00042680</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#4011</td>
+  <td class="time">2026-06-11 20:05 UTC</td>
+  <td class="coin">AVAX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00010470</td>
+  <td class="num tgt">0.00010941</td>
+  <td class="num stp">0.00010156</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#4010</td>
+  <td class="time">2026-06-11 19:21 UTC</td>
+  <td class="coin">XTZ/ETH</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00044000</td>
+  <td class="num tgt">0.00045980</td>
+  <td class="num stp">0.00042680</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#4009</td>
+  <td class="time">2026-06-11 18:48 UTC</td>
+  <td class="coin">TRX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000495</td>
+  <td class="num tgt">0.00000517</td>
+  <td class="num stp">0.00000480</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#4008</td>
+  <td class="time">2026-06-11 18:43 UTC</td>
+  <td class="coin">LTC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00067200</td>
+  <td class="num tgt">0.00070224</td>
+  <td class="num stp">0.00065184</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#4007</td>
+  <td class="time">2026-06-11 18:31 UTC</td>
+  <td class="coin">LTC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00067100</td>
+  <td class="num tgt">0.00070120</td>
+  <td class="num stp">0.00065087</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#4006</td>
+  <td class="time">2026-06-11 17:59 UTC</td>
+  <td class="coin">DOT/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001529</td>
+  <td class="num tgt">0.00001598</td>
+  <td class="num stp">0.00001483</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#4005</td>
+  <td class="time">2026-06-11 17:57 UTC</td>
+  <td class="coin">ETC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00011540</td>
+  <td class="num tgt">0.00012059</td>
+  <td class="num stp">0.00011194</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#4004</td>
+  <td class="time">2026-06-11 17:47 UTC</td>
+  <td class="coin">ETC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00011640</td>
+  <td class="num tgt">0.00012164</td>
+  <td class="num stp">0.00011291</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#4003</td>
+  <td class="time">2026-06-11 17:47 UTC</td>
+  <td class="coin">ALGO/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000140</td>
+  <td class="num tgt">0.00000146</td>
+  <td class="num stp">0.00000136</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#4002</td>
+  <td class="time">2026-06-11 17:40 UTC</td>
+  <td class="coin">DOT/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001525</td>
+  <td class="num tgt">0.00001594</td>
+  <td class="num stp">0.00001479</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#4001</td>
+  <td class="time">2026-06-11 17:38 UTC</td>
+  <td class="coin">AVAX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00010480</td>
+  <td class="num tgt">0.00010952</td>
+  <td class="num stp">0.00010166</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#4000</td>
+  <td class="time">2026-06-11 17:37 UTC</td>
+  <td class="coin">ALGO/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000140</td>
+  <td class="num tgt">0.00000146</td>
+  <td class="num stp">0.00000136</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3999</td>
+  <td class="time">2026-06-11 17:31 UTC</td>
+  <td class="coin">LINK/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00012400</td>
+  <td class="num tgt">0.00012958</td>
+  <td class="num stp">0.00012028</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3998</td>
+  <td class="time">2026-06-11 17:15 UTC</td>
+  <td class="coin">XTZ/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000365</td>
+  <td class="num tgt">0.00000381</td>
+  <td class="num stp">0.00000354</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3997</td>
+  <td class="time">2026-06-11 17:15 UTC</td>
+  <td class="coin">DOGE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000135</td>
+  <td class="num tgt">0.00000141</td>
+  <td class="num stp">0.00000131</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3996</td>
+  <td class="time">2026-06-11 17:04 UTC</td>
+  <td class="coin">TRX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000504</td>
+  <td class="num tgt">0.00000527</td>
+  <td class="num stp">0.00000489</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3995</td>
+  <td class="time">2026-06-11 17:00 UTC</td>
+  <td class="coin">AAVE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001009</td>
+  <td class="num tgt">0.001054</td>
+  <td class="num stp">0.00097873</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3994</td>
+  <td class="time">2026-06-11 16:57 UTC</td>
+  <td class="coin">LINK/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00012330</td>
+  <td class="num tgt">0.00012885</td>
+  <td class="num stp">0.00011960</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3993</td>
+  <td class="time">2026-06-11 16:57 UTC</td>
+  <td class="coin">XLM/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000190</td>
+  <td class="num tgt">0.00000199</td>
+  <td class="num stp">0.00000184</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3992</td>
+  <td class="time">2026-06-11 16:53 UTC</td>
+  <td class="coin">AAVE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001014</td>
+  <td class="num tgt">0.001060</td>
+  <td class="num stp">0.00098358</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3991</td>
+  <td class="time">2026-06-11 16:32 UTC</td>
+  <td class="coin">NEAR/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00003188</td>
+  <td class="num tgt">0.00003483</td>
+  <td class="num stp">0.00002991</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3990</td>
+  <td class="time">2026-06-11 16:18 UTC</td>
+  <td class="coin">DOGE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000135</td>
+  <td class="num tgt">0.00000141</td>
+  <td class="num stp">0.00000131</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3989</td>
+  <td class="time">2026-06-11 16:05 UTC</td>
+  <td class="coin">XTZ/ETH</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00044000</td>
+  <td class="num tgt">0.00045980</td>
+  <td class="num stp">0.00042680</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3988</td>
+  <td class="time">2026-06-11 16:04 UTC</td>
+  <td class="coin">XTZ/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000371</td>
+  <td class="num tgt">0.00000388</td>
+  <td class="num stp">0.00000360</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3987</td>
+  <td class="time">2026-06-11 15:59 UTC</td>
+  <td class="coin">AVAX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00010430</td>
+  <td class="num tgt">0.00010899</td>
+  <td class="num stp">0.00010117</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3986</td>
+  <td class="time">2026-06-11 15:56 UTC</td>
+  <td class="coin">XRP/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001772</td>
+  <td class="num tgt">0.00001852</td>
+  <td class="num stp">0.00001719</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3985</td>
+  <td class="time">2026-06-11 15:51 UTC</td>
+  <td class="coin">XRP/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001772</td>
+  <td class="num tgt">0.00001852</td>
+  <td class="num stp">0.00001719</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3984</td>
+  <td class="time">2026-06-11 15:21 UTC</td>
+  <td class="coin">XTZ/ETH</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00044000</td>
+  <td class="num tgt">0.00045980</td>
+  <td class="num stp">0.00042680</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3983</td>
+  <td class="time">2026-06-11 15:06 UTC</td>
+  <td class="coin">SOL/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001039</td>
+  <td class="num tgt">0.001086</td>
+  <td class="num stp">0.001008</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3982</td>
+  <td class="time">2026-06-11 14:58 UTC</td>
+  <td class="coin">NEAR/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00003186</td>
+  <td class="num tgt">0.00003487</td>
+  <td class="num stp">0.00002986</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3981</td>
+  <td class="time">2026-06-11 14:40 UTC</td>
+  <td class="coin">TRX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000511</td>
+  <td class="num tgt">0.00000534</td>
+  <td class="num stp">0.00000496</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3980</td>
+  <td class="time">2026-06-11 14:28 UTC</td>
+  <td class="coin">SOL/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001038</td>
+  <td class="num tgt">0.001084</td>
+  <td class="num stp">0.001007</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3979</td>
+  <td class="time">2026-06-11 14:21 UTC</td>
+  <td class="coin">LTC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00067500</td>
+  <td class="num tgt">0.00070538</td>
+  <td class="num stp">0.00065475</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3978</td>
+  <td class="time">2026-06-11 14:16 UTC</td>
+  <td class="coin">ETH/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.026180</td>
+  <td class="num tgt">0.027358</td>
+  <td class="num stp">0.025395</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3977</td>
+  <td class="time">2026-06-11 14:09 UTC</td>
+  <td class="coin">LTC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00067600</td>
+  <td class="num tgt">0.00070642</td>
+  <td class="num stp">0.00065572</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3976</td>
+  <td class="time">2026-06-11 13:37 UTC</td>
+  <td class="coin">ETC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00011340</td>
+  <td class="num tgt">0.00011850</td>
+  <td class="num stp">0.00011000</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3975</td>
+  <td class="time">2026-06-11 13:08 UTC</td>
+  <td class="coin">DOGE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000134</td>
+  <td class="num tgt">0.00000140</td>
+  <td class="num stp">0.00000130</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3974</td>
+  <td class="time">2026-06-11 13:00 UTC</td>
+  <td class="coin">ALGO/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000141</td>
+  <td class="num tgt">0.00000147</td>
+  <td class="num stp">0.00000137</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3973</td>
+  <td class="time">2026-06-11 12:57 UTC</td>
+  <td class="coin">LINK/BTC</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.00012400</td>
+  <td class="num tgt">0.00011842</td>
+  <td class="num stp">0.00012772</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3972</td>
+  <td class="time">2026-06-11 12:51 UTC</td>
+  <td class="coin">TRX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000513</td>
+  <td class="num tgt">0.00000536</td>
+  <td class="num stp">0.00000498</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3971</td>
+  <td class="time">2026-06-11 12:43 UTC</td>
+  <td class="coin">LINK/BTC</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.00012390</td>
+  <td class="num tgt">0.00011832</td>
+  <td class="num stp">0.00012762</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3970</td>
+  <td class="time">2026-06-11 12:38 UTC</td>
+  <td class="coin">XLM/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000190</td>
+  <td class="num tgt">0.00000199</td>
+  <td class="num stp">0.00000184</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3969</td>
+  <td class="time">2026-06-11 12:30 UTC</td>
+  <td class="coin">DOT/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001502</td>
+  <td class="num tgt">0.00001570</td>
+  <td class="num stp">0.00001457</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3968</td>
+  <td class="time">2026-06-11 12:10 UTC</td>
+  <td class="coin">DOGE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000135</td>
+  <td class="num tgt">0.00000141</td>
+  <td class="num stp">0.00000131</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3967</td>
+  <td class="time">2026-06-11 12:04 UTC</td>
+  <td class="coin">XTZ/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000373</td>
+  <td class="num tgt">0.00000390</td>
+  <td class="num stp">0.00000362</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3966</td>
+  <td class="time">2026-06-11 12:01 UTC</td>
+  <td class="coin">XTZ/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000373</td>
+  <td class="num tgt">0.00000390</td>
+  <td class="num stp">0.00000362</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3965</td>
+  <td class="time">2026-06-11 12:01 UTC</td>
+  <td class="coin">AVAX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00010460</td>
+  <td class="num tgt">0.00010931</td>
+  <td class="num stp">0.00010146</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3964</td>
+  <td class="time">2026-06-11 11:48 UTC</td>
+  <td class="coin">XRP/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001775</td>
+  <td class="num tgt">0.00001855</td>
+  <td class="num stp">0.00001722</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3963</td>
+  <td class="time">2026-06-11 11:46 UTC</td>
+  <td class="coin">TRX/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.321600</td>
+  <td class="num tgt">0.336072</td>
+  <td class="num stp">0.311952</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3962</td>
+  <td class="time">2026-06-11 11:40 UTC</td>
+  <td class="coin">XTZ/ETH</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00044000</td>
+  <td class="num tgt">0.00045980</td>
+  <td class="num stp">0.00042680</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3961</td>
+  <td class="time">2026-06-11 11:26 UTC</td>
+  <td class="coin">AAVE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001000</td>
+  <td class="num tgt">0.001045</td>
+  <td class="num stp">0.00097000</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3960</td>
+  <td class="time">2026-06-11 11:23 UTC</td>
+  <td class="coin">TRX/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.321800</td>
+  <td class="num tgt">0.336281</td>
+  <td class="num stp">0.312146</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3959</td>
+  <td class="time">2026-06-11 11:18 UTC</td>
+  <td class="coin">XTZ/ETH</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00044000</td>
+  <td class="num tgt">0.00045980</td>
+  <td class="num stp">0.00042680</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3958</td>
+  <td class="time">2026-06-11 11:15 UTC</td>
+  <td class="coin">ALGO/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000142</td>
+  <td class="num tgt">0.00000148</td>
+  <td class="num stp">0.00000138</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3957</td>
+  <td class="time">2026-06-11 11:05 UTC</td>
+  <td class="coin">DOT/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001503</td>
+  <td class="num tgt">0.00001571</td>
+  <td class="num stp">0.00001458</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3956</td>
+  <td class="time">2026-06-11 11:03 UTC</td>
+  <td class="coin">AAVE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001001</td>
+  <td class="num tgt">0.001046</td>
+  <td class="num stp">0.00097097</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3955</td>
+  <td class="time">2026-06-11 11:01 UTC</td>
+  <td class="coin">AVAX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00010430</td>
+  <td class="num tgt">0.00010899</td>
+  <td class="num stp">0.00010117</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3954</td>
+  <td class="time">2026-06-11 11:00 UTC</td>
+  <td class="coin">ETH/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.026270</td>
+  <td class="num tgt">0.027452</td>
+  <td class="num stp">0.025482</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3953</td>
+  <td class="time">2026-06-11 10:16 UTC</td>
+  <td class="coin">TRX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000512</td>
+  <td class="num tgt">0.00000535</td>
+  <td class="num stp">0.00000497</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3952</td>
+  <td class="time">2026-06-11 10:14 UTC</td>
+  <td class="coin">LTC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00067600</td>
+  <td class="num tgt">0.00070642</td>
+  <td class="num stp">0.00065572</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3951</td>
+  <td class="time">2026-06-11 10:01 UTC</td>
+  <td class="coin">LTC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00067600</td>
+  <td class="num tgt">0.00070642</td>
+  <td class="num stp">0.00065572</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3950</td>
+  <td class="time">2026-06-11 09:59 UTC</td>
+  <td class="coin">NEAR/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00003174</td>
+  <td class="num tgt">0.00003481</td>
+  <td class="num stp">0.00002970</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3949</td>
+  <td class="time">2026-06-11 09:53 UTC</td>
+  <td class="coin">XRP/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001777</td>
+  <td class="num tgt">0.00001857</td>
+  <td class="num stp">0.00001724</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3948</td>
+  <td class="time">2026-06-11 09:52 UTC</td>
+  <td class="coin">NEAR/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00003174</td>
+  <td class="num tgt">0.00003481</td>
+  <td class="num stp">0.00002970</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3947</td>
+  <td class="time">2026-06-11 09:48 UTC</td>
+  <td class="coin">ADA/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000265</td>
+  <td class="num tgt">0.00000278</td>
+  <td class="num stp">0.00000256</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3946</td>
+  <td class="time">2026-06-11 09:47 UTC</td>
+  <td class="coin">ETC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00011300</td>
+  <td class="num tgt">0.00011808</td>
+  <td class="num stp">0.00010961</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3945</td>
+  <td class="time">2026-06-11 09:27 UTC</td>
+  <td class="coin">ETC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00011290</td>
+  <td class="num tgt">0.00011798</td>
+  <td class="num stp">0.00010951</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3944</td>
+  <td class="time">2026-06-11 09:02 UTC</td>
+  <td class="coin">DOGE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000135</td>
+  <td class="num tgt">0.00000141</td>
+  <td class="num stp">0.00000131</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3943</td>
+  <td class="time">2026-06-11 08:50 UTC</td>
+  <td class="coin">ALGO/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000143</td>
+  <td class="num tgt">0.00000149</td>
+  <td class="num stp">0.00000139</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3942</td>
+  <td class="time">2026-06-11 08:45 UTC</td>
+  <td class="coin">SOL/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001039</td>
+  <td class="num tgt">0.001086</td>
+  <td class="num stp">0.001008</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3941</td>
+  <td class="time">2026-06-11 08:34 UTC</td>
+  <td class="coin">XLM/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000190</td>
+  <td class="num tgt">0.00000199</td>
+  <td class="num stp">0.00000184</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3940</td>
+  <td class="time">2026-06-11 08:31 UTC</td>
+  <td class="coin">XLM/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000190</td>
+  <td class="num tgt">0.00000199</td>
+  <td class="num stp">0.00000184</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3939</td>
+  <td class="time">2026-06-11 08:27 UTC</td>
+  <td class="coin">SOL/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001040</td>
+  <td class="num tgt">0.001086</td>
+  <td class="num stp">0.001008</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3938</td>
+  <td class="time">2026-06-11 08:21 UTC</td>
+  <td class="coin">LINK/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00012400</td>
+  <td class="num tgt">0.00012958</td>
+  <td class="num stp">0.00012028</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3937</td>
+  <td class="time">2026-06-11 08:11 UTC</td>
+  <td class="coin">LINK/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00012400</td>
+  <td class="num tgt">0.00012958</td>
+  <td class="num stp">0.00012028</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3936</td>
+  <td class="time">2026-06-11 08:08 UTC</td>
+  <td class="coin">TRX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000513</td>
+  <td class="num tgt">0.00000536</td>
+  <td class="num stp">0.00000498</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3935</td>
+  <td class="time">2026-06-11 08:05 UTC</td>
+  <td class="coin">DOGE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000135</td>
+  <td class="num tgt">0.00000141</td>
+  <td class="num stp">0.00000131</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3934</td>
+  <td class="time">2026-06-11 08:03 UTC</td>
+  <td class="coin">DOT/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001512</td>
+  <td class="num tgt">0.00001580</td>
+  <td class="num stp">0.00001467</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3933</td>
+  <td class="time">2026-06-11 07:37 UTC</td>
+  <td class="coin">XTZ/ETH</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00044000</td>
+  <td class="num tgt">0.00045980</td>
+  <td class="num stp">0.00042680</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3932</td>
+  <td class="time">2026-06-11 07:17 UTC</td>
+  <td class="coin">XTZ/ETH</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00044000</td>
+  <td class="num tgt">0.00045980</td>
+  <td class="num stp">0.00042680</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3931</td>
+  <td class="time">2026-06-11 07:16 UTC</td>
+  <td class="coin">XTZ/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000375</td>
+  <td class="num tgt">0.00000392</td>
+  <td class="num stp">0.00000364</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3930</td>
+  <td class="time">2026-06-11 07:11 UTC</td>
+  <td class="coin">AAVE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001009</td>
+  <td class="num tgt">0.001054</td>
+  <td class="num stp">0.00097873</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3929</td>
+  <td class="time">2026-06-11 07:05 UTC</td>
+  <td class="coin">XTZ/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000375</td>
+  <td class="num tgt">0.00000392</td>
+  <td class="num stp">0.00000364</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3928</td>
+  <td class="time">2026-06-11 07:01 UTC</td>
+  <td class="coin">ALGO/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000141</td>
+  <td class="num tgt">0.00000147</td>
+  <td class="num stp">0.00000137</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3927</td>
+  <td class="time">2026-06-11 07:01 UTC</td>
+  <td class="coin">AAVE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001009</td>
+  <td class="num tgt">0.001054</td>
+  <td class="num stp">0.00097873</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3926</td>
+  <td class="time">2026-06-11 06:57 UTC</td>
+  <td class="coin">AVAX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00010480</td>
+  <td class="num tgt">0.00010952</td>
+  <td class="num stp">0.00010166</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3925</td>
+  <td class="time">2026-06-11 06:55 UTC</td>
+  <td class="coin">XRP/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001777</td>
+  <td class="num tgt">0.00001857</td>
+  <td class="num stp">0.00001724</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3924</td>
+  <td class="time">2026-06-11 06:02 UTC</td>
+  <td class="coin">TRX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000514</td>
+  <td class="num tgt">0.00000537</td>
+  <td class="num stp">0.00000499</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3923</td>
+  <td class="time">2026-06-11 06:01 UTC</td>
+  <td class="coin">LTC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00068100</td>
+  <td class="num tgt">0.00071165</td>
+  <td class="num stp">0.00066057</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3922</td>
+  <td class="time">2026-06-11 05:26 UTC</td>
+  <td class="coin">NEAR/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">2.0640</td>
+  <td class="num tgt">2.3207</td>
+  <td class="num stp">1.8928</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3921</td>
+  <td class="time">2026-06-11 05:04 UTC</td>
+  <td class="coin">ETC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00011370</td>
+  <td class="num tgt">0.00011882</td>
+  <td class="num stp">0.00011029</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3920</td>
+  <td class="time">2026-06-11 05:01 UTC</td>
+  <td class="coin">LTC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00068100</td>
+  <td class="num tgt">0.00071165</td>
+  <td class="num stp">0.00066057</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3919</td>
+  <td class="time">2026-06-11 05:00 UTC</td>
+  <td class="coin">DOT/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001515</td>
+  <td class="num tgt">0.00001583</td>
+  <td class="num stp">0.00001470</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3918</td>
+  <td class="time">2026-06-11 04:57 UTC</td>
+  <td class="coin">ETC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00011380</td>
+  <td class="num tgt">0.00011892</td>
+  <td class="num stp">0.00011039</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3917</td>
+  <td class="time">2026-06-11 04:30 UTC</td>
+  <td class="coin">XLM/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000190</td>
+  <td class="num tgt">0.00000199</td>
+  <td class="num stp">0.00000184</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3916</td>
+  <td class="time">2026-06-11 04:21 UTC</td>
+  <td class="coin">XLM/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000190</td>
+  <td class="num tgt">0.00000199</td>
+  <td class="num stp">0.00000184</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3915</td>
+  <td class="time">2026-06-11 04:15 UTC</td>
+  <td class="coin">LINK/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00012440</td>
+  <td class="num tgt">0.00013000</td>
+  <td class="num stp">0.00012067</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3914</td>
+  <td class="time">2026-06-11 04:09 UTC</td>
+  <td class="coin">LINK/BTC</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.00012440</td>
+  <td class="num tgt">0.00011880</td>
+  <td class="num stp">0.00012813</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3913</td>
+  <td class="time">2026-06-11 04:00 UTC</td>
+  <td class="coin">ATOM/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00002920</td>
+  <td class="num tgt">0.00003073</td>
+  <td class="num stp">0.00002818</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3912</td>
+  <td class="time">2026-06-11 03:59 UTC</td>
+  <td class="coin">DOT/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001512</td>
+  <td class="num tgt">0.00001580</td>
+  <td class="num stp">0.00001467</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3911</td>
+  <td class="time">2026-06-11 03:56 UTC</td>
+  <td class="coin">TRX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000513</td>
+  <td class="num tgt">0.00000536</td>
+  <td class="num stp">0.00000498</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3910</td>
+  <td class="time">2026-06-11 03:49 UTC</td>
+  <td class="coin">XRP/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001784</td>
+  <td class="num tgt">0.00001864</td>
+  <td class="num stp">0.00001730</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3909</td>
+  <td class="time">2026-06-11 03:36 UTC</td>
+  <td class="coin">NEAR/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00003148</td>
+  <td class="num tgt">0.00003451</td>
+  <td class="num stp">0.00002946</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3908</td>
+  <td class="time">2026-06-11 03:35 UTC</td>
+  <td class="coin">AVAX/BTC</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.00010450</td>
+  <td class="num tgt">0.00009980</td>
+  <td class="num stp">0.00010764</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3907</td>
+  <td class="time">2026-06-11 03:32 UTC</td>
+  <td class="coin">NEAR/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00003148</td>
+  <td class="num tgt">0.00003451</td>
+  <td class="num stp">0.00002946</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3906</td>
+  <td class="time">2026-06-11 03:27 UTC</td>
+  <td class="coin">XTZ/ETH</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00044000</td>
+  <td class="num tgt">0.00045980</td>
+  <td class="num stp">0.00042680</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3905</td>
+  <td class="time">2026-06-11 03:07 UTC</td>
+  <td class="coin">XTZ/ETH</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00044000</td>
+  <td class="num tgt">0.00045980</td>
+  <td class="num stp">0.00042680</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3904</td>
+  <td class="time">2026-06-11 03:06 UTC</td>
+  <td class="coin">XTZ/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000370</td>
+  <td class="num tgt">0.00000387</td>
+  <td class="num stp">0.00000359</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3903</td>
+  <td class="time">2026-06-11 03:02 UTC</td>
+  <td class="coin">DOGE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000135</td>
+  <td class="num tgt">0.00000141</td>
+  <td class="num stp">0.00000131</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3902</td>
+  <td class="time">2026-06-11 03:01 UTC</td>
+  <td class="coin">XTZ/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000370</td>
+  <td class="num tgt">0.00000387</td>
+  <td class="num stp">0.00000359</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3901</td>
+  <td class="time">2026-06-11 02:50 UTC</td>
+  <td class="coin">ALGO/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000142</td>
+  <td class="num tgt">0.00000148</td>
+  <td class="num stp">0.00000138</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3900</td>
+  <td class="time">2026-06-11 02:48 UTC</td>
+  <td class="coin">XRP/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001783</td>
+  <td class="num tgt">0.00001863</td>
+  <td class="num stp">0.00001730</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3899</td>
+  <td class="time">2026-06-11 02:48 UTC</td>
+  <td class="coin">AAVE/BTC</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.001005</td>
+  <td class="num tgt">0.00095978</td>
+  <td class="num stp">0.001035</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3898</td>
+  <td class="time">2026-06-11 02:47 UTC</td>
+  <td class="coin">ETH/BTC</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.026340</td>
+  <td class="num tgt">0.025155</td>
+  <td class="num stp">0.027130</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3897</td>
+  <td class="time">2026-06-11 02:17 UTC</td>
+  <td class="coin">ALGO/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000142</td>
+  <td class="num tgt">0.00000148</td>
+  <td class="num stp">0.00000138</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3896</td>
+  <td class="time">2026-06-11 02:08 UTC</td>
+  <td class="coin">AAVE/BTC</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.001007</td>
+  <td class="num tgt">0.00096169</td>
+  <td class="num stp">0.001037</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3895</td>
+  <td class="time">2026-06-11 02:07 UTC</td>
+  <td class="coin">AVAX/BTC</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.00010460</td>
+  <td class="num tgt">0.00009989</td>
+  <td class="num stp">0.00010774</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3894</td>
+  <td class="time">2026-06-11 01:01 UTC</td>
+  <td class="coin">LTC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00067700</td>
+  <td class="num tgt">0.00070747</td>
+  <td class="num stp">0.00065669</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3893</td>
+  <td class="time">2026-06-11 00:34 UTC</td>
+  <td class="coin">ADA/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000261</td>
+  <td class="num tgt">0.00000274</td>
+  <td class="num stp">0.00000252</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3892</td>
+  <td class="time">2026-06-11 00:07 UTC</td>
+  <td class="coin">LINK/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00012290</td>
+  <td class="num tgt">0.00012843</td>
+  <td class="num stp">0.00011921</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3891</td>
+  <td class="time">2026-06-11 00:00 UTC</td>
+  <td class="coin">LINK/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00012290</td>
+  <td class="num tgt">0.00012843</td>
+  <td class="num stp">0.00011921</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3890</td>
+  <td class="time">2026-06-10 23:58 UTC</td>
+  <td class="coin">ADA/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000262</td>
+  <td class="num tgt">0.00000276</td>
+  <td class="num stp">0.00000253</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3889</td>
+  <td class="time">2026-06-10 23:41 UTC</td>
+  <td class="coin">PENGU/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.006382</td>
+  <td class="num tgt">0.006858</td>
+  <td class="num stp">0.006065</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3888</td>
+  <td class="time">2026-06-10 23:35 UTC</td>
+  <td class="coin">SOL/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001026</td>
+  <td class="num tgt">0.001072</td>
+  <td class="num stp">0.00099493</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3887</td>
+  <td class="time">2026-06-10 23:31 UTC</td>
+  <td class="coin">DOT/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001487</td>
+  <td class="num tgt">0.00001554</td>
+  <td class="num stp">0.00001442</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3886</td>
+  <td class="time">2026-06-10 23:29 UTC</td>
+  <td class="coin">SOL/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001025</td>
+  <td class="num tgt">0.001071</td>
+  <td class="num stp">0.00099376</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3885</td>
+  <td class="time">2026-06-10 23:21 UTC</td>
+  <td class="coin">DOT/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001484</td>
+  <td class="num tgt">0.00001551</td>
+  <td class="num stp">0.00001439</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3884</td>
+  <td class="time">2026-06-10 23:11 UTC</td>
+  <td class="coin">NEAR/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00003224</td>
+  <td class="num tgt">0.00003552</td>
+  <td class="num stp">0.00003006</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3883</td>
+  <td class="time">2026-06-10 23:05 UTC</td>
+  <td class="coin">XTZ/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000370</td>
+  <td class="num tgt">0.00000387</td>
+  <td class="num stp">0.00000359</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3882</td>
+  <td class="time">2026-06-10 23:04 UTC</td>
+  <td class="coin">ATOM/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00002860</td>
+  <td class="num tgt">0.00002994</td>
+  <td class="num stp">0.00002771</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3881</td>
+  <td class="time">2026-06-10 23:01 UTC</td>
+  <td class="coin">LTC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00067700</td>
+  <td class="num tgt">0.00070747</td>
+  <td class="num stp">0.00065669</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3880</td>
+  <td class="time">2026-06-10 23:00 UTC</td>
+  <td class="coin">ATOM/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00002860</td>
+  <td class="num tgt">0.00002994</td>
+  <td class="num stp">0.00002771</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3879</td>
+  <td class="time">2026-06-10 22:55 UTC</td>
+  <td class="coin">XRP/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001784</td>
+  <td class="num tgt">0.00001864</td>
+  <td class="num stp">0.00001730</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3878</td>
+  <td class="time">2026-06-10 22:46 UTC</td>
+  <td class="coin">NEAR/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00003209</td>
+  <td class="num tgt">0.00003544</td>
+  <td class="num stp">0.00002986</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3877</td>
+  <td class="time">2026-06-10 22:42 UTC</td>
+  <td class="coin">TRX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000524</td>
+  <td class="num tgt">0.00000548</td>
+  <td class="num stp">0.00000508</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3876</td>
+  <td class="time">2026-06-10 22:40 UTC</td>
+  <td class="coin">ETH/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.026340</td>
+  <td class="num tgt">0.027525</td>
+  <td class="num stp">0.025550</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3875</td>
+  <td class="time">2026-06-10 22:40 UTC</td>
+  <td class="coin">ALGO/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000143</td>
+  <td class="num tgt">0.00000149</td>
+  <td class="num stp">0.00000139</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3874</td>
+  <td class="time">2026-06-10 22:37 UTC</td>
+  <td class="coin">AAVE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00099000</td>
+  <td class="num tgt">0.001035</td>
+  <td class="num stp">0.00096030</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3873</td>
+  <td class="time">2026-06-10 22:33 UTC</td>
+  <td class="coin">DOGE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000135</td>
+  <td class="num tgt">0.00000141</td>
+  <td class="num stp">0.00000131</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3872</td>
+  <td class="time">2026-06-10 22:32 UTC</td>
+  <td class="coin">AVAX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00010370</td>
+  <td class="num tgt">0.00010837</td>
+  <td class="num stp">0.00010059</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3871</td>
+  <td class="time">2026-06-10 22:30 UTC</td>
+  <td class="coin">ETH/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.026290</td>
+  <td class="num tgt">0.027473</td>
+  <td class="num stp">0.025501</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3870</td>
+  <td class="time">2026-06-10 22:17 UTC</td>
+  <td class="coin">TRX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000526</td>
+  <td class="num tgt">0.00000550</td>
+  <td class="num stp">0.00000510</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3869</td>
+  <td class="time">2026-06-10 22:14 UTC</td>
+  <td class="coin">DOGE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000134</td>
+  <td class="num tgt">0.00000140</td>
+  <td class="num stp">0.00000130</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3868</td>
+  <td class="time">2026-06-10 22:09 UTC</td>
+  <td class="coin">ETC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00011180</td>
+  <td class="num tgt">0.00011683</td>
+  <td class="num stp">0.00010845</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3867</td>
+  <td class="time">2026-06-10 22:07 UTC</td>
+  <td class="coin">XTZ/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000369</td>
+  <td class="num tgt">0.00000386</td>
+  <td class="num stp">0.00000358</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3866</td>
+  <td class="time">2026-06-10 22:04 UTC</td>
+  <td class="coin">ALGO/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000143</td>
+  <td class="num tgt">0.00000149</td>
+  <td class="num stp">0.00000139</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3865</td>
+  <td class="time">2026-06-10 22:03 UTC</td>
+  <td class="coin">AAVE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00098500</td>
+  <td class="num tgt">0.001029</td>
+  <td class="num stp">0.00095545</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3864</td>
+  <td class="time">2026-06-10 22:02 UTC</td>
+  <td class="coin">AVAX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00010310</td>
+  <td class="num tgt">0.00010774</td>
+  <td class="num stp">0.00010001</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3863</td>
+  <td class="time">2026-06-10 22:01 UTC</td>
+  <td class="coin">XRP/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001782</td>
+  <td class="num tgt">0.00001862</td>
+  <td class="num stp">0.00001729</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3862</td>
+  <td class="time">2026-06-10 21:48 UTC</td>
+  <td class="coin">ALGO/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000143</td>
+  <td class="num tgt">0.00000149</td>
+  <td class="num stp">0.00000139</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3861</td>
+  <td class="time">2026-06-10 21:45 UTC</td>
+  <td class="coin">ATOM/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00002850</td>
+  <td class="num tgt">0.00002999</td>
+  <td class="num stp">0.00002751</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3860</td>
+  <td class="time">2026-06-10 21:44 UTC</td>
+  <td class="coin">NEAR/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00003197</td>
+  <td class="num tgt">0.00003542</td>
+  <td class="num stp">0.00002967</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3859</td>
+  <td class="time">2026-06-10 21:42 UTC</td>
+  <td class="coin">LINK/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00012260</td>
+  <td class="num tgt">0.00012812</td>
+  <td class="num stp">0.00011892</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3858</td>
+  <td class="time">2026-06-10 21:41 UTC</td>
+  <td class="coin">DOT/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001478</td>
+  <td class="num tgt">0.00001545</td>
+  <td class="num stp">0.00001434</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3857</td>
+  <td class="time">2026-06-10 21:38 UTC</td>
+  <td class="coin">AVAX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00010370</td>
+  <td class="num tgt">0.00010837</td>
+  <td class="num stp">0.00010059</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3856</td>
+  <td class="time">2026-06-10 21:35 UTC</td>
+  <td class="coin">ETH/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.026330</td>
+  <td class="num tgt">0.027515</td>
+  <td class="num stp">0.025540</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3855</td>
+  <td class="time">2026-06-10 21:24 UTC</td>
+  <td class="coin">ETH/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.026330</td>
+  <td class="num tgt">0.027515</td>
+  <td class="num stp">0.025540</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3854</td>
+  <td class="time">2026-06-10 21:18 UTC</td>
+  <td class="coin">ETC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00011130</td>
+  <td class="num tgt">0.00011631</td>
+  <td class="num stp">0.00010796</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3853</td>
+  <td class="time">2026-06-10 21:16 UTC</td>
+  <td class="coin">XTZ/BTC</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.00000368</td>
+  <td class="num tgt">0.00000351</td>
+  <td class="num stp">0.00000379</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3852</td>
+  <td class="time">2026-06-10 21:12 UTC</td>
+  <td class="coin">ALGO/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000143</td>
+  <td class="num tgt">0.00000149</td>
+  <td class="num stp">0.00000139</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3851</td>
+  <td class="time">2026-06-10 20:58 UTC</td>
+  <td class="coin">ATOM/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00002820</td>
+  <td class="num tgt">0.00002970</td>
+  <td class="num stp">0.00002720</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3850</td>
+  <td class="time">2026-06-10 20:56 UTC</td>
+  <td class="coin">NEAR/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00003196</td>
+  <td class="num tgt">0.00003538</td>
+  <td class="num stp">0.00002968</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3849</td>
+  <td class="time">2026-06-10 20:53 UTC</td>
+  <td class="coin">AVAX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00010420</td>
+  <td class="num tgt">0.00010889</td>
+  <td class="num stp">0.00010107</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3848</td>
+  <td class="time">2026-06-10 20:51 UTC</td>
+  <td class="coin">SOL/ETH</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.038890</td>
+  <td class="num tgt">0.040640</td>
+  <td class="num stp">0.037723</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3847</td>
+  <td class="time">2026-06-10 20:12 UTC</td>
+  <td class="coin">ZIL/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.003010</td>
+  <td class="num tgt">0.003168</td>
+  <td class="num stp">0.002904</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3846</td>
+  <td class="time">2026-06-10 20:09 UTC</td>
+  <td class="coin">AAVE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00099500</td>
+  <td class="num tgt">0.001040</td>
+  <td class="num stp">0.00096515</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3845</td>
+  <td class="time">2026-06-10 19:49 UTC</td>
+  <td class="coin">XRP/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001773</td>
+  <td class="num tgt">0.00001853</td>
+  <td class="num stp">0.00001720</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3844</td>
+  <td class="time">2026-06-10 19:22 UTC</td>
+  <td class="coin">ADA/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000262</td>
+  <td class="num tgt">0.00000276</td>
+  <td class="num stp">0.00000252</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3843</td>
+  <td class="time">2026-06-10 19:11 UTC</td>
+  <td class="coin">LINK/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00012360</td>
+  <td class="num tgt">0.00012916</td>
+  <td class="num stp">0.00011989</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3842</td>
+  <td class="time">2026-06-10 18:26 UTC</td>
+  <td class="coin">SOL/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001031</td>
+  <td class="num tgt">0.001077</td>
+  <td class="num stp">0.001000</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3841</td>
+  <td class="time">2026-06-10 18:07 UTC</td>
+  <td class="coin">DOGE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000136</td>
+  <td class="num tgt">0.00000142</td>
+  <td class="num stp">0.00000132</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3840</td>
+  <td class="time">2026-06-10 17:31 UTC</td>
+  <td class="coin">DOT/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001501</td>
+  <td class="num tgt">0.00001569</td>
+  <td class="num stp">0.00001456</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3839</td>
+  <td class="time">2026-06-10 17:09 UTC</td>
+  <td class="coin">ALGO/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000144</td>
+  <td class="num tgt">0.00000150</td>
+  <td class="num stp">0.00000140</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3838</td>
+  <td class="time">2026-06-10 17:01 UTC</td>
+  <td class="coin">XTZ/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000379</td>
+  <td class="num tgt">0.00000396</td>
+  <td class="num stp">0.00000368</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3837</td>
+  <td class="time">2026-06-10 16:55 UTC</td>
+  <td class="coin">TRX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000520</td>
+  <td class="num tgt">0.00000543</td>
+  <td class="num stp">0.00000504</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3836</td>
+  <td class="time">2026-06-10 16:45 UTC</td>
+  <td class="coin">AVAX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00010480</td>
+  <td class="num tgt">0.00010952</td>
+  <td class="num stp">0.00010166</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3835</td>
+  <td class="time">2026-06-10 16:43 UTC</td>
+  <td class="coin">SOL/ETH</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.039370</td>
+  <td class="num tgt">0.041142</td>
+  <td class="num stp">0.038189</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3834</td>
+  <td class="time">2026-06-10 16:36 UTC</td>
+  <td class="coin">ETC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00011290</td>
+  <td class="num tgt">0.00011798</td>
+  <td class="num stp">0.00010951</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3833</td>
+  <td class="time">2026-06-10 15:57 UTC</td>
+  <td class="coin">ETH/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.026460</td>
+  <td class="num tgt">0.027651</td>
+  <td class="num stp">0.025666</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3832</td>
+  <td class="time">2026-06-10 15:40 UTC</td>
+  <td class="coin">AAVE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001018</td>
+  <td class="num tgt">0.001064</td>
+  <td class="num stp">0.00098746</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3831</td>
+  <td class="time">2026-06-10 15:34 UTC</td>
+  <td class="coin">XRP/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001808</td>
+  <td class="num tgt">0.00001889</td>
+  <td class="num stp">0.00001754</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3830</td>
+  <td class="time">2026-06-10 15:05 UTC</td>
+  <td class="coin">LINK/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00012480</td>
+  <td class="num tgt">0.00013042</td>
+  <td class="num stp">0.00012106</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3829</td>
+  <td class="time">2026-06-10 15:02 UTC</td>
+  <td class="coin">ATOM/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00002900</td>
+  <td class="num tgt">0.00003036</td>
+  <td class="num stp">0.00002810</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3828</td>
+  <td class="time">2026-06-10 14:42 UTC</td>
+  <td class="coin">ADA/BTC</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.00000264</td>
+  <td class="num tgt">0.00000252</td>
+  <td class="num stp">0.00000272</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3827</td>
+  <td class="time">2026-06-10 14:31 UTC</td>
+  <td class="coin">XLM/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000190</td>
+  <td class="num tgt">0.00000199</td>
+  <td class="num stp">0.00000184</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3826</td>
+  <td class="time">2026-06-10 14:26 UTC</td>
+  <td class="coin">XTZ/ETH</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00044000</td>
+  <td class="num tgt">0.00045980</td>
+  <td class="num stp">0.00042680</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3825</td>
+  <td class="time">2026-06-10 14:22 UTC</td>
+  <td class="coin">SOL/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001045</td>
+  <td class="num tgt">0.001093</td>
+  <td class="num stp">0.001014</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3824</td>
+  <td class="time">2026-06-10 14:18 UTC</td>
+  <td class="coin">TRX/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.321900</td>
+  <td class="num tgt">0.336386</td>
+  <td class="num stp">0.312243</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3823</td>
+  <td class="time">2026-06-10 13:59 UTC</td>
+  <td class="coin">LTC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00068900</td>
+  <td class="num tgt">0.00072001</td>
+  <td class="num stp">0.00066833</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3822</td>
+  <td class="time">2026-06-10 13:02 UTC</td>
+  <td class="coin">DOGE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000136</td>
+  <td class="num tgt">0.00000142</td>
+  <td class="num stp">0.00000132</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3821</td>
+  <td class="time">2026-06-10 12:38 UTC</td>
+  <td class="coin">TRX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000523</td>
+  <td class="num tgt">0.00000547</td>
+  <td class="num stp">0.00000507</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3820</td>
+  <td class="time">2026-06-10 12:38 UTC</td>
+  <td class="coin">ALGO/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000147</td>
+  <td class="num tgt">0.00000154</td>
+  <td class="num stp">0.00000143</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3819</td>
+  <td class="time">2026-06-10 12:33 UTC</td>
+  <td class="coin">ETC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00011300</td>
+  <td class="num tgt">0.00011808</td>
+  <td class="num stp">0.00010961</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3818</td>
+  <td class="time">2026-06-10 12:04 UTC</td>
+  <td class="coin">DOT/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001522</td>
+  <td class="num tgt">0.00001590</td>
+  <td class="num stp">0.00001476</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3817</td>
+  <td class="time">2026-06-10 12:04 UTC</td>
+  <td class="coin">AVAX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00010600</td>
+  <td class="num tgt">0.00011077</td>
+  <td class="num stp">0.00010282</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3816</td>
+  <td class="time">2026-06-10 11:54 UTC</td>
+  <td class="coin">NEAR/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00003337</td>
+  <td class="num tgt">0.00003675</td>
+  <td class="num stp">0.00003112</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3815</td>
+  <td class="time">2026-06-10 11:42 UTC</td>
+  <td class="coin">HBAR/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.077800</td>
+  <td class="num tgt">0.081301</td>
+  <td class="num stp">0.075466</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3814</td>
+  <td class="time">2026-06-10 11:09 UTC</td>
+  <td class="coin">ETH/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.026500</td>
+  <td class="num tgt">0.027692</td>
+  <td class="num stp">0.025705</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3813</td>
+  <td class="time">2026-06-10 11:07 UTC</td>
+  <td class="coin">XTZ/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000377</td>
+  <td class="num tgt">0.00000394</td>
+  <td class="num stp">0.00000366</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3812</td>
+  <td class="time">2026-06-10 11:04 UTC</td>
+  <td class="coin">LINK/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00012530</td>
+  <td class="num tgt">0.00013094</td>
+  <td class="num stp">0.00012154</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3811</td>
+  <td class="time">2026-06-10 11:00 UTC</td>
+  <td class="coin">AAVE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00099900</td>
+  <td class="num tgt">0.001044</td>
+  <td class="num stp">0.00096903</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3810</td>
+  <td class="time">2026-06-10 10:59 UTC</td>
+  <td class="coin">XRP/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001809</td>
+  <td class="num tgt">0.00001890</td>
+  <td class="num stp">0.00001755</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3809</td>
+  <td class="time">2026-06-10 10:58 UTC</td>
+  <td class="coin">SOL/ETH</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.039100</td>
+  <td class="num tgt">0.040859</td>
+  <td class="num stp">0.037927</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3808</td>
+  <td class="time">2026-06-10 10:26 UTC</td>
+  <td class="coin">IOTA/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.044600</td>
+  <td class="num tgt">0.047133</td>
+  <td class="num stp">0.042911</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3807</td>
+  <td class="time">2026-06-10 10:19 UTC</td>
+  <td class="coin">SOL/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001035</td>
+  <td class="num tgt">0.001082</td>
+  <td class="num stp">0.001004</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3806</td>
+  <td class="time">2026-06-10 09:34 UTC</td>
+  <td class="coin">GALA/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.002540</td>
+  <td class="num tgt">0.002690</td>
+  <td class="num stp">0.002440</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3805</td>
+  <td class="time">2026-06-10 09:10 UTC</td>
+  <td class="coin">ENJ/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.028560</td>
+  <td class="num tgt">0.030010</td>
+  <td class="num stp">0.027593</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3804</td>
+  <td class="time">2026-06-10 09:00 UTC</td>
+  <td class="coin">LTC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00069100</td>
+  <td class="num tgt">0.00072209</td>
+  <td class="num stp">0.00067027</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3803</td>
+  <td class="time">2026-06-10 08:40 UTC</td>
+  <td class="coin">DOGE/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.083320</td>
+  <td class="num tgt">0.087069</td>
+  <td class="num stp">0.080820</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3802</td>
+  <td class="time">2026-06-10 08:37 UTC</td>
+  <td class="coin">ZIL/USDT</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.003030</td>
+  <td class="num tgt">0.002894</td>
+  <td class="num stp">0.003121</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3801</td>
+  <td class="time">2026-06-10 08:34 UTC</td>
+  <td class="coin">DOGE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000135</td>
+  <td class="num tgt">0.00000141</td>
+  <td class="num stp">0.00000131</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3800</td>
+  <td class="time">2026-06-10 08:33 UTC</td>
+  <td class="coin">XRP/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">1.1102</td>
+  <td class="num tgt">1.1602</td>
+  <td class="num stp">1.0769</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3799</td>
+  <td class="time">2026-06-10 08:32 UTC</td>
+  <td class="coin">ETC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00011280</td>
+  <td class="num tgt">0.00011788</td>
+  <td class="num stp">0.00010942</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3798</td>
+  <td class="time">2026-06-10 08:12 UTC</td>
+  <td class="coin">VET/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.004756</td>
+  <td class="num tgt">0.004973</td>
+  <td class="num stp">0.004612</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3797</td>
+  <td class="time">2026-06-10 08:02 UTC</td>
+  <td class="coin">DOT/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001537</td>
+  <td class="num tgt">0.00001606</td>
+  <td class="num stp">0.00001491</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3796</td>
+  <td class="time">2026-06-10 08:02 UTC</td>
+  <td class="coin">AVAX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00010640</td>
+  <td class="num tgt">0.00011119</td>
+  <td class="num stp">0.00010321</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3795</td>
+  <td class="time">2026-06-10 07:47 UTC</td>
+  <td class="coin">BNB/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">588.40</td>
+  <td class="num tgt">614.88</td>
+  <td class="num stp">570.75</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3794</td>
+  <td class="time">2026-06-10 07:43 UTC</td>
+  <td class="coin">ADA/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000263</td>
+  <td class="num tgt">0.00000276</td>
+  <td class="num stp">0.00000255</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3793</td>
+  <td class="time">2026-06-10 07:39 UTC</td>
+  <td class="coin">HBAR/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.078830</td>
+  <td class="num tgt">0.082377</td>
+  <td class="num stp">0.076465</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3792</td>
+  <td class="time">2026-06-10 07:03 UTC</td>
+  <td class="coin">XTZ/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000380</td>
+  <td class="num tgt">0.00000397</td>
+  <td class="num stp">0.00000369</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3791</td>
+  <td class="time">2026-06-10 07:03 UTC</td>
+  <td class="coin">TRX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000524</td>
+  <td class="num tgt">0.00000548</td>
+  <td class="num stp">0.00000508</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3790</td>
+  <td class="time">2026-06-10 07:02 UTC</td>
+  <td class="coin">ALGO/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000148</td>
+  <td class="num tgt">0.00000155</td>
+  <td class="num stp">0.00000144</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3789</td>
+  <td class="time">2026-06-10 07:01 UTC</td>
+  <td class="coin">LINK/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00012560</td>
+  <td class="num tgt">0.00013125</td>
+  <td class="num stp">0.00012183</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3788</td>
+  <td class="time">2026-06-10 07:00 UTC</td>
+  <td class="coin">ETH/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.026550</td>
+  <td class="num tgt">0.027745</td>
+  <td class="num stp">0.025753</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3787</td>
+  <td class="time">2026-06-10 06:57 UTC</td>
+  <td class="coin">TRX/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.322100</td>
+  <td class="num tgt">0.336595</td>
+  <td class="num stp">0.312437</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3786</td>
+  <td class="time">2026-06-10 06:56 UTC</td>
+  <td class="coin">AAVE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001002</td>
+  <td class="num tgt">0.001047</td>
+  <td class="num stp">0.00097194</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3785</td>
+  <td class="time">2026-06-10 06:54 UTC</td>
+  <td class="coin">XRP/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001809</td>
+  <td class="num tgt">0.00001890</td>
+  <td class="num stp">0.00001755</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3784</td>
+  <td class="time">2026-06-10 06:54 UTC</td>
+  <td class="coin">SOL/ETH</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.039370</td>
+  <td class="num tgt">0.037598</td>
+  <td class="num stp">0.040551</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3783</td>
+  <td class="time">2026-06-10 06:03 UTC</td>
+  <td class="coin">SOL/BTC</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.001043</td>
+  <td class="num tgt">0.00099626</td>
+  <td class="num stp">0.001074</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3782</td>
+  <td class="time">2026-06-10 05:35 UTC</td>
+  <td class="coin">ATOM/BTC</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.00002880</td>
+  <td class="num tgt">0.00002750</td>
+  <td class="num stp">0.00002966</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3781</td>
+  <td class="time">2026-06-10 04:09 UTC</td>
+  <td class="coin">ETC/BTC</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.00011290</td>
+  <td class="num tgt">0.00010782</td>
+  <td class="num stp">0.00011629</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3780</td>
+  <td class="time">2026-06-10 04:01 UTC</td>
+  <td class="coin">DOT/BTC</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.00001538</td>
+  <td class="num tgt">0.00001469</td>
+  <td class="num stp">0.00001584</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3779</td>
+  <td class="time">2026-06-10 04:01 UTC</td>
+  <td class="coin">AVAX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00010700</td>
+  <td class="num tgt">0.00011181</td>
+  <td class="num stp">0.00010379</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3778</td>
+  <td class="time">2026-06-10 03:57 UTC</td>
+  <td class="coin">VET/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.004757</td>
+  <td class="num tgt">0.004996</td>
+  <td class="num stp">0.004598</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3777</td>
+  <td class="time">2026-06-10 03:39 UTC</td>
+  <td class="coin">ADA/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000263</td>
+  <td class="num tgt">0.00000277</td>
+  <td class="num stp">0.00000254</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3776</td>
+  <td class="time">2026-06-10 03:01 UTC</td>
+  <td class="coin">XTZ/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000380</td>
+  <td class="num tgt">0.00000397</td>
+  <td class="num stp">0.00000369</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3775</td>
+  <td class="time">2026-06-10 03:00 UTC</td>
+  <td class="coin">HBAR/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.078490</td>
+  <td class="num tgt">0.082022</td>
+  <td class="num stp">0.076135</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3774</td>
+  <td class="time">2026-06-10 02:51 UTC</td>
+  <td class="coin">SOL/ETH</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.039600</td>
+  <td class="num tgt">0.037818</td>
+  <td class="num stp">0.040788</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3773</td>
+  <td class="time">2026-06-10 02:39 UTC</td>
+  <td class="coin">XRP/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">1.1200</td>
+  <td class="num tgt">1.1723</td>
+  <td class="num stp">1.0852</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3772</td>
+  <td class="time">2026-06-10 02:35 UTC</td>
+  <td class="coin">GALA/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.002550</td>
+  <td class="num tgt">0.002720</td>
+  <td class="num stp">0.002436</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3771</td>
+  <td class="time">2026-06-10 02:30 UTC</td>
+  <td class="coin">TRX/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.321700</td>
+  <td class="num tgt">0.336176</td>
+  <td class="num stp">0.312049</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3770</td>
+  <td class="time">2026-06-10 02:04 UTC</td>
+  <td class="coin">ZIL/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.003050</td>
+  <td class="num tgt">0.003187</td>
+  <td class="num stp">0.002959</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3769</td>
+  <td class="time">2026-06-10 00:55 UTC</td>
+  <td class="coin">TRX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000523</td>
+  <td class="num tgt">0.00000547</td>
+  <td class="num stp">0.00000507</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3768</td>
+  <td class="time">2026-06-10 00:45 UTC</td>
+  <td class="coin">XRP/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001834</td>
+  <td class="num tgt">0.00001917</td>
+  <td class="num stp">0.00001779</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3767</td>
+  <td class="time">2026-06-09 23:54 UTC</td>
+  <td class="coin">VET/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.004825</td>
+  <td class="num tgt">0.005065</td>
+  <td class="num stp">0.004665</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3766</td>
+  <td class="time">2026-06-09 23:47 UTC</td>
+  <td class="coin">LINK/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00012710</td>
+  <td class="num tgt">0.00013282</td>
+  <td class="num stp">0.00012329</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3765</td>
+  <td class="time">2026-06-09 23:31 UTC</td>
+  <td class="coin">ETH/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.026510</td>
+  <td class="num tgt">0.027703</td>
+  <td class="num stp">0.025715</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3764</td>
+  <td class="time">2026-06-09 23:08 UTC</td>
+  <td class="coin">DOGE/BTC</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.00000137</td>
+  <td class="num tgt">0.00000131</td>
+  <td class="num stp">0.00000141</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3763</td>
+  <td class="time">2026-06-09 23:07 UTC</td>
+  <td class="coin">SOL/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001052</td>
+  <td class="num tgt">0.001099</td>
+  <td class="num stp">0.001020</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3762</td>
+  <td class="time">2026-06-09 23:03 UTC</td>
+  <td class="coin">ADA/BTC</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.00000268</td>
+  <td class="num tgt">0.00000255</td>
+  <td class="num stp">0.00000277</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3761</td>
+  <td class="time">2026-06-09 22:54 UTC</td>
+  <td class="coin">XTZ/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000386</td>
+  <td class="num tgt">0.00000403</td>
+  <td class="num stp">0.00000374</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3760</td>
+  <td class="time">2026-06-09 21:41 UTC</td>
+  <td class="coin">TRX/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.323100</td>
+  <td class="num tgt">0.337639</td>
+  <td class="num stp">0.313407</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3759</td>
+  <td class="time">2026-06-09 21:39 UTC</td>
+  <td class="coin">SOL/ETH</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.039420</td>
+  <td class="num tgt">0.037646</td>
+  <td class="num stp">0.040603</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3758</td>
+  <td class="time">2026-06-09 21:01 UTC</td>
+  <td class="coin">ALGO/BTC</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.00000147</td>
+  <td class="num tgt">0.00000140</td>
+  <td class="num stp">0.00000151</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3757</td>
+  <td class="time">2026-06-09 20:00 UTC</td>
+  <td class="coin">TRX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000521</td>
+  <td class="num tgt">0.00000544</td>
+  <td class="num stp">0.00000505</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3756</td>
+  <td class="time">2026-06-09 18:20 UTC</td>
+  <td class="coin">ATOM/BTC</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.00002860</td>
+  <td class="num tgt">0.00002731</td>
+  <td class="num stp">0.00002946</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3755</td>
+  <td class="time">2026-06-09 17:53 UTC</td>
+  <td class="coin">ZIL/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.003030</td>
+  <td class="num tgt">0.003198</td>
+  <td class="num stp">0.002918</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3754</td>
+  <td class="time">2026-06-09 17:49 UTC</td>
+  <td class="coin">SOL/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001051</td>
+  <td class="num tgt">0.001099</td>
+  <td class="num stp">0.001020</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3753</td>
+  <td class="time">2026-06-09 17:43 UTC</td>
+  <td class="coin">XRP/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001853</td>
+  <td class="num tgt">0.00001936</td>
+  <td class="num stp">0.00001797</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3752</td>
+  <td class="time">2026-06-09 17:37 UTC</td>
+  <td class="coin">AAVE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00099600</td>
+  <td class="num tgt">0.001041</td>
+  <td class="num stp">0.00096612</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3751</td>
+  <td class="time">2026-06-09 17:29 UTC</td>
+  <td class="coin">ADA/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000268</td>
+  <td class="num tgt">0.00000281</td>
+  <td class="num stp">0.00000259</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3750</td>
+  <td class="time">2026-06-09 17:25 UTC</td>
+  <td class="coin">TRX/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.323100</td>
+  <td class="num tgt">0.337639</td>
+  <td class="num stp">0.313407</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3749</td>
+  <td class="time">2026-06-09 17:22 UTC</td>
+  <td class="coin">SOL/ETH</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.039470</td>
+  <td class="num tgt">0.041246</td>
+  <td class="num stp">0.038286</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3748</td>
+  <td class="time">2026-06-09 17:18 UTC</td>
+  <td class="coin">HBAR/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.079830</td>
+  <td class="num tgt">0.083422</td>
+  <td class="num stp">0.077435</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3747</td>
+  <td class="time">2026-06-09 17:06 UTC</td>
+  <td class="coin">XTZ/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000386</td>
+  <td class="num tgt">0.00000403</td>
+  <td class="num stp">0.00000374</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3746</td>
+  <td class="time">2026-06-09 17:04 UTC</td>
+  <td class="coin">AVAX/BTC</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.00010610</td>
+  <td class="num tgt">0.00010133</td>
+  <td class="num stp">0.00010928</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3745</td>
+  <td class="time">2026-06-09 17:02 UTC</td>
+  <td class="coin">ETC/BTC</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.00011230</td>
+  <td class="num tgt">0.00010725</td>
+  <td class="num stp">0.00011567</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3744</td>
+  <td class="time">2026-06-09 15:02 UTC</td>
+  <td class="coin">ALGO/BTC</td>
+  <td><span class="side short">SHORT</span></td>
+  <td class="num">0.00000147</td>
+  <td class="num tgt">0.00000140</td>
+  <td class="num stp">0.00000151</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3743</td>
+  <td class="time">2026-06-09 14:22 UTC</td>
+  <td class="coin">CRV/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.195800</td>
+  <td class="num tgt">0.206960</td>
+  <td class="num stp">0.188360</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3742</td>
+  <td class="time">2026-06-09 14:19 UTC</td>
+  <td class="coin">DOT/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001544</td>
+  <td class="num tgt">0.00001613</td>
+  <td class="num stp">0.00001498</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3741</td>
+  <td class="time">2026-06-09 14:19 UTC</td>
+  <td class="coin">DOGE/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.084990</td>
+  <td class="num tgt">0.088815</td>
+  <td class="num stp">0.082440</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3740</td>
+  <td class="time">2026-06-09 14:15 UTC</td>
+  <td class="coin">GALA/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.002580</td>
+  <td class="num tgt">0.002741</td>
+  <td class="num stp">0.002473</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3739</td>
+  <td class="time">2026-06-09 13:43 UTC</td>
+  <td class="coin">VET/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.004892</td>
+  <td class="num tgt">0.005128</td>
+  <td class="num stp">0.004734</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3738</td>
+  <td class="time">2026-06-09 13:41 UTC</td>
+  <td class="coin">LINK/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00012690</td>
+  <td class="num tgt">0.00013261</td>
+  <td class="num stp">0.00012309</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3737</td>
+  <td class="time">2026-06-09 13:20 UTC</td>
+  <td class="coin">TRX/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.322200</td>
+  <td class="num tgt">0.336699</td>
+  <td class="num stp">0.312534</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3736</td>
+  <td class="time">2026-06-09 13:03 UTC</td>
+  <td class="coin">XTZ/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000388</td>
+  <td class="num tgt">0.00000405</td>
+  <td class="num stp">0.00000376</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3735</td>
+  <td class="time">2026-06-09 13:01 UTC</td>
+  <td class="coin">ATOM/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00002780</td>
+  <td class="num tgt">0.00002905</td>
+  <td class="num stp">0.00002697</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3734</td>
+  <td class="time">2026-06-09 12:43 UTC</td>
+  <td class="coin">HBAR/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.080420</td>
+  <td class="num tgt">0.084039</td>
+  <td class="num stp">0.078007</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3733</td>
+  <td class="time">2026-06-09 12:41 UTC</td>
+  <td class="coin">XRP/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00001853</td>
+  <td class="num tgt">0.00001936</td>
+  <td class="num stp">0.00001797</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3732</td>
+  <td class="time">2026-06-09 12:36 UTC</td>
+  <td class="coin">AAVE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00099600</td>
+  <td class="num tgt">0.001041</td>
+  <td class="num stp">0.00096612</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3731</td>
+  <td class="time">2026-06-09 12:21 UTC</td>
+  <td class="coin">XTZ/ETH</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00044000</td>
+  <td class="num tgt">0.00045980</td>
+  <td class="num stp">0.00042680</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3730</td>
+  <td class="time">2026-06-09 12:08 UTC</td>
+  <td class="coin">SOL/ETH</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.039530</td>
+  <td class="num tgt">0.041309</td>
+  <td class="num stp">0.038344</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3729</td>
+  <td class="time">2026-06-09 11:22 UTC</td>
+  <td class="coin">TRX/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000515</td>
+  <td class="num tgt">0.00000538</td>
+  <td class="num stp">0.00000500</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3728</td>
+  <td class="time">2026-06-09 11:03 UTC</td>
+  <td class="coin">DOGE/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00000136</td>
+  <td class="num tgt">0.00000142</td>
+  <td class="num stp">0.00000132</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3727</td>
+  <td class="time">2026-06-09 10:58 UTC</td>
+  <td class="coin">SOL/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.001058</td>
+  <td class="num tgt">0.001105</td>
+  <td class="num stp">0.001026</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3726</td>
+  <td class="time">2026-06-09 10:11 UTC</td>
+  <td class="coin">LTC/BTC</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.00067700</td>
+  <td class="num tgt">0.00070747</td>
+  <td class="num stp">0.00065669</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3725</td>
+  <td class="time">2026-06-09 09:59 UTC</td>
+  <td class="coin">CRV/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.196500</td>
+  <td class="num tgt">0.207042</td>
+  <td class="num stp">0.189472</td>
+  <td><span class="out hit">🎯 Target hit</span></td>
+</tr>
+<tr>
+  <td class="id">#3724</td>
+  <td class="time">2026-06-09 09:49 UTC</td>
+  <td class="coin">DOGE/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.085310</td>
+  <td class="num tgt">0.089149</td>
+  <td class="num stp">0.082751</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3723</td>
+  <td class="time">2026-06-09 09:39 UTC</td>
+  <td class="coin">GALA/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.002590</td>
+  <td class="num tgt">0.002761</td>
+  <td class="num stp">0.002476</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3722</td>
+  <td class="time">2026-06-09 09:39 UTC</td>
+  <td class="coin">VET/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.004857</td>
+  <td class="num tgt">0.005103</td>
+  <td class="num stp">0.004693</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+<tr>
+  <td class="id">#3721</td>
+  <td class="time">2026-06-09 09:34 UTC</td>
+  <td class="coin">ZIL/USDT</td>
+  <td><span class="side long">LONG</span></td>
+  <td class="num">0.003060</td>
+  <td class="num tgt">0.003214</td>
+  <td class="num stp">0.002957</td>
+  <td><span class="out miss">🛑 Stop / no target</span></td>
+</tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="foot">
+    Showing the most recent 300 signals with full levels. Generated 2026-06-12 23:34 UTC.<br>
+    Experimental trend signals. Trend-following, not guaranteed predictions. Not financial advice. DYOR.
+  </p>
+</div>
+</body>
+</html>
