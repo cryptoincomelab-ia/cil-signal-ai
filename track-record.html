@@ -41,10 +41,16 @@
   .empty { text-align:center; color:var(--muted); padding:40px; }
   .foot { color:var(--muted); font-size:12px; margin-top:24px; line-height:1.6; }
   .scroll { overflow-x:auto; }
+  .home { display:inline-flex; align-items:center; gap:6px; color:var(--green);
+           text-decoration:none; font-size:14px; font-weight:600; margin-bottom:18px;
+           padding:8px 14px; border:1px solid var(--line); border-radius:8px;
+           background:var(--card); transition:border-color .15s, background .15s; }
+  .home:hover { border-color:var(--green); background:rgba(0,255,136,.06); }
 </style>
 </head>
 <body>
 <div class="wrap">
+  <a class="home" href="/">← Back to home</a>
   <h1>Public <span class="accent">Track Record</span></h1>
   <p class="sub">Every signal below was posted publicly on Telegram — with entry, target and stop —
   <strong>before</strong> the outcome was known. Nothing is added after the fact.</p>
@@ -3077,7 +3083,7 @@
   </table>
   </div>
   <p class="foot">
-    Showing the most recent 300 signals with full levels. Generated 2026-06-17 19:50 UTC.<br>
+    Showing the most recent 300 signals with full levels. Generated 2026-06-17 20:10 UTC.<br>
     Experimental trend signals. Trend-following, not guaranteed predictions. Not financial advice. DYOR.
   </p>
 </div>
