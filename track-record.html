@@ -46,6 +46,17 @@
            padding:8px 14px; border:1px solid var(--line); border-radius:8px;
            background:var(--card); transition:border-color .15s, background .15s; }
   .home:hover { border-color:var(--green); background:rgba(0,255,136,.06); }
+  .search { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+  #q { flex:1; max-width:420px; background:var(--card); border:1px solid var(--line);
+        border-radius:10px; padding:12px 16px; color:var(--text); font-size:15px;
+        outline:none; transition:border-color .15s; }
+  #q:focus { border-color:var(--green); }
+  #q::placeholder { color:var(--muted); }
+  .qcount { color:var(--muted); font-size:13px; white-space:nowrap; }
+  .noresult { color:var(--muted); font-size:14px; padding:24px 8px; text-align:center;
+               background:var(--card); border:1px solid var(--line); border-radius:10px; }
+  tr.hidden { display:none; }
+  tr.match td { background:rgba(0,255,136,.07); }
 </style>
 </head>
 <body>
@@ -71,6 +82,11 @@
     target before the stop? That's the whole check — the prediction was public and timestamped first, so
     it can't be faked backwards. "Target hit" = target reached before stop within 24h.
   </div>
+  <div class="search">
+    <input id="q" type="text" inputmode="numeric"
+           placeholder="Search a signal by ID — type 4350 or #4350" autocomplete="off">
+    <span id="qcount" class="qcount"></span>
+  </div>
   <div class="scroll">
   <table>
     <thead><tr>
@@ -78,8 +94,8 @@
       <th style="text-align:right">Entry</th><th style="text-align:right">Target</th>
       <th style="text-align:right">Stop</th><th>Result</th>
     </tr></thead>
-    <tbody>
-<tr>
+    <tbody id="tbody">
+<tr data-id="4350">
   <td class="id">#4350</td>
   <td class="time">2026-06-16 20:58 UTC</td>
   <td class="coin">ALGO/BTC</td>
@@ -89,7 +105,7 @@
   <td class="num stp">0.00000140</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4349">
   <td class="id">#4349</td>
   <td class="time">2026-06-16 20:49 UTC</td>
   <td class="coin">ADA/BTC</td>
@@ -99,7 +115,7 @@
   <td class="num stp">0.00000258</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4348">
   <td class="id">#4348</td>
   <td class="time">2026-06-14 22:51 UTC</td>
   <td class="coin">TRX/BTC</td>
@@ -109,7 +125,7 @@
   <td class="num stp">0.00000473</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4347">
   <td class="id">#4347</td>
   <td class="time">2026-06-14 22:48 UTC</td>
   <td class="coin">XLM/BTC</td>
@@ -119,7 +135,7 @@
   <td class="num stp">0.00000184</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4346">
   <td class="id">#4346</td>
   <td class="time">2026-06-14 22:47 UTC</td>
   <td class="coin">ALGO/BTC</td>
@@ -129,7 +145,7 @@
   <td class="num stp">0.00000138</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4345">
   <td class="id">#4345</td>
   <td class="time">2026-06-14 22:44 UTC</td>
   <td class="coin">AAVE/BTC</td>
@@ -139,7 +155,7 @@
   <td class="num stp">0.001011</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4344">
   <td class="id">#4344</td>
   <td class="time">2026-06-14 22:41 UTC</td>
   <td class="coin">NEAR/BTC</td>
@@ -149,7 +165,7 @@
   <td class="num stp">0.00003254</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4343">
   <td class="id">#4343</td>
   <td class="time">2026-06-14 22:39 UTC</td>
   <td class="coin">LINK/BTC</td>
@@ -159,7 +175,7 @@
   <td class="num stp">0.00012028</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4342">
   <td class="id">#4342</td>
   <td class="time">2026-06-14 22:34 UTC</td>
   <td class="coin">XRP/BTC</td>
@@ -169,7 +185,7 @@
   <td class="num stp">0.00001744</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4341">
   <td class="id">#4341</td>
   <td class="time">2026-06-14 22:25 UTC</td>
   <td class="coin">ETC/BTC</td>
@@ -179,7 +195,7 @@
   <td class="num stp">0.00010641</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4340">
   <td class="id">#4340</td>
   <td class="time">2026-06-14 22:01 UTC</td>
   <td class="coin">XTZ/BTC</td>
@@ -189,7 +205,7 @@
   <td class="num stp">0.00000372</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4339">
   <td class="id">#4339</td>
   <td class="time">2026-06-14 21:46 UTC</td>
   <td class="coin">DOGE/BTC</td>
@@ -199,7 +215,7 @@
   <td class="num stp">0.00000132</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4338">
   <td class="id">#4338</td>
   <td class="time">2026-06-14 21:44 UTC</td>
   <td class="coin">ADA/BTC</td>
@@ -209,7 +225,7 @@
   <td class="num stp">0.00000259</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4337">
   <td class="id">#4337</td>
   <td class="time">2026-06-14 21:41 UTC</td>
   <td class="coin">SOL/BTC</td>
@@ -219,7 +235,7 @@
   <td class="num stp">0.001042</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4336">
   <td class="id">#4336</td>
   <td class="time">2026-06-14 21:26 UTC</td>
   <td class="coin">TRX/BTC</td>
@@ -229,7 +245,7 @@
   <td class="num stp">0.00000477</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4335">
   <td class="id">#4335</td>
   <td class="time">2026-06-14 21:20 UTC</td>
   <td class="coin">ATOM/BTC</td>
@@ -239,7 +255,7 @@
   <td class="num stp">0.00002997</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4334">
   <td class="id">#4334</td>
   <td class="time">2026-06-14 21:10 UTC</td>
   <td class="coin">ZIL/USDT</td>
@@ -249,7 +265,7 @@
   <td class="num stp">0.003075</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4333">
   <td class="id">#4333</td>
   <td class="time">2026-06-14 21:07 UTC</td>
   <td class="coin">ALGO/BTC</td>
@@ -259,7 +275,7 @@
   <td class="num stp">0.00000137</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4332">
   <td class="id">#4332</td>
   <td class="time">2026-06-14 20:59 UTC</td>
   <td class="coin">XTZ/ETH</td>
@@ -269,7 +285,7 @@
   <td class="num stp">0.00042680</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4331">
   <td class="id">#4331</td>
   <td class="time">2026-06-14 20:51 UTC</td>
   <td class="coin">XLM/BTC</td>
@@ -279,7 +295,7 @@
   <td class="num stp">0.00000184</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4330">
   <td class="id">#4330</td>
   <td class="time">2026-06-14 20:45 UTC</td>
   <td class="coin">DOT/BTC</td>
@@ -289,7 +305,7 @@
   <td class="num stp">0.00001449</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4329">
   <td class="id">#4329</td>
   <td class="time">2026-06-14 20:43 UTC</td>
   <td class="coin">AVAX/BTC</td>
@@ -299,7 +315,7 @@
   <td class="num stp">0.00009816</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4328">
   <td class="id">#4328</td>
   <td class="time">2026-06-14 20:42 UTC</td>
   <td class="coin">XRP/BTC</td>
@@ -309,7 +325,7 @@
   <td class="num stp">0.00001725</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4327">
   <td class="id">#4327</td>
   <td class="time">2026-06-14 20:40 UTC</td>
   <td class="coin">SOL/ETH</td>
@@ -319,7 +335,7 @@
   <td class="num stp">0.039450</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4326">
   <td class="id">#4326</td>
   <td class="time">2026-06-14 20:10 UTC</td>
   <td class="coin">XLM/BTC</td>
@@ -329,7 +345,7 @@
   <td class="num stp">0.00000184</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4325">
   <td class="id">#4325</td>
   <td class="time">2026-06-14 20:08 UTC</td>
   <td class="coin">SOL/ETH</td>
@@ -339,7 +355,7 @@
   <td class="num stp">0.039363</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4324">
   <td class="id">#4324</td>
   <td class="time">2026-06-14 20:03 UTC</td>
   <td class="coin">XTZ/BTC</td>
@@ -349,7 +365,7 @@
   <td class="num stp">0.00000349</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4323">
   <td class="id">#4323</td>
   <td class="time">2026-06-14 19:03 UTC</td>
   <td class="coin">ZIL/USDT</td>
@@ -359,7 +375,7 @@
   <td class="num stp">0.003046</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4322">
   <td class="id">#4322</td>
   <td class="time">2026-06-14 18:59 UTC</td>
   <td class="coin">AVAX/BTC</td>
@@ -369,7 +385,7 @@
   <td class="num stp">0.00009729</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4321">
   <td class="id">#4321</td>
   <td class="time">2026-06-14 18:38 UTC</td>
   <td class="coin">VET/USDT</td>
@@ -379,7 +395,7 @@
   <td class="num stp">0.004747</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4320">
   <td class="id">#4320</td>
   <td class="time">2026-06-14 18:29 UTC</td>
   <td class="coin">XTZ/ETH</td>
@@ -389,7 +405,7 @@
   <td class="num stp">0.00042680</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4319">
   <td class="id">#4319</td>
   <td class="time">2026-06-14 18:09 UTC</td>
   <td class="coin">ALGO/BTC</td>
@@ -399,7 +415,7 @@
   <td class="num stp">0.00000136</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4318">
   <td class="id">#4318</td>
   <td class="time">2026-06-14 17:56 UTC</td>
   <td class="coin">LINK/BTC</td>
@@ -409,7 +425,7 @@
   <td class="num stp">0.00011892</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4317">
   <td class="id">#4317</td>
   <td class="time">2026-06-14 17:52 UTC</td>
   <td class="coin">XRP/BTC</td>
@@ -419,7 +435,7 @@
   <td class="num stp">0.00001725</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4316">
   <td class="id">#4316</td>
   <td class="time">2026-06-14 17:50 UTC</td>
   <td class="coin">SOL/BTC</td>
@@ -429,7 +445,7 @@
   <td class="num stp">0.001025</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4315">
   <td class="id">#4315</td>
   <td class="time">2026-06-14 17:41 UTC</td>
   <td class="coin">GALA/USDT</td>
@@ -439,7 +455,7 @@
   <td class="num stp">0.002506</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4314">
   <td class="id">#4314</td>
   <td class="time">2026-06-14 17:35 UTC</td>
   <td class="coin">/USDT</td>
@@ -449,7 +465,7 @@
   <td class="num stp">62,037.13</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4313">
   <td class="id">#4313</td>
   <td class="time">2026-06-14 17:26 UTC</td>
   <td class="coin">AAVE/BTC</td>
@@ -459,7 +475,7 @@
   <td class="num stp">0.00099522</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4312">
   <td class="id">#4312</td>
   <td class="time">2026-06-14 15:58 UTC</td>
   <td class="coin">XTZ/BTC</td>
@@ -469,7 +485,7 @@
   <td class="num stp">0.00000349</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4311">
   <td class="id">#4311</td>
   <td class="time">2026-06-14 14:50 UTC</td>
   <td class="coin">NEAR/BTC</td>
@@ -479,7 +495,7 @@
   <td class="num stp">0.00003101</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4310">
   <td class="id">#4310</td>
   <td class="time">2026-06-14 14:39 UTC</td>
   <td class="coin">ETC/BTC</td>
@@ -489,7 +505,7 @@
   <td class="num stp">0.00010621</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4309">
   <td class="id">#4309</td>
   <td class="time">2026-06-14 14:36 UTC</td>
   <td class="coin">ZIL/USDT</td>
@@ -499,7 +515,7 @@
   <td class="num stp">0.003056</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4308">
   <td class="id">#4308</td>
   <td class="time">2026-06-14 14:33 UTC</td>
   <td class="coin">TRX/BTC</td>
@@ -509,7 +525,7 @@
   <td class="num stp">0.00000480</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4307">
   <td class="id">#4307</td>
   <td class="time">2026-06-14 14:27 UTC</td>
   <td class="coin">ADA/BTC</td>
@@ -519,7 +535,7 @@
   <td class="num stp">0.00000253</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4306">
   <td class="id">#4306</td>
   <td class="time">2026-06-14 14:08 UTC</td>
   <td class="coin">ATOM/BTC</td>
@@ -529,7 +545,7 @@
   <td class="num stp">0.00002920</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4305">
   <td class="id">#4305</td>
   <td class="time">2026-06-14 13:58 UTC</td>
   <td class="coin">VET/USDT</td>
@@ -539,7 +555,7 @@
   <td class="num stp">0.004837</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4304">
   <td class="id">#4304</td>
   <td class="time">2026-06-14 13:52 UTC</td>
   <td class="coin">LINK/BTC</td>
@@ -549,7 +565,7 @@
   <td class="num stp">0.00011863</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4303">
   <td class="id">#4303</td>
   <td class="time">2026-06-14 13:49 UTC</td>
   <td class="coin">XRP/BTC</td>
@@ -559,7 +575,7 @@
   <td class="num stp">0.00001713</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4302">
   <td class="id">#4302</td>
   <td class="time">2026-06-14 13:48 UTC</td>
   <td class="coin">SOL/ETH</td>
@@ -569,7 +585,7 @@
   <td class="num stp">0.039421</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4301">
   <td class="id">#4301</td>
   <td class="time">2026-06-14 13:47 UTC</td>
   <td class="coin">SOL/BTC</td>
@@ -579,7 +595,7 @@
   <td class="num stp">0.001021</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4300">
   <td class="id">#4300</td>
   <td class="time">2026-06-14 13:46 UTC</td>
   <td class="coin">ETH/USDT</td>
@@ -589,7 +605,7 @@
   <td class="num stp">1,618.08</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4299">
   <td class="id">#4299</td>
   <td class="time">2026-06-14 13:40 UTC</td>
   <td class="coin">PENGU/USDT</td>
@@ -599,7 +615,7 @@
   <td class="num stp">0.006375</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4298">
   <td class="id">#4298</td>
   <td class="time">2026-06-14 13:35 UTC</td>
   <td class="coin">GALA/USDT</td>
@@ -609,7 +625,7 @@
   <td class="num stp">0.002505</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4297">
   <td class="id">#4297</td>
   <td class="time">2026-06-14 13:27 UTC</td>
   <td class="coin">ETH/BTC</td>
@@ -619,7 +635,7 @@
   <td class="num stp">0.025133</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4296">
   <td class="id">#4296</td>
   <td class="time">2026-06-14 13:17 UTC</td>
   <td class="coin">DOT/BTC</td>
@@ -629,7 +645,7 @@
   <td class="num stp">0.00001453</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4295">
   <td class="id">#4295</td>
   <td class="time">2026-06-14 13:12 UTC</td>
   <td class="coin">XTZ/ETH</td>
@@ -639,7 +655,7 @@
   <td class="num stp">0.00042680</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4294">
   <td class="id">#4294</td>
   <td class="time">2026-06-14 13:08 UTC</td>
   <td class="coin">XLM/BTC</td>
@@ -649,7 +665,7 @@
   <td class="num stp">0.00000184</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4293">
   <td class="id">#4293</td>
   <td class="time">2026-06-14 13:08 UTC</td>
   <td class="coin">ALGO/BTC</td>
@@ -659,7 +675,7 @@
   <td class="num stp">0.00000137</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4292">
   <td class="id">#4292</td>
   <td class="time">2026-06-14 13:07 UTC</td>
   <td class="coin">AAVE/BTC</td>
@@ -669,7 +685,7 @@
   <td class="num stp">0.00099716</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4291">
   <td class="id">#4291</td>
   <td class="time">2026-06-14 13:05 UTC</td>
   <td class="coin">DOGE/BTC</td>
@@ -679,7 +695,7 @@
   <td class="num stp">0.00000131</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4290">
   <td class="id">#4290</td>
   <td class="time">2026-06-14 13:04 UTC</td>
   <td class="coin">AVAX/BTC</td>
@@ -689,7 +705,7 @@
   <td class="num stp">0.00009962</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4289">
   <td class="id">#4289</td>
   <td class="time">2026-06-14 11:24 UTC</td>
   <td class="coin">SUSHI/USDT</td>
@@ -699,7 +715,7 @@
   <td class="num stp">0.169556</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4288">
   <td class="id">#4288</td>
   <td class="time">2026-06-14 11:01 UTC</td>
   <td class="coin">XTZ/BTC</td>
@@ -709,7 +725,7 @@
   <td class="num stp">0.00000349</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4287">
   <td class="id">#4287</td>
   <td class="time">2026-06-14 10:38 UTC</td>
   <td class="coin">LTC/BTC</td>
@@ -719,7 +735,7 @@
   <td class="num stp">0.00066445</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4286">
   <td class="id">#4286</td>
   <td class="time">2026-06-14 10:05 UTC</td>
   <td class="coin">ETC/BTC</td>
@@ -729,7 +745,7 @@
   <td class="num stp">0.00010718</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4285">
   <td class="id">#4285</td>
   <td class="time">2026-06-14 10:02 UTC</td>
   <td class="coin">ATOM/BTC</td>
@@ -739,7 +755,7 @@
   <td class="num stp">0.00002920</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4284">
   <td class="id">#4284</td>
   <td class="time">2026-06-14 10:01 UTC</td>
   <td class="coin">ADA/BTC</td>
@@ -749,7 +765,7 @@
   <td class="num stp">0.00000257</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4283">
   <td class="id">#4283</td>
   <td class="time">2026-06-14 09:49 UTC</td>
   <td class="coin">TRX/BTC</td>
@@ -759,7 +775,7 @@
   <td class="num stp">0.00000477</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4282">
   <td class="id">#4282</td>
   <td class="time">2026-06-14 09:47 UTC</td>
   <td class="coin">VET/USDT</td>
@@ -769,7 +785,7 @@
   <td class="num stp">0.004914</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4281">
   <td class="id">#4281</td>
   <td class="time">2026-06-14 09:40 UTC</td>
   <td class="coin">DOGE/USDT</td>
@@ -779,7 +795,7 @@
   <td class="num stp">0.084623</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4280">
   <td class="id">#4280</td>
   <td class="time">2026-06-14 09:38 UTC</td>
   <td class="coin">XRP/BTC</td>
@@ -789,7 +805,7 @@
   <td class="num stp">0.00001725</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4279">
   <td class="id">#4279</td>
   <td class="time">2026-06-14 09:32 UTC</td>
   <td class="coin">PENGU/USDT</td>
@@ -799,7 +815,7 @@
   <td class="num stp">0.006489</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4278">
   <td class="id">#4278</td>
   <td class="time">2026-06-14 09:28 UTC</td>
   <td class="coin">GALA/USDT</td>
@@ -809,7 +825,7 @@
   <td class="num stp">0.002515</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4277">
   <td class="id">#4277</td>
   <td class="time">2026-06-14 09:24 UTC</td>
   <td class="coin">LINK/BTC</td>
@@ -819,7 +835,7 @@
   <td class="num stp">0.00011892</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4276">
   <td class="id">#4276</td>
   <td class="time">2026-06-14 09:22 UTC</td>
   <td class="coin">ETH/USDT</td>
@@ -829,7 +845,7 @@
   <td class="num stp">1,620.81</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4275">
   <td class="id">#4275</td>
   <td class="time">2026-06-14 09:09 UTC</td>
   <td class="coin">XTZ/ETH</td>
@@ -839,7 +855,7 @@
   <td class="num stp">0.00042680</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4274">
   <td class="id">#4274</td>
   <td class="time">2026-06-14 09:07 UTC</td>
   <td class="coin">XLM/BTC</td>
@@ -849,7 +865,7 @@
   <td class="num stp">0.00000184</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4273">
   <td class="id">#4273</td>
   <td class="time">2026-06-14 09:06 UTC</td>
   <td class="coin">ALGO/BTC</td>
@@ -859,7 +875,7 @@
   <td class="num stp">0.00000138</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4272">
   <td class="id">#4272</td>
   <td class="time">2026-06-14 09:05 UTC</td>
   <td class="coin">AAVE/BTC</td>
@@ -869,7 +885,7 @@
   <td class="num stp">0.00099619</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4271">
   <td class="id">#4271</td>
   <td class="time">2026-06-14 09:04 UTC</td>
   <td class="coin">DOT/BTC</td>
@@ -879,7 +895,7 @@
   <td class="num stp">0.00001457</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4270">
   <td class="id">#4270</td>
   <td class="time">2026-06-14 09:04 UTC</td>
   <td class="coin">DOGE/BTC</td>
@@ -889,7 +905,7 @@
   <td class="num stp">0.00000132</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4269">
   <td class="id">#4269</td>
   <td class="time">2026-06-14 09:03 UTC</td>
   <td class="coin">AVAX/BTC</td>
@@ -899,7 +915,7 @@
   <td class="num stp">0.00010010</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4268">
   <td class="id">#4268</td>
   <td class="time">2026-06-14 09:02 UTC</td>
   <td class="coin">SOL/ETH</td>
@@ -909,7 +925,7 @@
   <td class="num stp">0.039498</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4267">
   <td class="id">#4267</td>
   <td class="time">2026-06-14 09:01 UTC</td>
   <td class="coin">ETH/BTC</td>
@@ -919,7 +935,7 @@
   <td class="num stp">0.025210</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4266">
   <td class="id">#4266</td>
   <td class="time">2026-06-14 08:52 UTC</td>
   <td class="coin">DOGE/USDT</td>
@@ -929,7 +945,7 @@
   <td class="num stp">0.084759</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4265">
   <td class="id">#4265</td>
   <td class="time">2026-06-14 08:50 UTC</td>
   <td class="coin">SOL/BTC</td>
@@ -939,7 +955,7 @@
   <td class="num stp">0.001028</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4264">
   <td class="id">#4264</td>
   <td class="time">2026-06-14 08:31 UTC</td>
   <td class="coin">AXS/USDT</td>
@@ -949,7 +965,7 @@
   <td class="num stp">0.932170</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4263">
   <td class="id">#4263</td>
   <td class="time">2026-06-14 08:01 UTC</td>
   <td class="coin">ZIL/USDT</td>
@@ -959,7 +975,7 @@
   <td class="num stp">0.003094</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4262">
   <td class="id">#4262</td>
   <td class="time">2026-06-14 07:38 UTC</td>
   <td class="coin">ADA/USDT</td>
@@ -969,7 +985,7 @@
   <td class="num stp">0.166161</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4261">
   <td class="id">#4261</td>
   <td class="time">2026-06-14 07:19 UTC</td>
   <td class="coin">SUSHI/USDT</td>
@@ -979,7 +995,7 @@
   <td class="num stp">0.169362</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4260">
   <td class="id">#4260</td>
   <td class="time">2026-06-14 07:18 UTC</td>
   <td class="coin">VET/USDT</td>
@@ -989,7 +1005,7 @@
   <td class="num stp">0.004876</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4259">
   <td class="id">#4259</td>
   <td class="time">2026-06-14 06:48 UTC</td>
   <td class="coin">MANA/USDT</td>
@@ -999,7 +1015,7 @@
   <td class="num stp">0.064602</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4258">
   <td class="id">#4258</td>
   <td class="time">2026-06-14 06:47 UTC</td>
   <td class="coin">TRX/USDT</td>
@@ -1009,7 +1025,7 @@
   <td class="num stp">0.306229</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4257">
   <td class="id">#4257</td>
   <td class="time">2026-06-14 06:41 UTC</td>
   <td class="coin">ETH/BTC</td>
@@ -1019,7 +1035,7 @@
   <td class="num stp">0.025317</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4256">
   <td class="id">#4256</td>
   <td class="time">2026-06-14 06:15 UTC</td>
   <td class="coin">XTZ/ETH</td>
@@ -1029,7 +1045,7 @@
   <td class="num stp">0.00042680</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4255">
   <td class="id">#4255</td>
   <td class="time">2026-06-14 06:12 UTC</td>
   <td class="coin">XLM/BTC</td>
@@ -1039,7 +1055,7 @@
   <td class="num stp">0.00000184</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4254">
   <td class="id">#4254</td>
   <td class="time">2026-06-14 06:03 UTC</td>
   <td class="coin">DOT/BTC</td>
@@ -1049,7 +1065,7 @@
   <td class="num stp">0.00001462</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4253">
   <td class="id">#4253</td>
   <td class="time">2026-06-14 06:02 UTC</td>
   <td class="coin">XRP/BTC</td>
@@ -1059,7 +1075,7 @@
   <td class="num stp">0.00001730</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4252">
   <td class="id">#4252</td>
   <td class="time">2026-06-14 05:49 UTC</td>
   <td class="coin">ATOM/BTC</td>
@@ -1069,7 +1085,7 @@
   <td class="num stp">0.00002920</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4251">
   <td class="id">#4251</td>
   <td class="time">2026-06-14 05:48 UTC</td>
   <td class="coin">LINK/BTC</td>
@@ -1079,7 +1095,7 @@
   <td class="num stp">0.00011941</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4250">
   <td class="id">#4250</td>
   <td class="time">2026-06-14 05:39 UTC</td>
   <td class="coin">PENGU/USDT</td>
@@ -1089,7 +1105,7 @@
   <td class="num stp">0.006512</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4249">
   <td class="id">#4249</td>
   <td class="time">2026-06-14 05:34 UTC</td>
   <td class="coin">GALA/USDT</td>
@@ -1099,7 +1115,7 @@
   <td class="num stp">0.002526</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4248">
   <td class="id">#4248</td>
   <td class="time">2026-06-14 05:30 UTC</td>
   <td class="coin">UNI/USDT</td>
@@ -1109,7 +1125,7 @@
   <td class="num stp">2.4473</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4247">
   <td class="id">#4247</td>
   <td class="time">2026-06-14 05:24 UTC</td>
   <td class="coin">ETC/BTC</td>
@@ -1119,7 +1135,7 @@
   <td class="num stp">0.00010738</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4246">
   <td class="id">#4246</td>
   <td class="time">2026-06-14 05:11 UTC</td>
   <td class="coin">AVAX/BTC</td>
@@ -1129,7 +1145,7 @@
   <td class="num stp">0.00010069</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4245">
   <td class="id">#4245</td>
   <td class="time">2026-06-14 05:05 UTC</td>
   <td class="coin">XTZ/BTC</td>
@@ -1139,7 +1155,7 @@
   <td class="num stp">0.00000355</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4244">
   <td class="id">#4244</td>
   <td class="time">2026-06-14 05:02 UTC</td>
   <td class="coin">ALGO/BTC</td>
@@ -1149,7 +1165,7 @@
   <td class="num stp">0.00000138</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4243">
   <td class="id">#4243</td>
   <td class="time">2026-06-14 05:01 UTC</td>
   <td class="coin">AAVE/BTC</td>
@@ -1159,7 +1175,7 @@
   <td class="num stp">0.001006</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4242">
   <td class="id">#4242</td>
   <td class="time">2026-06-14 04:56 UTC</td>
   <td class="coin">ADA/BTC</td>
@@ -1169,7 +1185,7 @@
   <td class="num stp">0.00000259</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4241">
   <td class="id">#4241</td>
   <td class="time">2026-06-14 04:03 UTC</td>
   <td class="coin">TRX/BTC</td>
@@ -1179,7 +1195,7 @@
   <td class="num stp">0.00000475</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4240">
   <td class="id">#4240</td>
   <td class="time">2026-06-14 04:01 UTC</td>
   <td class="coin">SOL/ETH</td>
@@ -1189,7 +1205,7 @@
   <td class="num stp">0.039799</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4239">
   <td class="id">#4239</td>
   <td class="time">2026-06-14 04:00 UTC</td>
   <td class="coin">SOL/BTC</td>
@@ -1199,7 +1215,7 @@
   <td class="num stp">0.001036</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4238">
   <td class="id">#4238</td>
   <td class="time">2026-06-14 03:09 UTC</td>
   <td class="coin">DOGE/BTC</td>
@@ -1209,7 +1225,7 @@
   <td class="num stp">0.00000132</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4237">
   <td class="id">#4237</td>
   <td class="time">2026-06-14 02:34 UTC</td>
   <td class="coin">TRX/USDT</td>
@@ -1219,7 +1235,7 @@
   <td class="num stp">0.306326</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4236">
   <td class="id">#4236</td>
   <td class="time">2026-06-14 02:12 UTC</td>
   <td class="coin">XTZ/ETH</td>
@@ -1229,7 +1245,7 @@
   <td class="num stp">0.00042680</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4235">
   <td class="id">#4235</td>
   <td class="time">2026-06-14 02:09 UTC</td>
   <td class="coin">XLM/BTC</td>
@@ -1239,7 +1255,7 @@
   <td class="num stp">0.00000184</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4234">
   <td class="id">#4234</td>
   <td class="time">2026-06-14 02:01 UTC</td>
   <td class="coin">MANA/USDT</td>
@@ -1249,7 +1265,7 @@
   <td class="num stp">0.065281</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4233">
   <td class="id">#4233</td>
   <td class="time">2026-06-14 01:37 UTC</td>
   <td class="coin">XRP/BTC</td>
@@ -1259,7 +1275,7 @@
   <td class="num stp">0.00001732</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4232">
   <td class="id">#4232</td>
   <td class="time">2026-06-14 01:26 UTC</td>
   <td class="coin">ATOM/BTC</td>
@@ -1269,7 +1285,7 @@
   <td class="num stp">0.00002910</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4231">
   <td class="id">#4231</td>
   <td class="time">2026-06-14 01:16 UTC</td>
   <td class="coin">LINK/BTC</td>
@@ -1279,7 +1295,7 @@
   <td class="num stp">0.00011989</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4230">
   <td class="id">#4230</td>
   <td class="time">2026-06-14 01:08 UTC</td>
   <td class="coin">DOT/BTC</td>
@@ -1289,7 +1305,7 @@
   <td class="num stp">0.00001470</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4229">
   <td class="id">#4229</td>
   <td class="time">2026-06-14 01:07 UTC</td>
   <td class="coin">AVAX/BTC</td>
@@ -1299,7 +1315,7 @@
   <td class="num stp">0.00010069</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4228">
   <td class="id">#4228</td>
   <td class="time">2026-06-14 01:02 UTC</td>
   <td class="coin">ETC/BTC</td>
@@ -1309,7 +1325,7 @@
   <td class="num stp">0.00010767</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4227">
   <td class="id">#4227</td>
   <td class="time">2026-06-14 01:02 UTC</td>
   <td class="coin">XTZ/BTC</td>
@@ -1319,7 +1335,7 @@
   <td class="num stp">0.00000357</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4226">
   <td class="id">#4226</td>
   <td class="time">2026-06-14 00:59 UTC</td>
   <td class="coin">GALA/USDT</td>
@@ -1329,7 +1345,7 @@
   <td class="num stp">0.002580</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4225">
   <td class="id">#4225</td>
   <td class="time">2026-06-14 00:50 UTC</td>
   <td class="coin">ADA/BTC</td>
@@ -1339,7 +1355,7 @@
   <td class="num stp">0.00000258</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4224">
   <td class="id">#4224</td>
   <td class="time">2026-06-14 00:45 UTC</td>
   <td class="coin">PENGU/USDT</td>
@@ -1349,7 +1365,7 @@
   <td class="num stp">0.006565</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4223">
   <td class="id">#4223</td>
   <td class="time">2026-06-14 00:20 UTC</td>
   <td class="coin">AAVE/BTC</td>
@@ -1359,7 +1375,7 @@
   <td class="num stp">0.001013</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4222">
   <td class="id">#4222</td>
   <td class="time">2026-06-13 23:58 UTC</td>
   <td class="coin">ETC/USDT</td>
@@ -1369,7 +1385,7 @@
   <td class="num stp">6.9743</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4221">
   <td class="id">#4221</td>
   <td class="time">2026-06-13 23:57 UTC</td>
   <td class="coin">IOTA/USDT</td>
@@ -1379,7 +1395,7 @@
   <td class="num stp">0.045008</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4220">
   <td class="id">#4220</td>
   <td class="time">2026-06-13 23:31 UTC</td>
   <td class="coin">ALGO/BTC</td>
@@ -1389,7 +1405,7 @@
   <td class="num stp">0.00000136</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4219">
   <td class="id">#4219</td>
   <td class="time">2026-06-13 23:21 UTC</td>
   <td class="coin">ALGO/USDT</td>
@@ -1399,7 +1415,7 @@
   <td class="num stp">0.087494</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4218">
   <td class="id">#4218</td>
   <td class="time">2026-06-13 23:02 UTC</td>
   <td class="coin">DOGE/BTC</td>
@@ -1409,7 +1425,7 @@
   <td class="num stp">0.00000133</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4217">
   <td class="id">#4217</td>
   <td class="time">2026-06-13 22:54 UTC</td>
   <td class="coin">TRX/BTC</td>
@@ -1419,7 +1435,7 @@
   <td class="num stp">0.00000477</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4216">
   <td class="id">#4216</td>
   <td class="time">2026-06-13 22:25 UTC</td>
   <td class="coin">SOL/USDT</td>
@@ -1429,7 +1445,7 @@
   <td class="num stp">66.9494</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4215">
   <td class="id">#4215</td>
   <td class="time">2026-06-13 22:04 UTC</td>
   <td class="coin">XTZ/ETH</td>
@@ -1439,7 +1455,7 @@
   <td class="num stp">0.00042680</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4214">
   <td class="id">#4214</td>
   <td class="time">2026-06-13 22:03 UTC</td>
   <td class="coin">SUSHI/USDT</td>
@@ -1449,7 +1465,7 @@
   <td class="num stp">0.171981</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4213">
   <td class="id">#4213</td>
   <td class="time">2026-06-13 22:01 UTC</td>
   <td class="coin">XLM/BTC</td>
@@ -1459,7 +1475,7 @@
   <td class="num stp">0.00000184</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4212">
   <td class="id">#4212</td>
   <td class="time">2026-06-13 21:54 UTC</td>
   <td class="coin">/USDT</td>
@@ -1469,7 +1485,7 @@
   <td class="num stp">62,567.43</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4211">
   <td class="id">#4211</td>
   <td class="time">2026-06-13 21:21 UTC</td>
   <td class="coin">NEAR/BTC</td>
@@ -1479,7 +1495,7 @@
   <td class="num stp">0.00003100</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4210">
   <td class="id">#4210</td>
   <td class="time">2026-06-13 21:13 UTC</td>
   <td class="coin">SOL/ETH</td>
@@ -1489,7 +1505,7 @@
   <td class="num stp">0.039537</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4209">
   <td class="id">#4209</td>
   <td class="time">2026-06-13 21:06 UTC</td>
   <td class="coin">ATOM/BTC</td>
@@ -1499,7 +1515,7 @@
   <td class="num stp">0.00002958</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4208">
   <td class="id">#4208</td>
   <td class="time">2026-06-13 21:05 UTC</td>
   <td class="coin">DOT/BTC</td>
@@ -1509,7 +1525,7 @@
   <td class="num stp">0.00001478</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4207">
   <td class="id">#4207</td>
   <td class="time">2026-06-13 21:04 UTC</td>
   <td class="coin">AVAX/BTC</td>
@@ -1519,7 +1535,7 @@
   <td class="num stp">0.00010127</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4206">
   <td class="id">#4206</td>
   <td class="time">2026-06-13 20:57 UTC</td>
   <td class="coin">MANA/USDT</td>
@@ -1529,7 +1545,7 @@
   <td class="num stp">0.065184</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4205">
   <td class="id">#4205</td>
   <td class="time">2026-06-13 20:52 UTC</td>
   <td class="coin">UNI/USDT</td>
@@ -1539,7 +1555,7 @@
   <td class="num stp">2.4686</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4204">
   <td class="id">#4204</td>
   <td class="time">2026-06-13 20:50 UTC</td>
   <td class="coin">SOL/BTC</td>
@@ -1549,7 +1565,7 @@
   <td class="num stp">0.001029</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4203">
   <td class="id">#4203</td>
   <td class="time">2026-06-13 20:43 UTC</td>
   <td class="coin">QNT/USDT</td>
@@ -1559,7 +1575,7 @@
   <td class="num stp">65.2616</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4202">
   <td class="id">#4202</td>
   <td class="time">2026-06-13 20:40 UTC</td>
   <td class="coin">ADA/BTC</td>
@@ -1569,7 +1585,7 @@
   <td class="num stp">0.00000259</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4201">
   <td class="id">#4201</td>
   <td class="time">2026-06-13 20:39 UTC</td>
   <td class="coin">XRP/USDT</td>
@@ -1579,7 +1595,7 @@
   <td class="num stp">1.1128</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4200">
   <td class="id">#4200</td>
   <td class="time">2026-06-13 20:03 UTC</td>
   <td class="coin">PENGU/USDT</td>
@@ -1589,7 +1605,7 @@
   <td class="num stp">0.006450</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4199">
   <td class="id">#4199</td>
   <td class="time">2026-06-13 20:03 UTC</td>
   <td class="coin">ETC/BTC</td>
@@ -1599,7 +1615,7 @@
   <td class="num stp">0.00010874</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4198">
   <td class="id">#4198</td>
   <td class="time">2026-06-13 20:02 UTC</td>
   <td class="coin">XTZ/BTC</td>
@@ -1609,7 +1625,7 @@
   <td class="num stp">0.00000360</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4197">
   <td class="id">#4197</td>
   <td class="time">2026-06-13 19:56 UTC</td>
   <td class="coin">AAVE/BTC</td>
@@ -1619,7 +1635,7 @@
   <td class="num stp">0.001004</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4196">
   <td class="id">#4196</td>
   <td class="time">2026-06-13 19:53 UTC</td>
   <td class="coin">LINK/BTC</td>
@@ -1629,7 +1645,7 @@
   <td class="num stp">0.00012076</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4195">
   <td class="id">#4195</td>
   <td class="time">2026-06-13 19:43 UTC</td>
   <td class="coin">IOTA/USDT</td>
@@ -1639,7 +1655,7 @@
   <td class="num stp">0.044985</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4194">
   <td class="id">#4194</td>
   <td class="time">2026-06-13 19:03 UTC</td>
   <td class="coin">ALGO/BTC</td>
@@ -1649,7 +1665,7 @@
   <td class="num stp">0.00000133</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4193">
   <td class="id">#4193</td>
   <td class="time">2026-06-13 19:01 UTC</td>
   <td class="coin">DOGE/BTC</td>
@@ -1659,7 +1675,7 @@
   <td class="num stp">0.00000133</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4192">
   <td class="id">#4192</td>
   <td class="time">2026-06-13 19:00 UTC</td>
   <td class="coin">XRP/BTC</td>
@@ -1669,7 +1685,7 @@
   <td class="num stp">0.00001732</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4191">
   <td class="id">#4191</td>
   <td class="time">2026-06-13 18:58 UTC</td>
   <td class="coin">ETH/BTC</td>
@@ -1679,7 +1695,7 @@
   <td class="num stp">0.025365</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4190">
   <td class="id">#4190</td>
   <td class="time">2026-06-13 18:48 UTC</td>
   <td class="coin">TRX/BTC</td>
@@ -1689,7 +1705,7 @@
   <td class="num stp">0.00000479</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4189">
   <td class="id">#4189</td>
   <td class="time">2026-06-13 18:03 UTC</td>
   <td class="coin">XTZ/ETH</td>
@@ -1699,7 +1715,7 @@
   <td class="num stp">0.00042680</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4188">
   <td class="id">#4188</td>
   <td class="time">2026-06-13 18:00 UTC</td>
   <td class="coin">XLM/BTC</td>
@@ -1709,7 +1725,7 @@
   <td class="num stp">0.00000184</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4187">
   <td class="id">#4187</td>
   <td class="time">2026-06-13 17:00 UTC</td>
   <td class="coin">AVAX/BTC</td>
@@ -1719,7 +1735,7 @@
   <td class="num stp">0.00010784</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4186">
   <td class="id">#4186</td>
   <td class="time">2026-06-13 16:14 UTC</td>
   <td class="coin">ADA/BTC</td>
@@ -1729,7 +1745,7 @@
   <td class="num stp">0.00000263</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4185">
   <td class="id">#4185</td>
   <td class="time">2026-06-13 15:58 UTC</td>
   <td class="coin">ETC/BTC</td>
@@ -1739,7 +1755,7 @@
   <td class="num stp">0.00010893</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4184">
   <td class="id">#4184</td>
   <td class="time">2026-06-13 15:47 UTC</td>
   <td class="coin">LTC/BTC</td>
@@ -1749,7 +1765,7 @@
   <td class="num stp">0.00066445</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4183">
   <td class="id">#4183</td>
   <td class="time">2026-06-13 15:46 UTC</td>
   <td class="coin">NEAR/BTC</td>
@@ -1759,7 +1775,7 @@
   <td class="num stp">0.00003160</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4182">
   <td class="id">#4182</td>
   <td class="time">2026-06-13 15:44 UTC</td>
   <td class="coin">DOT/BTC</td>
@@ -1769,7 +1785,7 @@
   <td class="num stp">0.00001495</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4181">
   <td class="id">#4181</td>
   <td class="time">2026-06-13 15:39 UTC</td>
   <td class="coin">SOL/BTC</td>
@@ -1779,7 +1795,7 @@
   <td class="num stp">0.001035</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4180">
   <td class="id">#4180</td>
   <td class="time">2026-06-13 15:28 UTC</td>
   <td class="coin">MANA/USDT</td>
@@ -1789,7 +1805,7 @@
   <td class="num stp">0.065378</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4179">
   <td class="id">#4179</td>
   <td class="time">2026-06-13 15:23 UTC</td>
   <td class="coin">ATOM/BTC</td>
@@ -1799,7 +1815,7 @@
   <td class="num stp">0.00002988</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4178">
   <td class="id">#4178</td>
   <td class="time">2026-06-13 15:01 UTC</td>
   <td class="coin">ALGO/BTC</td>
@@ -1809,7 +1825,7 @@
   <td class="num stp">0.00000134</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4177">
   <td class="id">#4177</td>
   <td class="time">2026-06-13 14:54 UTC</td>
   <td class="coin">ETH/BTC</td>
@@ -1819,7 +1835,7 @@
   <td class="num stp">0.025375</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4176">
   <td class="id">#4176</td>
   <td class="time">2026-06-13 14:48 UTC</td>
   <td class="coin">XTZ/BTC</td>
@@ -1829,7 +1845,7 @@
   <td class="num stp">0.00000381</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4175">
   <td class="id">#4175</td>
   <td class="time">2026-06-13 14:12 UTC</td>
   <td class="coin">AAVE/BTC</td>
@@ -1839,7 +1855,7 @@
   <td class="num stp">0.001016</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4174">
   <td class="id">#4174</td>
   <td class="time">2026-06-13 14:10 UTC</td>
   <td class="coin">DOGE/BTC</td>
@@ -1849,7 +1865,7 @@
   <td class="num stp">0.00000133</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4173">
   <td class="id">#4173</td>
   <td class="time">2026-06-13 13:56 UTC</td>
   <td class="coin">XTZ/ETH</td>
@@ -1859,7 +1875,7 @@
   <td class="num stp">0.00042680</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4172">
   <td class="id">#4172</td>
   <td class="time">2026-06-13 13:51 UTC</td>
   <td class="coin">TRX/BTC</td>
@@ -1869,7 +1885,7 @@
   <td class="num stp">0.00000479</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4171">
   <td class="id">#4171</td>
   <td class="time">2026-06-13 13:49 UTC</td>
   <td class="coin">XLM/BTC</td>
@@ -1879,7 +1895,7 @@
   <td class="num stp">0.00000184</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4170">
   <td class="id">#4170</td>
   <td class="time">2026-06-13 13:26 UTC</td>
   <td class="coin">LINK/USDT</td>
@@ -1889,7 +1905,7 @@
   <td class="num stp">7.7629</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4169">
   <td class="id">#4169</td>
   <td class="time">2026-06-13 13:15 UTC</td>
   <td class="coin">LTC/USDT</td>
@@ -1899,7 +1915,7 @@
   <td class="num stp">42.6606</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4168">
   <td class="id">#4168</td>
   <td class="time">2026-06-13 12:24 UTC</td>
   <td class="coin">LINK/BTC</td>
@@ -1909,7 +1925,7 @@
   <td class="num stp">0.00012125</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4167">
   <td class="id">#4167</td>
   <td class="time">2026-06-13 12:07 UTC</td>
   <td class="coin">ADA/BTC</td>
@@ -1919,7 +1935,7 @@
   <td class="num stp">0.00000264</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4166">
   <td class="id">#4166</td>
   <td class="time">2026-06-13 11:55 UTC</td>
   <td class="coin">AVAX/BTC</td>
@@ -1929,7 +1945,7 @@
   <td class="num stp">0.00010107</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4165">
   <td class="id">#4165</td>
   <td class="time">2026-06-13 11:45 UTC</td>
   <td class="coin">ETC/BTC</td>
@@ -1939,7 +1955,7 @@
   <td class="num stp">0.00010932</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4164">
   <td class="id">#4164</td>
   <td class="time">2026-06-13 11:40 UTC</td>
   <td class="coin">GALA/USDT</td>
@@ -1949,7 +1965,7 @@
   <td class="num stp">0.002587</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4163">
   <td class="id">#4163</td>
   <td class="time">2026-06-13 11:15 UTC</td>
   <td class="coin">ZIL/USDT</td>
@@ -1959,7 +1975,7 @@
   <td class="num stp">0.003056</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4162">
   <td class="id">#4162</td>
   <td class="time">2026-06-13 11:12 UTC</td>
   <td class="coin">DOT/BTC</td>
@@ -1969,7 +1985,7 @@
   <td class="num stp">0.00001487</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4161">
   <td class="id">#4161</td>
   <td class="time">2026-06-13 11:04 UTC</td>
   <td class="coin">ATOM/BTC</td>
@@ -1979,7 +1995,7 @@
   <td class="num stp">0.00003007</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4160">
   <td class="id">#4160</td>
   <td class="time">2026-06-13 10:48 UTC</td>
   <td class="coin">XRP/USDT</td>
@@ -1989,7 +2005,7 @@
   <td class="num stp">1.1113</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4159">
   <td class="id">#4159</td>
   <td class="time">2026-06-13 10:47 UTC</td>
   <td class="coin">ETH/BTC</td>
@@ -1999,7 +2015,7 @@
   <td class="num stp">0.027017</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4158">
   <td class="id">#4158</td>
   <td class="time">2026-06-13 10:31 UTC</td>
   <td class="coin">XTZ/BTC</td>
@@ -2009,7 +2025,7 @@
   <td class="num stp">0.00000367</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4157">
   <td class="id">#4157</td>
   <td class="time">2026-06-13 10:08 UTC</td>
   <td class="coin">DOGE/BTC</td>
@@ -2019,7 +2035,7 @@
   <td class="num stp">0.00000133</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4156">
   <td class="id">#4156</td>
   <td class="time">2026-06-13 09:55 UTC</td>
   <td class="coin">NEAR/BTC</td>
@@ -2029,7 +2045,7 @@
   <td class="num stp">0.00003047</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4155">
   <td class="id">#4155</td>
   <td class="time">2026-06-13 09:46 UTC</td>
   <td class="coin">XTZ/ETH</td>
@@ -2039,7 +2055,7 @@
   <td class="num stp">0.00042680</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4154">
   <td class="id">#4154</td>
   <td class="time">2026-06-13 09:42 UTC</td>
   <td class="coin">TRX/BTC</td>
@@ -2049,7 +2065,7 @@
   <td class="num stp">0.00000481</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4153">
   <td class="id">#4153</td>
   <td class="time">2026-06-13 09:40 UTC</td>
   <td class="coin">XLM/BTC</td>
@@ -2059,7 +2075,7 @@
   <td class="num stp">0.00000184</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4152">
   <td class="id">#4152</td>
   <td class="time">2026-06-13 09:29 UTC</td>
   <td class="coin">TRX/BTC</td>
@@ -2069,7 +2085,7 @@
   <td class="num stp">0.00000480</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4151">
   <td class="id">#4151</td>
   <td class="time">2026-06-13 09:21 UTC</td>
   <td class="coin">XTZ/ETH</td>
@@ -2079,7 +2095,7 @@
   <td class="num stp">0.00042680</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4150">
   <td class="id">#4150</td>
   <td class="time">2026-06-13 09:17 UTC</td>
   <td class="coin">XLM/BTC</td>
@@ -2089,7 +2105,7 @@
   <td class="num stp">0.00000184</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4149">
   <td class="id">#4149</td>
   <td class="time">2026-06-13 09:03 UTC</td>
   <td class="coin">XTZ/BTC</td>
@@ -2099,7 +2115,7 @@
   <td class="num stp">0.00000358</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4148">
   <td class="id">#4148</td>
   <td class="time">2026-06-13 08:48 UTC</td>
   <td class="coin">GALA/USDT</td>
@@ -2109,7 +2125,7 @@
   <td class="num stp">0.002591</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4147">
   <td class="id">#4147</td>
   <td class="time">2026-06-13 08:43 UTC</td>
   <td class="coin">LTC/BTC</td>
@@ -2119,7 +2135,7 @@
   <td class="num stp">0.00066348</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4146">
   <td class="id">#4146</td>
   <td class="time">2026-06-13 08:39 UTC</td>
   <td class="coin">XRP/USDT</td>
@@ -2129,7 +2145,7 @@
   <td class="num stp">1.1112</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4145">
   <td class="id">#4145</td>
   <td class="time">2026-06-13 08:01 UTC</td>
   <td class="coin">NEAR/BTC</td>
@@ -2139,7 +2155,7 @@
   <td class="num stp">0.00003047</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4144">
   <td class="id">#4144</td>
   <td class="time">2026-06-13 08:00 UTC</td>
   <td class="coin">DOGE/BTC</td>
@@ -2149,7 +2165,7 @@
   <td class="num stp">0.00000132</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4143">
   <td class="id">#4143</td>
   <td class="time">2026-06-13 07:03 UTC</td>
   <td class="coin">ATOM/BTC</td>
@@ -2159,7 +2175,7 @@
   <td class="num stp">0.00003026</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4142">
   <td class="id">#4142</td>
   <td class="time">2026-06-13 07:02 UTC</td>
   <td class="coin">LINK/BTC</td>
@@ -2169,7 +2185,7 @@
   <td class="num stp">0.00012067</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4141">
   <td class="id">#4141</td>
   <td class="time">2026-06-13 07:01 UTC</td>
   <td class="coin">ADA/BTC</td>
@@ -2179,7 +2195,7 @@
   <td class="num stp">0.00000262</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4140">
   <td class="id">#4140</td>
   <td class="time">2026-06-13 07:00 UTC</td>
   <td class="coin">XRP/BTC</td>
@@ -2189,7 +2205,7 @@
   <td class="num stp">0.00001731</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4139">
   <td class="id">#4139</td>
   <td class="time">2026-06-13 06:48 UTC</td>
   <td class="coin">AAVE/BTC</td>
@@ -2199,7 +2215,7 @@
   <td class="num stp">0.001002</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4138">
   <td class="id">#4138</td>
   <td class="time">2026-06-13 06:14 UTC</td>
   <td class="coin">DOT/BTC</td>
@@ -2209,7 +2225,7 @@
   <td class="num stp">0.00001476</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4137">
   <td class="id">#4137</td>
   <td class="time">2026-06-13 06:08 UTC</td>
   <td class="coin">ETC/BTC</td>
@@ -2219,7 +2235,7 @@
   <td class="num stp">0.00010864</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4136">
   <td class="id">#4136</td>
   <td class="time">2026-06-13 05:36 UTC</td>
   <td class="coin">PENGU/USDT</td>
@@ -2229,7 +2245,7 @@
   <td class="num stp">0.006434</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4135">
   <td class="id">#4135</td>
   <td class="time">2026-06-13 05:23 UTC</td>
   <td class="coin">AVAX/BTC</td>
@@ -2239,7 +2255,7 @@
   <td class="num stp">0.00010069</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4134">
   <td class="id">#4134</td>
   <td class="time">2026-06-13 05:19 UTC</td>
   <td class="coin">XTZ/ETH</td>
@@ -2249,7 +2265,7 @@
   <td class="num stp">0.00042680</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4133">
   <td class="id">#4133</td>
   <td class="time">2026-06-13 05:16 UTC</td>
   <td class="coin">XLM/BTC</td>
@@ -2259,7 +2275,7 @@
   <td class="num stp">0.00000184</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4132">
   <td class="id">#4132</td>
   <td class="time">2026-06-13 05:00 UTC</td>
   <td class="coin">ZIL/USDT</td>
@@ -2269,7 +2285,7 @@
   <td class="num stp">0.003046</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4131">
   <td class="id">#4131</td>
   <td class="time">2026-06-13 04:32 UTC</td>
   <td class="coin">GALA/USDT</td>
@@ -2279,7 +2295,7 @@
   <td class="num stp">0.002558</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4130">
   <td class="id">#4130</td>
   <td class="time">2026-06-13 04:16 UTC</td>
   <td class="coin">XTZ/BTC</td>
@@ -2289,7 +2305,7 @@
   <td class="num stp">0.00000377</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4129">
   <td class="id">#4129</td>
   <td class="time">2026-06-13 04:07 UTC</td>
   <td class="coin">ALGO/BTC</td>
@@ -2299,7 +2315,7 @@
   <td class="num stp">0.00000132</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4128">
   <td class="id">#4128</td>
   <td class="time">2026-06-13 02:58 UTC</td>
   <td class="coin">IOTA/USDT</td>
@@ -2309,7 +2325,7 @@
   <td class="num stp">0.044741</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4127">
   <td class="id">#4127</td>
   <td class="time">2026-06-13 02:03 UTC</td>
   <td class="coin">ETC/BTC</td>
@@ -2319,7 +2335,7 @@
   <td class="num stp">0.00010942</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4126">
   <td class="id">#4126</td>
   <td class="time">2026-06-13 01:53 UTC</td>
   <td class="coin">ETH/BTC</td>
@@ -2329,7 +2345,7 @@
   <td class="num stp">0.025453</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4125">
   <td class="id">#4125</td>
   <td class="time">2026-06-13 01:33 UTC</td>
   <td class="coin">PENGU/USDT</td>
@@ -2339,7 +2355,7 @@
   <td class="num stp">0.006508</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4124">
   <td class="id">#4124</td>
   <td class="time">2026-06-13 01:27 UTC</td>
   <td class="coin">SOL/ETH</td>
@@ -2349,7 +2365,7 @@
   <td class="num stp">0.039052</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4123">
   <td class="id">#4123</td>
   <td class="time">2026-06-13 01:08 UTC</td>
   <td class="coin">AVAX/BTC</td>
@@ -2359,7 +2375,7 @@
   <td class="num stp">0.00010049</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4122">
   <td class="id">#4122</td>
   <td class="time">2026-06-13 00:46 UTC</td>
   <td class="coin">ATOM/BTC</td>
@@ -2369,7 +2385,7 @@
   <td class="num stp">0.00003036</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4121">
   <td class="id">#4121</td>
   <td class="time">2026-06-13 00:44 UTC</td>
   <td class="coin">ADA/BTC</td>
@@ -2379,7 +2395,7 @@
   <td class="num stp">0.00000259</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4120">
   <td class="id">#4120</td>
   <td class="time">2026-06-13 00:27 UTC</td>
   <td class="coin">GALA/USDT</td>
@@ -2389,7 +2405,7 @@
   <td class="num stp">0.002546</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4119">
   <td class="id">#4119</td>
   <td class="time">2026-06-13 00:20 UTC</td>
   <td class="coin">XTZ/ETH</td>
@@ -2399,7 +2415,7 @@
   <td class="num stp">0.00042680</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4118">
   <td class="id">#4118</td>
   <td class="time">2026-06-13 00:18 UTC</td>
   <td class="coin">XLM/BTC</td>
@@ -2409,7 +2425,7 @@
   <td class="num stp">0.00000184</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4117">
   <td class="id">#4117</td>
   <td class="time">2026-06-13 00:04 UTC</td>
   <td class="coin">XTZ/BTC</td>
@@ -2419,7 +2435,7 @@
   <td class="num stp">0.00000378</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4116">
   <td class="id">#4116</td>
   <td class="time">2026-06-13 00:01 UTC</td>
   <td class="coin">ALGO/BTC</td>
@@ -2429,7 +2445,7 @@
   <td class="num stp">0.00000133</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4115">
   <td class="id">#4115</td>
   <td class="time">2026-06-13 00:00 UTC</td>
   <td class="coin">AAVE/BTC</td>
@@ -2439,7 +2455,7 @@
   <td class="num stp">0.00097970</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4114">
   <td class="id">#4114</td>
   <td class="time">2026-06-12 23:57 UTC</td>
   <td class="coin">LINK/BTC</td>
@@ -2449,7 +2465,7 @@
   <td class="num stp">0.00011999</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4113">
   <td class="id">#4113</td>
   <td class="time">2026-06-12 23:56 UTC</td>
   <td class="coin">DOGE/BTC</td>
@@ -2459,7 +2475,7 @@
   <td class="num stp">0.00000130</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4112">
   <td class="id">#4112</td>
   <td class="time">2026-06-12 23:54 UTC</td>
   <td class="coin">/USDT</td>
@@ -2469,7 +2485,7 @@
   <td class="num stp">61,663.21</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4111">
   <td class="id">#4111</td>
   <td class="time">2026-06-12 23:44 UTC</td>
   <td class="coin">AAVE/BTC</td>
@@ -2479,7 +2495,7 @@
   <td class="num stp">0.00097970</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4110">
   <td class="id">#4110</td>
   <td class="time">2026-06-12 23:27 UTC</td>
   <td class="coin">GALA/USDT</td>
@@ -2489,7 +2505,7 @@
   <td class="num stp">0.002535</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4109">
   <td class="id">#4109</td>
   <td class="time">2026-06-12 23:24 UTC</td>
   <td class="coin">ETH/BTC</td>
@@ -2499,7 +2515,7 @@
   <td class="num stp">0.025404</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4108">
   <td class="id">#4108</td>
   <td class="time">2026-06-12 23:06 UTC</td>
   <td class="coin">ETC/BTC</td>
@@ -2509,7 +2525,7 @@
   <td class="num stp">0.00010874</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4107">
   <td class="id">#4107</td>
   <td class="time">2026-06-12 23:05 UTC</td>
   <td class="coin">ZIL/USDT</td>
@@ -2519,7 +2535,7 @@
   <td class="num stp">0.002997</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4106">
   <td class="id">#4106</td>
   <td class="time">2026-06-12 23:02 UTC</td>
   <td class="coin">DOT/BTC</td>
@@ -2529,7 +2545,7 @@
   <td class="num stp">0.00001459</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4105">
   <td class="id">#4105</td>
   <td class="time">2026-06-12 22:12 UTC</td>
   <td class="coin">/USDT</td>
@@ -2539,7 +2555,7 @@
   <td class="num stp">61,583.37</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4104">
   <td class="id">#4104</td>
   <td class="time">2026-06-12 22:08 UTC</td>
   <td class="coin">XTZ/BTC</td>
@@ -2549,7 +2565,7 @@
   <td class="num stp">0.00000358</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4103">
   <td class="id">#4103</td>
   <td class="time">2026-06-12 22:05 UTC</td>
   <td class="coin">LTC/BTC</td>
@@ -2559,7 +2575,7 @@
   <td class="num stp">0.00065572</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4102">
   <td class="id">#4102</td>
   <td class="time">2026-06-12 22:04 UTC</td>
   <td class="coin">ATOM/BTC</td>
@@ -2569,7 +2585,7 @@
   <td class="num stp">0.00002997</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4101">
   <td class="id">#4101</td>
   <td class="time">2026-06-12 22:03 UTC</td>
   <td class="coin">DOGE/BTC</td>
@@ -2579,7 +2595,7 @@
   <td class="num stp">0.00000132</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4100">
   <td class="id">#4100</td>
   <td class="time">2026-06-12 22:02 UTC</td>
   <td class="coin">AVAX/BTC</td>
@@ -2589,7 +2605,7 @@
   <td class="num stp">0.00010020</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4099">
   <td class="id">#4099</td>
   <td class="time">2026-06-12 21:50 UTC</td>
   <td class="coin">SOL/BTC</td>
@@ -2599,7 +2615,7 @@
   <td class="num stp">0.001019</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4098">
   <td class="id">#4098</td>
   <td class="time">2026-06-12 21:42 UTC</td>
   <td class="coin">TRX/BTC</td>
@@ -2609,7 +2625,7 @@
   <td class="num stp">0.00000482</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4097">
   <td class="id">#4097</td>
   <td class="time">2026-06-12 21:38 UTC</td>
   <td class="coin">XRP/BTC</td>
@@ -2619,7 +2635,7 @@
   <td class="num stp">0.00001731</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4096">
   <td class="id">#4096</td>
   <td class="time">2026-06-12 21:33 UTC</td>
   <td class="coin">PENGU/USDT</td>
@@ -2629,7 +2645,7 @@
   <td class="num stp">0.006441</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4095">
   <td class="id">#4095</td>
   <td class="time">2026-06-12 21:23 UTC</td>
   <td class="coin">XTZ/ETH</td>
@@ -2639,7 +2655,7 @@
   <td class="num stp">0.00042680</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4094">
   <td class="id">#4094</td>
   <td class="time">2026-06-12 21:20 UTC</td>
   <td class="coin">XLM/BTC</td>
@@ -2649,7 +2665,7 @@
   <td class="num stp">0.00000184</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4093">
   <td class="id">#4093</td>
   <td class="time">2026-06-12 21:19 UTC</td>
   <td class="coin">ALGO/BTC</td>
@@ -2659,7 +2675,7 @@
   <td class="num stp">0.00000134</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4092">
   <td class="id">#4092</td>
   <td class="time">2026-06-12 21:17 UTC</td>
   <td class="coin">LINK/BTC</td>
@@ -2669,7 +2685,7 @@
   <td class="num stp">0.00011989</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4091">
   <td class="id">#4091</td>
   <td class="time">2026-06-12 20:59 UTC</td>
   <td class="coin">XTZ/ETH</td>
@@ -2679,7 +2695,7 @@
   <td class="num stp">0.00042680</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4090">
   <td class="id">#4090</td>
   <td class="time">2026-06-12 20:51 UTC</td>
   <td class="coin">NEAR/BTC</td>
@@ -2689,7 +2705,7 @@
   <td class="num stp">0.00002952</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4089">
   <td class="id">#4089</td>
   <td class="time">2026-06-12 20:49 UTC</td>
   <td class="coin">AVAX/BTC</td>
@@ -2699,7 +2715,7 @@
   <td class="num stp">0.00010059</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4088">
   <td class="id">#4088</td>
   <td class="time">2026-06-12 20:38 UTC</td>
   <td class="coin">LINK/BTC</td>
@@ -2709,7 +2725,7 @@
   <td class="num stp">0.00011999</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4087">
   <td class="id">#4087</td>
   <td class="time">2026-06-12 20:29 UTC</td>
   <td class="coin">XRP/BTC</td>
@@ -2719,7 +2735,7 @@
   <td class="num stp">0.00001730</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4086">
   <td class="id">#4086</td>
   <td class="time">2026-06-12 20:13 UTC</td>
   <td class="coin">SOL/ETH</td>
@@ -2729,7 +2745,7 @@
   <td class="num stp">0.038800</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4085">
   <td class="id">#4085</td>
   <td class="time">2026-06-12 20:12 UTC</td>
   <td class="coin">SOL/BTC</td>
@@ -2739,7 +2755,7 @@
   <td class="num stp">0.001016</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4084">
   <td class="id">#4084</td>
   <td class="time">2026-06-12 20:07 UTC</td>
   <td class="coin">ETC/BTC</td>
@@ -2749,7 +2765,7 @@
   <td class="num stp">0.00010903</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4083">
   <td class="id">#4083</td>
   <td class="time">2026-06-12 20:04 UTC</td>
   <td class="coin">ALGO/BTC</td>
@@ -2759,7 +2775,7 @@
   <td class="num stp">0.00000134</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4082">
   <td class="id">#4082</td>
   <td class="time">2026-06-12 20:02 UTC</td>
   <td class="coin">DOGE/BTC</td>
@@ -2769,7 +2785,7 @@
   <td class="num stp">0.00000133</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4081">
   <td class="id">#4081</td>
   <td class="time">2026-06-12 20:01 UTC</td>
   <td class="coin">ADA/BTC</td>
@@ -2779,7 +2795,7 @@
   <td class="num stp">0.00000260</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4080">
   <td class="id">#4080</td>
   <td class="time">2026-06-12 19:00 UTC</td>
   <td class="coin">TRX/BTC</td>
@@ -2789,7 +2805,7 @@
   <td class="num stp">0.00000479</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4079">
   <td class="id">#4079</td>
   <td class="time">2026-06-12 18:55 UTC</td>
   <td class="coin">LTC/BTC</td>
@@ -2799,7 +2815,7 @@
   <td class="num stp">0.00065281</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4078">
   <td class="id">#4078</td>
   <td class="time">2026-06-12 18:49 UTC</td>
   <td class="coin">ETH/BTC</td>
@@ -2809,7 +2825,7 @@
   <td class="num stp">0.025385</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4077">
   <td class="id">#4077</td>
   <td class="time">2026-06-12 18:10 UTC</td>
   <td class="coin">XTZ/BTC</td>
@@ -2819,7 +2835,7 @@
   <td class="num stp">0.00000358</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4076">
   <td class="id">#4076</td>
   <td class="time">2026-06-12 17:59 UTC</td>
   <td class="coin">ZIL/USDT</td>
@@ -2829,7 +2845,7 @@
   <td class="num stp">0.003017</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4075">
   <td class="id">#4075</td>
   <td class="time">2026-06-12 17:56 UTC</td>
   <td class="coin">GALA/USDT</td>
@@ -2839,7 +2855,7 @@
   <td class="num stp">0.002543</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4074">
   <td class="id">#4074</td>
   <td class="time">2026-06-12 17:53 UTC</td>
   <td class="coin">XLM/USDT</td>
@@ -2849,7 +2865,7 @@
   <td class="num stp">0.180775</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4073">
   <td class="id">#4073</td>
   <td class="time">2026-06-12 17:34 UTC</td>
   <td class="coin">XLM/BTC</td>
@@ -2859,7 +2875,7 @@
   <td class="num stp">0.00000184</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4072">
   <td class="id">#4072</td>
   <td class="time">2026-06-12 17:06 UTC</td>
   <td class="coin">ATOM/BTC</td>
@@ -2869,7 +2885,7 @@
   <td class="num stp">0.00002983</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4071">
   <td class="id">#4071</td>
   <td class="time">2026-06-12 16:58 UTC</td>
   <td class="coin">XTZ/ETH</td>
@@ -2879,7 +2895,7 @@
   <td class="num stp">0.00042680</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4070">
   <td class="id">#4070</td>
   <td class="time">2026-06-12 16:19 UTC</td>
   <td class="coin">XRP/BTC</td>
@@ -2889,7 +2905,7 @@
   <td class="num stp">0.00001721</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4069">
   <td class="id">#4069</td>
   <td class="time">2026-06-12 15:59 UTC</td>
   <td class="coin">NEAR/BTC</td>
@@ -2899,7 +2915,7 @@
   <td class="num stp">0.00003031</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4068">
   <td class="id">#4068</td>
   <td class="time">2026-06-12 15:57 UTC</td>
   <td class="coin">DOT/BTC</td>
@@ -2909,7 +2925,7 @@
   <td class="num stp">0.00001455</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4067">
   <td class="id">#4067</td>
   <td class="time">2026-06-12 15:46 UTC</td>
   <td class="coin">ETC/BTC</td>
@@ -2919,7 +2935,7 @@
   <td class="num stp">0.00011019</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4066">
   <td class="id">#4066</td>
   <td class="time">2026-06-12 15:37 UTC</td>
   <td class="coin">ALGO/BTC</td>
@@ -2929,7 +2945,7 @@
   <td class="num stp">0.00000134</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4065">
   <td class="id">#4065</td>
   <td class="time">2026-06-12 15:30 UTC</td>
   <td class="coin">AVAX/BTC</td>
@@ -2939,7 +2955,7 @@
   <td class="num stp">0.00010059</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4064">
   <td class="id">#4064</td>
   <td class="time">2026-06-12 15:29 UTC</td>
   <td class="coin">ADA/BTC</td>
@@ -2949,7 +2965,7 @@
   <td class="num stp">0.00000262</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4063">
   <td class="id">#4063</td>
   <td class="time">2026-06-12 15:08 UTC</td>
   <td class="coin">SOL/ETH</td>
@@ -2959,7 +2975,7 @@
   <td class="num stp">0.039460</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4062">
   <td class="id">#4062</td>
   <td class="time">2026-06-12 14:51 UTC</td>
   <td class="coin">LTC/BTC</td>
@@ -2969,7 +2985,7 @@
   <td class="num stp">0.00065863</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4061">
   <td class="id">#4061</td>
   <td class="time">2026-06-12 14:41 UTC</td>
   <td class="coin">ETH/BTC</td>
@@ -2979,7 +2995,7 @@
   <td class="num stp">0.025501</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4060">
   <td class="id">#4060</td>
   <td class="time">2026-06-12 14:04 UTC</td>
   <td class="coin">XTZ/BTC</td>
@@ -2989,7 +3005,7 @@
   <td class="num stp">0.00000354</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4059">
   <td class="id">#4059</td>
   <td class="time">2026-06-12 14:00 UTC</td>
   <td class="coin">AAVE/BTC</td>
@@ -2999,7 +3015,7 @@
   <td class="num stp">0.00097776</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4058">
   <td class="id">#4058</td>
   <td class="time">2026-06-12 13:57 UTC</td>
   <td class="coin">LINK/BTC</td>
@@ -3009,7 +3025,7 @@
   <td class="num stp">0.00011979</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4057">
   <td class="id">#4057</td>
   <td class="time">2026-06-12 13:40 UTC</td>
   <td class="coin">GALA/USDT</td>
@@ -3019,7 +3035,7 @@
   <td class="num stp">0.002543</td>
   <td><span class="out miss">🛑 Stop / no target</span></td>
 </tr>
-<tr>
+<tr data-id="4056">
   <td class="id">#4056</td>
   <td class="time">2026-06-12 13:23 UTC</td>
   <td class="coin">XLM/BTC</td>
@@ -3029,7 +3045,7 @@
   <td class="num stp">0.00000184</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4055">
   <td class="id">#4055</td>
   <td class="time">2026-06-12 13:04 UTC</td>
   <td class="coin">TRX/BTC</td>
@@ -3039,7 +3055,7 @@
   <td class="num stp">0.00000477</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4054">
   <td class="id">#4054</td>
   <td class="time">2026-06-12 12:36 UTC</td>
   <td class="coin">XTZ/ETH</td>
@@ -3049,7 +3065,7 @@
   <td class="num stp">0.00042680</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4053">
   <td class="id">#4053</td>
   <td class="time">2026-06-12 12:19 UTC</td>
   <td class="coin">ATOM/BTC</td>
@@ -3059,7 +3075,7 @@
   <td class="num stp">0.00002959</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4052">
   <td class="id">#4052</td>
   <td class="time">2026-06-12 12:01 UTC</td>
   <td class="coin">DOGE/BTC</td>
@@ -3069,7 +3085,7 @@
   <td class="num stp">0.00000133</td>
   <td><span class="out hit">🎯 Target hit</span></td>
 </tr>
-<tr>
+<tr data-id="4051">
   <td class="id">#4051</td>
   <td class="time">2026-06-12 11:59 UTC</td>
   <td class="coin">XRP/BTC</td>
@@ -3082,10 +3098,49 @@
     </tbody>
   </table>
   </div>
+  <p id="noresult" class="noresult" style="display:none;">
+    No signal with that ID in the most recent 300 verified signals.
+    Older ones may be outside this list.
+  </p>
   <p class="foot">
-    Showing the most recent 300 signals with full levels. Generated 2026-06-17 21:30 UTC.<br>
+    Showing the most recent 300 signals with full levels. Generated 2026-06-17 21:36 UTC.<br>
     Experimental trend signals. Trend-following, not guaranteed predictions. Not financial advice. DYOR.
   </p>
 </div>
+<script>
+(function() {
+  var input = document.getElementById('q');
+  var rows = Array.prototype.slice.call(document.querySelectorAll('#tbody tr[data-id]'));
+  var noresult = document.getElementById('noresult');
+  var qcount = document.getElementById('qcount');
+  var total = rows.length;
+
+  function digits(s) { return (s || '').replace(/[^0-9]/g, ''); }
+
+  function filter() {
+    var q = digits(input.value);
+    if (!q) {
+      rows.forEach(function(r) { r.classList.remove('hidden'); r.classList.remove('match'); });
+      noresult.style.display = 'none';
+      qcount.textContent = total + ' signals';
+      return;
+    }
+    var shown = 0, exact = null;
+    rows.forEach(function(r) {
+      var id = r.getAttribute('data-id');
+      r.classList.remove('match');
+      if (id === q) { r.classList.remove('hidden'); r.classList.add('match'); shown++; exact = r; }
+      else if (id.indexOf(q) === 0) { r.classList.remove('hidden'); shown++; }
+      else { r.classList.add('hidden'); }
+    });
+    noresult.style.display = shown ? 'none' : 'block';
+    qcount.textContent = shown ? (shown + ' shown') : '';
+    if (exact) exact.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  input.addEventListener('input', filter);
+  qcount.textContent = total + ' signals';
+})();
+</script>
 </body>
 </html>
