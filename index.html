@@ -1494,13 +1494,13 @@ section.s {
 
 .price-card.featured::before {
 
-  content: 'COMING SOON';
+  content: 'LIVE NOW';
 
   position: absolute;
 
   top: -12px; left: 32px;
 
-  background: var(--gold);
+  background: var(--green);
 
   color: var(--bg-darkest);
 
@@ -1700,272 +1700,6 @@ section.s {
 
 
 
-/* === TOKEN === */
-
-.token-section {
-
-  margin: 100px auto 0;
-
-  padding: 60px 32px;
-
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(0, 255, 136, 0.05));
-
-  border: 1px solid rgba(255, 215, 0, 0.15);
-
-  border-radius: 32px;
-
-  text-align: center;
-
-  position: relative;
-
-  overflow: hidden;
-
-  max-width: 1280px;
-
-}
-
-.token-section::before {
-
-  content: '';
-
-  position: absolute;
-
-  top: -50%; left: 50%; transform: translateX(-50%);
-
-  width: 800px; height: 800px;
-
-  background: radial-gradient(circle, rgba(255, 215, 0, 0.1), transparent 60%);
-
-  filter: blur(80px);
-
-  pointer-events: none;
-
-}
-
-.token-badge {
-
-  display: inline-block;
-
-  padding: 6px 16px;
-
-  background: rgba(255, 215, 0, 0.1);
-
-  border: 1px solid var(--gold);
-
-  border-radius: 32px;
-
-  font-family: var(--font-data);
-
-  font-size: 11px;
-
-  letter-spacing: 3px;
-
-  color: var(--gold);
-
-  margin-bottom: 24px;
-
-  position: relative;
-
-  z-index: 2;
-
-}
-
-.token-title {
-
-  font-family: var(--font-head);
-
-  font-weight: 800;
-
-  font-size: clamp(32px, 6vw, 72px);
-
-  line-height: 1;
-
-  letter-spacing: -2px;
-
-  margin-bottom: 24px;
-
-  position: relative;
-
-  z-index: 2;
-
-}
-
-.token-title .accent { color: var(--gold); }
-
-.token-sub {
-
-  color: var(--text-dim);
-
-  font-size: 16px;
-
-  max-width: 640px;
-
-  margin: 0 auto 40px;
-
-  line-height: 1.8;
-
-  position: relative;
-
-  z-index: 2;
-
-}
-
-.token-perks {
-
-  display: grid;
-
-  grid-template-columns: repeat(3, 1fr);
-
-  gap: 20px;
-
-  max-width: 900px;
-
-  margin: 0 auto 48px;
-
-  position: relative;
-
-  z-index: 2;
-
-}
-
-.token-perk {
-
-  padding: 24px;
-
-  background: rgba(20, 20, 32, 0.6);
-
-  backdrop-filter: blur(10px);
-
-  border: 1px solid var(--border);
-
-  border-radius: 20px;
-
-}
-
-.token-perk-icon {
-
-  font-family: var(--font-head);
-
-  font-weight: 800;
-
-  font-size: 32px;
-
-  color: var(--gold);
-
-  margin-bottom: 12px;
-
-}
-
-.token-perk-title {
-
-  font-family: var(--font-head);
-
-  font-weight: 700;
-
-  font-size: 16px;
-
-  margin-bottom: 8px;
-
-  color: var(--text);
-
-}
-
-.token-perk-desc {
-
-  font-size: 12px;
-
-  color: var(--text-dim);
-
-  line-height: 1.6;
-
-}
-
-.token-form {
-
-  display: flex;
-
-  gap: 12px;
-
-  max-width: 500px;
-
-  margin: 0 auto;
-
-  position: relative;
-
-  z-index: 2;
-
-}
-
-.token-form input {
-
-  flex: 1;
-
-  padding: 16px 20px;
-
-  background: rgba(20, 20, 32, 0.6);
-
-  backdrop-filter: blur(10px);
-
-  border: 1px solid rgba(255, 215, 0, 0.3);
-
-  border-radius: 32px;
-
-  color: var(--text);
-
-  font-family: var(--font-data);
-
-  font-size: 14px;
-
-  min-width: 0;
-
-}
-
-.token-form input:focus {
-
-  outline: none;
-
-  border-color: var(--gold);
-
-}
-
-.token-form button {
-
-  padding: 16px 32px;
-
-  background: var(--gold);
-
-  color: var(--bg-darkest);
-
-  border: none;
-
-  border-radius: 32px;
-
-  font-family: var(--font-data);
-
-  font-weight: 700;
-
-  font-size: 13px;
-
-  letter-spacing: 2px;
-
-  cursor: pointer;
-
-  transition: all 0.3s;
-
-  white-space: nowrap;
-
-}
-
-.token-form button:hover {
-
-  transform: translateY(-2px);
-
-  box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4);
-
-}
-
-
-
 /* === FOOTER === */
 
 footer {
@@ -2096,7 +1830,6 @@ footer {
 
   .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin: 48px auto 0; }
 
-  .token-perks { grid-template-columns: 1fr; }
 
   .last-signal-wrap { grid-template-columns: 1fr; }
 
@@ -2140,9 +1873,7 @@ footer {
 
   .stat-value { font-size: 36px; }
 
-  .token-section { padding: 40px 20px; }
 
-  .token-form { flex-direction: column; }
 
   .top-ticker { font-size: 10px; padding: 8px 0; }
 
@@ -2512,7 +2243,7 @@ footer {
 
   <h2 class="section-title">Simple <span class="accent">process.</span></h2>
 
-  <p class="section-sub">The AI runs 24/7 analyzing markets. You get signals with clear entry, target and stop loss.</p>
+  <p class="section-sub">The system runs 24/7 scanning markets. You get signals with clear entry, target and stop — and every result posted after.</p>
 
 
 
@@ -2544,13 +2275,13 @@ footer {
 
   <div class="features-grid">
 
-    <div class="feat-card"><div class="feat-icon-box">⚡</div><div class="feat-title">AI Powered</div><div class="feat-desc">Advanced machine learning models, retrained continuously on fresh data.</div></div>
+    <div class="feat-card"><div class="feat-icon-box">⚡</div><div class="feat-title">Rule-Based Engine</div><div class="feat-desc">Systematic trend-following on technical signals. Not a crystal ball — a disciplined, repeatable process.</div></div>
 
     <div class="feat-card"><div class="feat-icon-box">⊞</div><div class="feat-title">15+ Data Sources</div><div class="feat-desc">On-chain, technical, futures, sentiment & macro indicators combined.</div></div>
 
     <div class="feat-card"><div class="feat-icon-box">◎</div><div class="feat-title">Full Signals</div><div class="feat-desc">Entry, target, stop loss and clear risk/reward on every signal — shown to everyone.</div></div>
 
-    <div class="feat-card"><div class="feat-icon-box">⚐</div><div class="feat-title">Real-time Alerts</div><div class="feat-desc">Instant Telegram notifications 24/7 — never miss an opportunity.</div></div>
+    <div class="feat-card"><div class="feat-icon-box">⚐</div><div class="feat-title">Real-time Alerts</div><div class="feat-desc">Instant Telegram notifications 24/7 the moment a setup triggers.</div></div>
 
     <div class="feat-card"><div class="feat-icon-box">◈</div><div class="feat-title">Radically Transparent</div><div class="feat-desc">Every signal's outcome is auto-posted — target, stop or timeout. Wins AND losses. A live record nobody can edit after the fact.</div></div>
 
